@@ -1,0 +1,20 @@
+@import "bootstrap/dist/css/bootstrap.rtl.min.css";
+@import "./abstracts/mixins";
+@import "./abstracts/variables";
+
+@import "./base/base";
+@import "./base/normalize";
+@import "./base/typography";
+@import "./base/reset";
+
+@import "./layout/navbar";
+@import "./layout/footer";
+@import "./layout/default";
+
+@import "./components/button";
+@import "./components/popup";
+@import "./vendors/element-ui";
+
+@import "./pages/student/course/course-content";
+@import "./pages/student/my-courses";
+@import "./pages/login";

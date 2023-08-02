@@ -1,0 +1,8 @@
+<svg id="vuesax_linear_edit" data-name="vuesax/linear/edit" xmlns="http://www.w3.org/2000/svg" width="19.041" height="19.041" viewBox="0 0 19.041 19.041">
+  <g id="edit">
+    <path id="Vector" d="M7.14,0H5.554C1.587,0,0,1.587,0,5.554v4.76c0,3.967,1.587,5.554,5.554,5.554h4.76c3.967,0,5.554-1.587,5.554-5.554V8.727" transform="translate(1.587 1.587)" fill="none" stroke="#363443" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Vector-2" data-name="Vector" d="M7.133,1.009.881,7.26A2.152,2.152,0,0,0,.358,8.308L.017,10.7a1.13,1.13,0,0,0,1.349,1.349L3.754,11.7A2.222,2.222,0,0,0,4.8,11.18l6.252-6.252c1.079-1.079,1.587-2.333,0-3.919S8.212-.07,7.133,1.009Z" transform="translate(5.592 1.387)" fill="none" stroke="#363443" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Vector-3" data-name="Vector" d="M0,0A5.668,5.668,0,0,0,3.919,3.919" transform="translate(11.829 3.293)" fill="none" stroke="#363443" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <path id="Vector-4" data-name="Vector" d="M0,0H19.041V19.041H0Z" fill="none" opacity="0"/>
+  </g>
+</svg>

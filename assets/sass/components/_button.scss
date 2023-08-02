@@ -1,0 +1,44 @@
+.button {
+  padding: .8rem 1.4rem;
+  border: none;
+  border-radius: .5rem;
+  &--primary {
+    background: var(--primary);
+    color: var(--white);
+    *{
+      color: var(--white);
+    }
+  }
+  &--primary-plain {
+    background: #008dd23d;
+    color: var(--primary);
+    *{
+      color: var(--primary);
+    }
+  }
+  &--whatsapp {
+    background: var(--light-green);
+    *{
+      color: var(--green);
+    }
+  }
+  &--icon {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+  }
+  &__gmail {
+    background: #FFF;
+    padding: 1.5rem 1.8rem;
+    border: none;
+    box-shadow: 0 12px 22px 5px #f7f7f7;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin: 2rem 0;
+    span {
+      font-size: 1.5rem;
+    }
+  }
+
+}

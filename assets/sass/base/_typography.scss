@@ -1,0 +1,83 @@
+html {
+  font-family: cairoRegular;
+}
+
+*{
+  font: inherit;
+  font-size: 2rem;
+}
+
+@font-face {
+  font-family: cairoBold;
+  src: url(@/assets/font/Cairo/Cairo-Bold.ttf);
+}
+
+@font-face {
+  font-family: cairoSemiBold;
+  src: url(@/assets/font/Cairo/Cairo-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: cairoRegular;
+  src: url(@/assets/font/Cairo/Cairo-Regular.ttf);
+}
+
+
+.font-h6 {
+  font-size: 1.5rem;
+}
+
+.font {
+  &--light {
+    color: var(--light-black);
+    font-weight: 400;
+  }
+  &--primary {
+    color: var(--primary);
+  }
+  &--danger {
+    color: red;
+  }
+  &--orange {
+    color: var(--orange);
+  }
+  &--regular {
+    font-family: cairoRegular;
+  }
+  &--semibold {
+    font-family: cairoSemiBold;
+  }
+  &--bold {
+    font-family: cairoBold;
+  }
+}
+
+.font-h5 {
+  font-size: 1.8rem;
+}
+
+.font-h4 {
+  font-size: 2.2rem;
+}
+
+.font-h3 {
+  font-size: 2.8rem;
+}
+
+
+.font-h2 {
+  font-size: 3.2rem;
+}
+
+
+.font-h1 {
+  font-size: 3.8rem;
+}
+
+span, p {
+  color: #363443;
+}
+.light-font {
+  font-family: cairoRegular;
+  color: #8D8D8D;
+}

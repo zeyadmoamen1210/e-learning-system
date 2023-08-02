@@ -1,0 +1,8 @@
+<svg id="vuesax_broken_tick-circle" data-name="vuesax/broken/tick-circle" xmlns="http://www.w3.org/2000/svg" width="95.963" height="95.963" viewBox="0 0 95.963 95.963">
+  <g id="tick-circle">
+    <path id="Vector" d="M8,15.994A39.985,39.985,0,1,0,39.985,0,39.445,39.445,0,0,0,23.871,3.4" transform="translate(7.997 7.997)" fill="none" stroke="#e17f00" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+    <path id="Vector-2" data-name="Vector" d="M0,4.518,4.478,0" transform="translate(59.977 36.986)" fill="none" stroke="#e17f00" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+    <path id="Vector-3" data-name="Vector" d="M0,0,10.956,11,21.152.84" transform="translate(31.508 47.981)" fill="none" stroke="#e17f00" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+    <path id="Vector-4" data-name="Vector" d="M0,0H95.963V95.963H0Z" fill="none" opacity="0"/>
+  </g>
+</svg>

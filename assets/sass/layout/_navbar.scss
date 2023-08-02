@@ -1,0 +1,128 @@
+.app-navbar {
+    background-image: url(@/assets/imgs/navbar-imgs/navbar-bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 16rem;
+    background-position: bottom;
+
+    @media screen and (min-width: 1700px) {
+      min-height: 20rem;
+    }
+
+    @media screen and (min-width: 2200px) {
+      min-height: 27rem;
+    }
+
+    font-size: 1.7rem;
+
+    &__inner {
+      padding: 1.5rem 0;
+    }
+
+
+    &__list {
+      ul {
+        list-style: none;
+        display: flex;
+        gap: 2.8rem;
+        margin: 0;
+        a{
+          color: var(--white);
+          text-decoration: none;
+          &:hover {
+            color: var(--white);
+            text-decoration: none;
+          }
+        }
+      }
+    }
+
+
+    &__btns {
+      display: flex;
+      gap: 1.5rem;
+    }
+    &__btn--login {
+      background: var(--white);
+      color: var(--primary);
+      padding: 1rem 1.6rem;
+      border: none;
+      border-radius: 0.5rem;
+    }
+
+    &__btn--signup {
+      background: var(--primary);
+      border: .1rem solid var(--white);
+      color: var(--white);
+      padding: 1rem 1.6rem;
+      border-radius: 0.5rem;
+    }
+}
+
+
+.profile-notification {
+  background: #FFF;
+  border: none;
+  padding: 1rem 1.3rem;
+  border-radius: .4rem;
+  position: relative;
+
+  &__number {
+    position: absolute;
+    top: -11px;
+    right: -8px;
+    height: 3rem;
+    width: 3rem;
+    background: #FFF;
+    border: 2px solid #008DD2;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    font-size: 1.5rem;
+    line-height: 3rem;
+    color: red;
+    font-weight: bold;
+  }
+}
+
+
+.profile-dropdown {
+  background-color: #1baaf0a3;
+
+  border: none;
+  padding: 1rem 2.1rem;
+  border-radius: 0.4rem;
+  position: relative;
+
+  &__arrow {
+    display: block;
+    transform: rotate(90deg);
+  }
+
+  &__list {
+    position: absolute;
+    z-index: 33;
+    background: #FFF;
+    padding: .5rem 1.2rem;
+    top: 100%;
+    right: 0;
+    width: 100%;
+    box-shadow: -1px 6px 17px 1px #0000002e;
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      li {
+        text-align: right;
+        padding: .4rem .9rem;
+        transition: all .2s linear;
+        &:hover {
+          transform: translateX(-.5rem);
+        }
+        span {
+          font-size: 1.43rem;
+        }
+      }
+    }
+  }
+}

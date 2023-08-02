@@ -1,0 +1,67 @@
+.app-footer {
+    background-image: url(@/assets/imgs/footer-imgs/footer-bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    padding-bottom: 3rem;
+
+    &__inner {
+        padding-top: 12rem;
+        .row {
+            height: 100%;
+        }
+    }
+
+    &__about {
+        p {
+            margin-top: 1rem;
+            color: var(--white);
+            font-size: 1.8rem;
+        }
+    }
+
+    &__list {
+        list-style: inside;
+        line-height: 4.2rem;
+        font-size: 1.7rem;
+        color: var(--white);
+        margin-bottom: 0;
+        a {
+            color: var(--white);
+            text-decoration: none
+        }
+    }
+
+    &__follow-btns {
+        margin-top: 5rem;
+        display: flex;
+        gap: 1rem;
+
+        @media screen and (max-width: 1000px) {
+            margin-top: 1rem;
+        }
+
+    }
+    &__follow {
+        h6 {
+            font-size: 1.7rem;
+            color: #FFF;
+        }
+        button {
+            padding: .7rem 1.5rem;
+            font-size: 2rem;
+            border-radius: 0.5rem;
+            border: none;
+            color: var(--white);
+            background: #4dc9e67a;
+        }
+    }
+
+    &__copy {
+        h6 {
+            color: #8D8D8D;
+            padding: 1.5rem;
+            font-size: 1.4rem;
+        }
+    }
+}
