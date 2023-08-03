@@ -34,7 +34,11 @@
             </li>
             <li>
               <img src="@/assets/imgs/navbar-imgs/vuesax-linear-edit.svg" alt="" />
-              <span class="font-h6 font--bold">تعديل بياناتى </span>
+              <span
+                @click="$router.push('/student/profile/edit')"
+                class="font-h6 font--bold"
+                >تعديل بياناتى
+              </span>
             </li>
             <li>
               <img src="@/assets/imgs/navbar-imgs/vuesax-linear-logout.svg" alt="" />

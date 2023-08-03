@@ -75,7 +75,7 @@
     <div v-if="selectedContentStarted && selectedContent.type == 'pdf'">
       <object
         style="height: 50.5rem; width: 100%"
-        :data="selectedContent.link"
+        :data="selectedContent.link + '#toolbar=0&navpanes=0&scrollbar=0'"
         type="application/pdf"
       >
         Your browser does not support PDF files.

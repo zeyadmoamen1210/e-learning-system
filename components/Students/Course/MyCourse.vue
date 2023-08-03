@@ -10,9 +10,9 @@
           <div>
             <img src="@/assets/imgs/course-imgs/timer-broken.png" alt="" />
           </div>
-          <h6 class="mb-0 font-h5 font--semibold">مدة الكورس :</h6>
+          <h6 class="mb-0 font-h5 font--light">مدة الكورس :</h6>
         </div>
-        <h6 class="mb-0 font-h5 font--semibold font--orange">4 ساعات</h6>
+        <h6 class="mb-0 font-h5 font--light font--orange">4 ساعات</h6>
       </div>
 
       <div>

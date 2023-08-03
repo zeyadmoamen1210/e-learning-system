@@ -3,9 +3,7 @@
     <Popup :contentCentered="true" :open="isOpened" @close="$emit('close', false)">
       <template #header> الإشتراك بالكورس </template>
       <template #body>
-        <h6 class="font font--regular font--light mb-4 font-h5">
-          تم تأكيد إشتراكك بالكورس بنجاح
-        </h6>
+        <h6 class="font font--light mb-4 font-h5">تم تأكيد إشتراكك بالكورس بنجاح</h6>
 
         <div>
           <div class="mb-4 mt-2">

@@ -3,7 +3,7 @@
     <Popup :contentCentered="true" :open="isOpened" @close="$emit('close', false)">
       <template #header> الإشتراك بالكورس </template>
       <template #body>
-        <h6 class="font font--regular font--light mb-4 font-h5">
+        <h6 class="font font--light mb-4 font-h5">
           قم بكتابة كود الإشتراك الخاص بك لتفعيل الإشتراك والبدأ بالكورس
         </h6>
 

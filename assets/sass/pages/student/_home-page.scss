@@ -1,0 +1,160 @@
+.home-page {
+    background-image: url(@/assets/imgs/landing-page/header.png);
+    padding: 3rem;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 70vh;
+    margin-top: -10rem;
+    padding-top: 10rem;
+    &__title {
+      font-size: 4.2rem;
+      margin-top: 6rem;
+
+      @media screen and (max-width: 1000px) {
+        margin-top: 1rem;
+      }
+    }
+    &__title-2 {
+      font-size: 2.9rem;
+    }
+    &__desc {
+      line-height: 2;
+      font-family: 'fontRegular';
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+    }
+    &__img {
+      img {
+        display: block;
+      margin: auto;
+      max-width: 100%;
+      }
+    }
+}
+
+
+.about-us {
+  margin-top: 5.5rem;
+  background-image: url(@/assets/imgs/landing-page/bg-about.svg);
+  background-repeat: no-repeat;
+  background-position: left;
+
+  &__title {
+    background: url(@/assets/imgs/landing-page/rec.svg);
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: contain;
+    font-size: 2.5rem;
+    height: 6rem;
+    line-height: 6rem;
+    font-family: 'fontRegular';
+  }
+  &__logo {
+    max-width: 100%
+  }
+  &__text {
+    position: relative;
+  }
+  &__content {
+    @media screen and (max-width: 800px) {
+      flex-wrap: wrap;
+    }
+  }
+  &__bubble {
+    &.first {
+      position: absolute;
+      top: -19%;
+      right: 0;
+    }
+    &.second {
+      position: absolute;
+      top: 37%;
+      left: 50%;
+    }
+    &.third {
+      position: absolute;
+      top: 8%;
+      left: 18%;
+    }
+  }
+}
+
+
+.about-physics {
+  margin-top: 5.5rem;
+  &__title {
+    background: url(@/assets/imgs/landing-page/rec.svg);
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: contain;
+    font-size: 2.5rem;
+    height: 6rem;
+    line-height: 6rem;
+    font-family: 'fontRegular';
+    margin-bottom: 2.5rem;
+  }
+}
+
+
+.courses-list {
+  margin-top: 5.5rem;
+  &__title {
+    background: url(@/assets/imgs/landing-page/rec.svg);
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: contain;
+    font-size: 2.5rem;
+    height: 6rem;
+    line-height: 6rem;
+    font-family: 'fontRegular';
+    margin-bottom: 2.5rem;
+  }
+}
+
+
+.course-card {
+  position: relative;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  *{
+    color: white;
+  }
+  &__img {
+    height: 100%;
+    max-height: 45rem;
+  }
+  &__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, #0b3771 , transparent);
+    display: grid;
+    place-content: end;
+    > div {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 2rem;
+      overflow: hidden;
+      h6 {
+        font-size: 2rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      span {
+        font-size: 1.5rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

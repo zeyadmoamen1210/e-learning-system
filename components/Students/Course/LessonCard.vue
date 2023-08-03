@@ -21,7 +21,7 @@
         />
       </div>
       <div class="overflow-hidden">
-        <h5 class="font-h5 font--light font--semibold content-list__description">
+        <h5 class="font-h5 font--regular content-list__description">
           {{ lessonMaterial.title }}
         </h5>
         <span class="font-h5 light-font content-list__description">

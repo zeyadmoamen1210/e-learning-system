@@ -13,16 +13,16 @@
             <div class="app-navbar__list">
               <ul>
                 <li>
-                  <nuxt-link to="#">الرئيسية</nuxt-link>
+                  <nuxt-link to="/student">الرئيسية</nuxt-link>
                 </li>
                 <li>
-                  <nuxt-link to="#">نبذة بسيطة</nuxt-link>
+                  <nuxt-link to="/student#about-us">نبذة بسيطة</nuxt-link>
                 </li>
                 <li>
-                  <nuxt-link to="#">قائمة الكورسات</nuxt-link>
+                  <nuxt-link to="/student#about-physics"> عن الفيزياء</nuxt-link>
                 </li>
                 <li>
-                  <nuxt-link to="#">العروض</nuxt-link>
+                  <nuxt-link to="/student#courses-list">قائمة الكورسات</nuxt-link>
                 </li>
               </ul>
             </div>

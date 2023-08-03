@@ -1,0 +1,8 @@
+<svg id="vuesax_broken_timer" data-name="vuesax/broken/timer" xmlns="http://www.w3.org/2000/svg" width="30.707" height="30.707" viewBox="0 0 30.707 30.707">
+  <g id="timer">
+    <path id="Vector" d="M0,0V6.4" transform="translate(15.353 10.236)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="Vector-2" data-name="Vector" d="M0,0H7.677" transform="translate(11.515 2.559)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="Vector-3" data-name="Vector" d="M2.239,4.478A11.159,11.159,0,1,0,6.679.947" transform="translate(4.158 5.758)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="Vector-4" data-name="Vector" d="M0,0H30.707V30.707H0Z" fill="none" opacity="0"/>
+  </g>
+</svg>

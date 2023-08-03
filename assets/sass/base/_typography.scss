@@ -1,5 +1,5 @@
 html {
-  font-family: cairoRegular;
+  font-family: fontRegular;
 }
 
 *{
@@ -8,18 +8,27 @@ html {
 }
 
 @font-face {
-  font-family: cairoBold;
-  src: url(@/assets/font/Cairo/Cairo-Bold.ttf);
+  font-family: fontBold;
+  src: url(@/assets/font/Rubik/static/Rubik-Bold.ttf);
 }
 
 @font-face {
-  font-family: cairoSemiBold;
-  src: url(@/assets/font/Cairo/Cairo-SemiBold.ttf);
+  font-family: fontMedium;
+  src: url(@/assets/font/Rubik/static/Rubik-Medium.ttf);
+}
+@font-face {
+  font-family: fontLight;
+  src: url(@/assets/font/Rubik/static/Rubik-Light.ttf);
 }
 
 @font-face {
-  font-family: cairoRegular;
-  src: url(@/assets/font/Cairo/Cairo-Regular.ttf);
+  font-family: fontSemiBold;
+  src: url(@/assets/font/Rubik/static/Rubik-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: fontRegular;
+  src: url(@/assets/font/Rubik/static/Rubik-Regular.ttf);
 }
 
 
@@ -31,6 +40,7 @@ html {
   &--light {
     color: var(--light-black);
     font-weight: 400;
+    font-family: fontLight;
   }
   &--primary {
     color: var(--primary);
@@ -42,13 +52,13 @@ html {
     color: var(--orange);
   }
   &--regular {
-    font-family: cairoRegular;
+    font-family: fontRegular;
   }
   &--semibold {
-    font-family: cairoSemiBold;
+    font-family: fontSemiBold;
   }
   &--bold {
-    font-family: cairoBold;
+    font-family: fontBold;
   }
 }
 
@@ -78,6 +88,6 @@ span, p {
   color: #363443;
 }
 .light-font {
-  font-family: cairoRegular;
+  font-family: fontLight;
   color: #8D8D8D;
 }
