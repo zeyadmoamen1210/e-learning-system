@@ -7,6 +7,20 @@
   }
   &__rather-than  {
     color: #FF1D1D;
+    span {
+      color: #FF1D1D;
+      position: relative;
+      &::after {
+        position: absolute;
+        top: 14px;
+        left: -6px;
+        content: "";
+        width: 140%;
+        height: 0.12rem;
+        background-color: #FF1D1D;
+        transform: rotate(45deg);
+      }
+    }
   }
   &__name {
     display: flex;

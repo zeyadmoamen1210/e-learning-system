@@ -7,7 +7,12 @@
 
 <script>
 export default {
-  name: 'IndexPage',
-  layout: 'fullpage'
-}
+  name: "IndexPage",
+  layout: "fullpage",
+  // created() {
+  //   if (this.$route.fullPath == "/") {
+  //     this.$router.push("/student");
+  //   }
+  // },
+};
 </script>

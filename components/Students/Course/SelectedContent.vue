@@ -1,8 +1,10 @@
 <template>
   <div class="selected-content">
     <div
-      class="selected-content__video"
+      class="selected-content__video mb-4"
       v-if="selectedContent.type == 'video' && !selectedContentStarted"
+      @click="openVideo(selectedContent)"
+      role="button"
     >
       <img
         class="selected-content__video-photo"
@@ -11,11 +13,7 @@
       />
 
       <div class="selected-content__video-title">
-        <div
-          role="button"
-          class="d-flex gap-3 align-items-end"
-          @click="openVideo(selectedContent)"
-        >
+        <div class="d-flex gap-3 align-items-end">
           <div>
             <div class="selected-content__video-time">{{ selectedContent.time }}</div>
             <img src="@/assets/imgs/course-imgs/vuesax-broken-video-square.svg" alt="" />
@@ -47,7 +45,7 @@
 
     <div
       class="selected-content__pdf"
-      v-if="selectedContent.type == 'test' && !selectedContentStarted"
+      v-if="selectedContent.type == 'test' && !selectedContentStarted && !examSubmitted"
     >
       <div class="selected-content__pdf-inner">
         <img src="@/assets/imgs/course-imgs/test.svg" alt="" />
@@ -64,6 +62,13 @@
       </div>
     </div>
 
+    <div
+      class="selected-content__pdf"
+      v-if="selectedContent.type == 'test' && selectedContentStarted"
+    >
+      <ExamTemplate @submit="(examSubmitted = true), (selectedContentStarted = false)" />
+    </div>
+
     <div v-if="selectedContentStarted && selectedContent.type == 'video'">
       <iframe
         style="width: 100%; height: 50.5rem"
@@ -78,15 +83,37 @@
         :data="selectedContent.link + '#toolbar=0&navpanes=0&scrollbar=0'"
         type="application/pdf"
       >
-        Your browser does not support PDF files.
-        <a :href="selectedContent.link">Download the file instead</a>
+        <div class="mb-4">المتصفح الحالي لا يدعم ملفات ال PDF افتح من متصفح اخر</div>
       </object>
+    </div>
+
+    <div class="selected-content__pdf" v-if="examSubmitted">
+      <div class="selected-content__pdf-inner">
+        <img src="@/assets/imgs/course-imgs/tick-circle-bulk.png" alt="" />
+        <h6 class="font-h4 text-center">تم تسليم الاختبار</h6>
+        <span class="d-block font--light font-h5 text-center">
+          أجاباتك قيد المراجعة والتصحيح سوف يتم إرسال إشعار لك بالنتيجة فور انتهاء التصحيح
+        </span>
+        <div class="d-flex gap-2 align-items-center justify-content-center mt-4">
+          <div class="exam-template__timer d-flex align-items-center gap-2">
+            <div class="d-flex gap-2 align-items-center">
+              <img class="mb-0" src="@/assets/imgs/course-imgs/timer-broken.svg" alt="" />
+              <span class="font-h5"> لقد استغرقت : </span>
+            </div>
+            <h6 class="font-h4 mb-0 exam-template__mins">04:32</h6>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import ExamTemplate from "./Exam/Template.vue";
 export default {
+  components: {
+    ExamTemplate,
+  },
   props: {
     selectedContent: {
       required: true,
@@ -95,6 +122,7 @@ export default {
   data() {
     return {
       selectedContentStarted: false,
+      examSubmitted: false,
     };
   },
   methods: {

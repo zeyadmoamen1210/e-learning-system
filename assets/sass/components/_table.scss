@@ -1,0 +1,30 @@
+.app-table {
+  width: 100%;
+  tr, tbody tr td {
+    border: .1rem solid #dddddda8;
+  }
+  thead {
+    background-color: #F7F7F7;
+    td {
+      color: #9EABC3;
+      font-weight: 300;
+      font-size: 1.9rem;
+    }
+  }
+  tbody {
+    td, span {
+      font-size: 1.7rem;
+    }
+  }
+  td {
+    padding: 1.7rem 3rem;
+    @media screen and (max-width: 1200px) {
+      padding: .5rem 1rem;
+    }
+  }
+}
+
+.app-table-container {
+  max-height: 55rem;
+  overflow-y: scroll;
+}

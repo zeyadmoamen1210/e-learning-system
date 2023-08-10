@@ -29,6 +29,7 @@
         a{
           color: var(--white);
           text-decoration: none;
+          font-size: 1.9rem;
           &:hover {
             color: var(--white);
             text-decoration: none;
@@ -124,5 +125,16 @@
         }
       }
     }
+
   }
+
+  &__logout {
+    border-radius: .4rem;
+    img {
+      padding-top: 1.2rem;
+    }
+  }
+
 }
+
+

@@ -1,0 +1,7 @@
+<svg id="vuesax_linear_close-circle" data-name="vuesax/linear/close-circle" xmlns="http://www.w3.org/2000/svg" width="36.333" height="36.333" viewBox="0 0 36.333 36.333">
+  <g id="close-circle">
+    <path id="Vector" d="M15.139,30.278A15.139,15.139,0,1,0,0,15.139,15.183,15.183,0,0,0,15.139,30.278Z" transform="translate(3.028 3.028)" fill="none" stroke="#ff1d1d" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Vector-2" data-name="Vector" d="M8.569,8.569,0,0" transform="translate(12.108 18.167) rotate(-45)" fill="none" stroke="#ff1d1d" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="Vector-3" data-name="Vector" d="M0,0H36.333V36.333H0Z" fill="none" opacity="0"/>
+  </g>
+</svg>

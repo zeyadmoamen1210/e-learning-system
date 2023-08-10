@@ -28,14 +28,15 @@ export default {
     '@/plugins/element-ui',
     { src: "~/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", mode: "client" },
     { src: "@/plugins/CodeInput.js", mode: "client" },
+    { src: "@/plugins/social-sharing.js" },
+    '@/plugins/vue-awesome-swiper.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules:['@nuxtjs/fontawesome'],
-
+  buildModules:['@nuxtjs/fontawesome', '@nuxtjs/pwa'],
 
   fontawesome: {
     icons:{
@@ -48,7 +49,32 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    'vue-social-sharing/nuxt',
   ],
+
+
+  pwa: {
+    meta: {
+      theme_color: '#ffffff',
+      title: 'Madkor Salama E-Learning',
+      author: 'Madkor Salama',
+    },
+    manifest: {
+      name: 'Madkor Salama E-Learning',
+      short_name: 'Madkor Salama',
+      lang: 'ar',
+      start_url: "/student/",
+      display: "standalone",
+      background_color: "#E5F3FB",
+      theme_color: "#008DD2"
+    },
+    workbox: {
+      enabled: true,
+    },
+    icon: {
+      source: '/static/icon.png', // Path to your app's icon
+    },
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {

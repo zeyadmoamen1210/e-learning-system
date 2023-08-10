@@ -17,6 +17,7 @@
 
       <div>
         <button
+          @click="$router.push('/student/my-courses/1')"
           class="button button--primary-plain w-100 d-flex gap-3 justify-content-center"
         >
           <span>عرض تفاصيل الكورس</span>

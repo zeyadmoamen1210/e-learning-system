@@ -19,7 +19,7 @@
     </div>
     <div class="col-md-6">
       <div class="home-page__img">
-        <img src="@/assets/imgs/landing-page/header-left.png" alt="" />
+        <img src="@/assets/imgs/landing-page/illustration.png" alt="" />
       </div>
     </div>
   </div>

@@ -25,7 +25,14 @@
               ></el-input>
             </el-form-item>
             <div class="d-flex flex-row-reverse">
-              <span class="font-h5 mb-4"> هل نسيت كلمة المرور ؟ </span>
+              <nuxt-link
+                role="button"
+                tag="span"
+                class="font-h5 mb-4"
+                to="/auth/forget-password"
+              >
+                هل نسيت كلمة المرور ؟
+              </nuxt-link>
             </div>
             <el-form-item
               prop="newPassword"

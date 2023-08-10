@@ -4,53 +4,48 @@
       <div class="container">
         <div class="app-footer__inner">
           <div class="row align-items-end">
-            <div class="col-12 col-lg-4 col-xl-5">
+            <div class="col-12 col-md-4">
               <div class="app-footer__about">
                 <div>
                   <img src="@/assets/imgs/navbar-imgs/logo.png" alt="" />
                 </div>
-                <p>
+                <p class="font-h6">
                   هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي
-                  القارئ عن التركيز على الشكل الخارجي للنص أو شكل توضع الفقرات في الصفحة
-                  التي يقرأها. ولذلك يتم استخدام طريقة لوريم
+                  القارئ عن التركيز على الشكل الخارجي للنص أو شكل توضع
                 </p>
               </div>
             </div>
 
-            <div class="col-6 col-lg-3 col-xl-2">
-              <div>
+            <div class="col-12 col-md-5">
+              <div class="d-flex gap-3 flex-wrap justify-content-around">
                 <ul class="app-footer__list">
                   <li>
                     <nuxt-link to="/student">الرئيسية</nuxt-link>
                   </li>
                   <li>
-                    <nuxt-link to="#">نبذة بسيطة</nuxt-link>
+                    <nuxt-link to="/student#about-us">نبذة بسيطة</nuxt-link>
                   </li>
                   <li>
-                    <nuxt-link to="#">التسجيل بالموقع</nuxt-link>
+                    <nuxt-link to="/auth/login">التسجيل بالموقع</nuxt-link>
                   </li>
                 </ul>
-              </div>
-            </div>
 
-            <div class="col-6 col-lg-3 col-xl-2">
-              <div>
                 <ul class="app-footer__list">
                   <li>
-                    <nuxt-link to="/student">الرئيسية</nuxt-link>
+                    <nuxt-link to="/student#courses-list">قائمة الكورسات</nuxt-link>
                   </li>
                   <li>
-                    <nuxt-link to="#">نبذة بسيطة</nuxt-link>
+                    <nuxt-link to="/student#courses-list">العروض</nuxt-link>
                   </li>
                   <li>
-                    <nuxt-link to="#">التسجيل بالموقع</nuxt-link>
+                    <nuxt-link to="/student#courses-list">الشروط والأحكام</nuxt-link>
                   </li>
                 </ul>
               </div>
             </div>
 
-            <div class="col-12 col-lg-3 col-xl-2">
-              <div class="app-footer__follow">
+            <div class="col-12 col-md-3 d-flex justify-content-center">
+              <div class="app-footer__follow mt-4">
                 <h6>أو تابعنا على</h6>
                 <div class="app-footer__follow-btns">
                   <button>
@@ -58,15 +53,15 @@
                   </button>
 
                   <button>
-                    <font-awesome-icon :icon="['fab', 'facebook-f']" />
+                    <font-awesome-icon :icon="['fab', 'instagram']" />
                   </button>
 
                   <button>
-                    <font-awesome-icon :icon="['fab', 'facebook-f']" />
+                    <font-awesome-icon :icon="['fab', 'twitter']" />
                   </button>
 
                   <button>
-                    <font-awesome-icon :icon="['fab', 'facebook-f']" />
+                    <font-awesome-icon :icon="['fab', 'linkedin-in']" />
                   </button>
                 </div>
               </div>

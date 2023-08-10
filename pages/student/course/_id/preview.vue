@@ -1,6 +1,6 @@
 <template>
   <div>
-    <CourseHeader :isHasOffer="isHasOffer" />
+    <CourseHeader :isHasOffer="isHasOffer" :isSubscribedIn="false" />
 
     <div class="container mt-5">
       <div class="row">
@@ -39,10 +39,16 @@ export default {
   methods: {
     selectContent(content) {
       this.$refs.selectedContent.selectedContentStarted = false;
+
+      this.$refs.selectedContent.examSubmitted = false;
+
       this.selectedContent = content;
     },
     showPreview(e) {
       this.$refs.selectedContent.selectedContentStarted = false;
+
+      this.$refs.selectedContent.examSubmitted = false;
+
       this.selectedContent = null;
     },
   },

@@ -3,7 +3,7 @@
     <h6 class="about-us__title">نبذة بسيطة</h6>
 
     <div class="d-flex gap-3 align-items-end about-us__content">
-      <img src="@/assets/imgs/landing-page/user.png" alt="" />
+      <img class="w-100" src="@/assets/imgs/landing-page/user.png" alt="" />
       <div class="about-us__text">
         <img class="about-us__logo" src="@/assets/imgs/landing-page/logo.svg" alt="" />
         <h4 class="mb-3 mt-5">

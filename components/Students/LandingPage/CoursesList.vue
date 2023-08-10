@@ -2,7 +2,7 @@
   <div>
     <h6 class="courses-list__title">قائمة الكورسات</h6>
     <div class="row">
-      <div class="col-md-4" v-for="course in courses" :key="index">
+      <div class="col-md-6 col-lg-4" v-for="(course, index) in courses" :key="index">
         <div class="course-card">
           <img class="course-card__img" :src="course.image" alt="" />
           <div class="course-card__content">
@@ -21,6 +21,18 @@
                   <img src="@/assets/imgs/landing-page/vuesax-broken-timer.svg" alt="" />
                   <span>{{ course.price }}</span>
                 </div>
+              </div>
+
+              <div>
+                <button
+                  @click="$router.push('/student/course/1/preview')"
+                  class="button button--secondary w-100 d-flex gap-3 justify-content-center mt-4 font-h5 font--regular py-3"
+                >
+                  <span>عرض تفاصيل الكورس</span>
+                  <span>
+                    <img src="@/assets/imgs/course-imgs/arrow-left-linear.svg" alt="" />
+                  </span>
+                </button>
               </div>
             </div>
           </div>

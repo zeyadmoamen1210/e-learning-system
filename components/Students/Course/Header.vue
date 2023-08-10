@@ -1,14 +1,14 @@
 <template>
   <div class="course-header">
     <div class="container">
-      <div class="row row-gap-4">
-        <div class="col-md-6 col-lg-8">
+      <div class="row row-gap-4 align-items-center">
+        <div class="col-md-6 col-lg-7">
           <div>
             <h4 class="course-header__name font-h4 mb-4">
               <span>مبادئ أساسيات الفيزياء</span>
               <span class="course-header__offer-perc" v-if="isHasOffer">20%</span>
             </h4>
-            <div class="d-flex gap-2 align-items-center mb-3 flex-wrap">
+            <div class="d-flex gap-2 align-items-center flex-wrap">
               <div class="d-flex gap-2 align-items-center">
                 <div>
                   <img src="@/assets/imgs/course-imgs/timer-broken.png" alt="" />
@@ -18,7 +18,7 @@
               <h6 class="mb-0 font-h6 font--orange">4 ساعات</h6>
             </div>
 
-            <div class="d-flex gap-2 align-items-center">
+            <div class="d-flex gap-2 align-items-center mt-3" v-if="!isSubscribedIn">
               <div class="d-flex gap-2 align-items-center">
                 <div>
                   <img src="@/assets/imgs/course-imgs/vuesax-broken-wallet.png" alt="" />
@@ -29,14 +29,14 @@
                 <span class="font--orange">720 جنية</span>
 
                 <span v-if="isHasOffer" class="course-header__rather-than font-h5">
-                  بدلاً من 900 جنية
+                  بدلاً من <span>900</span> جنية
                 </span>
               </h6>
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4">
-          <div>
+        <div class="col-md-6 col-lg-5">
+          <div v-if="!isSubscribedIn">
             <div>
               <button
                 @click="openCourseSubscribeCourse = !openCourseSubscribeCourse"
@@ -46,19 +46,36 @@
               </button>
             </div>
 
-            <div class="d-flex gap-2">
+            <div class="d-flex gap-4">
               <div>
                 <p class="light-font">
                   أو تواصل معنا من خلال الواتساب للحصول على كود إشتراك
                 </p>
               </div>
               <div>
-                <button class="button button--icon button--whatsapp">
+                <ShareNetwork
+                  class="button button--icon button--whatsapp"
+                  network="whatsapp"
+                  url=""
+                  @open="openPopup"
+                  title="السلام عليكم و رحمة اللٌه و بركاته"
+                  :description="`أريد الإشتراك في هذا الكورس \n** الاسم/  زياد مؤمن السيد \n ** المُعلم/  مدكور سلامة \n ** المادة/  الفيزياء \n ** اسم الكورس/  الفزياء الحديثة \n ** رابط الكورس/  \n  localhost:3000/student/course/1/preview`"
+                >
                   <img src="@/assets/imgs/course-imgs/whatsapp.png" alt="" />
                   <span>واتساب</span>
-                </button>
+                </ShareNetwork>
               </div>
             </div>
+          </div>
+          <div v-else class="d-flex gap-2 flex-row-reverse flex-wrap">
+            <button class="button button--icon button--telegram">
+              <img src="@/assets/imgs/course-imgs/telegram.svg" alt="" />
+              <span class="font-h6">الانضمام إلى جروب التليجرام</span>
+            </button>
+            <button class="button button--icon button--whatsapp-dark">
+              <img src="@/assets/imgs/course-imgs/708.svg" alt="" />
+              <span class="font-h6">الانضمام إلى جروب الواتساب</span>
+            </button>
           </div>
         </div>
 
@@ -75,13 +92,13 @@
       </div>
     </div>
 
-    <SubscribeCoursePopup
+    <!-- <SubscribeCoursePopup
       :isOpened="openCourseSubscribeCourse"
       @close="openCourseSubscribeCourse = false"
-    />
+    /> -->
     <SubscriptionDoneSuccessfully
-      :isOpened="openSubscriptionDoneSuccessfully"
-      @close="openSubscriptionDoneSuccessfully = false"
+      :isOpened="openCourseSubscribeCourse"
+      @close="openCourseSubscribeCourse = false"
     />
   </div>
 </template>
@@ -96,7 +113,10 @@ export default {
   },
   props: {
     isHasOffer: {
-      required: true,
+      default: false,
+      type: Boolean,
+    },
+    isSubscribedIn: {
       default: false,
       type: Boolean,
     },
@@ -106,6 +126,12 @@ export default {
       openCourseSubscribeCourse: false,
       openSubscriptionDoneSuccessfully: false,
     };
+  },
+  methods: {
+    openPopup() {
+      console.log("open pop up");
+      location.reload();
+    },
   },
 };
 </script>

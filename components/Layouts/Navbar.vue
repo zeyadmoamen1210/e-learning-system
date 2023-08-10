@@ -3,7 +3,7 @@
     <div class="container">
       <div class="app-navbar__inner">
         <div class="row align-items-center">
-          <div class="col-md-3">
+          <div class="col-9 col-lg-3">
             <div>
               <img src="@/assets/imgs/navbar-imgs/logo.png" alt="" />
             </div>
@@ -13,16 +13,24 @@
             <div class="app-navbar__list">
               <ul>
                 <li>
-                  <nuxt-link to="/student">الرئيسية</nuxt-link>
+                  <nuxt-link enter-active-class="active-link" to="/student"
+                    >الرئيسية</nuxt-link
+                  >
                 </li>
                 <li>
-                  <nuxt-link to="/student#about-us">نبذة بسيطة</nuxt-link>
+                  <nuxt-link enter-active-class="active-link" to="/student#about-us"
+                    >نبذة بسيطة</nuxt-link
+                  >
                 </li>
                 <li>
-                  <nuxt-link to="/student#about-physics"> عن الفيزياء</nuxt-link>
+                  <nuxt-link enter-active-class="active-link" to="/student#about-physics">
+                    عن الفيزياء</nuxt-link
+                  >
                 </li>
                 <li>
-                  <nuxt-link to="/student#courses-list">قائمة الكورسات</nuxt-link>
+                  <nuxt-link enter-active-class="active-link" to="/student#courses-list"
+                    >قائمة الكورسات</nuxt-link
+                  >
                 </li>
               </ul>
             </div>
@@ -33,23 +41,45 @@
               <button class="app-navbar__btn--login">تسجيل الدخول</button>
               <button class="app-navbar__btn--signup">إنشاء حساب</button>
             </div>
-            <ProfileDropdown v-else />
+            <ProfileDropdown :from_dashboard="true" v-else />
+          </div>
+
+          <div class="col-3 d-flex flex-row-reverse d-block d-lg-none">
+            <font-awesome-icon
+              role="button"
+              :icon="['fas', 'bars']"
+              size="lg"
+              @click="openMenu = true"
+              style="color: #fff"
+            />
           </div>
         </div>
       </div>
+      <MobileMenu v-if="openMenu" @close="openMenu = false" />
     </div>
   </div>
 </template>
 
 <script>
 import ProfileDropdown from "../Students/ProfileDropdown.vue";
+
+import MobileMenu from "./MobileMenu.vue";
+
 export default {
   components: {
+    MobileMenu,
     ProfileDropdown,
+  },
+  props: {
+    from_dashboard: {
+      required: false,
+      default: false,
+    },
   },
   data() {
     return {
       isLoggedIn: true,
+      openMenu: false,
     };
   },
 };

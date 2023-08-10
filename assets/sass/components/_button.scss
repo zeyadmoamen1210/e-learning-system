@@ -9,6 +9,15 @@
       color: var(--white);
     }
   }
+
+  &--danger {
+    background: #FF1D1D;
+    color: var(--white);
+    *{
+      color: var(--white);
+    }
+  }
+
   &--primary-plain {
     background: #008dd23d;
     color: var(--primary);
@@ -16,16 +25,40 @@
       color: var(--primary);
     }
   }
+
+   &--secondary {
+    background: #fff;
+    color: var(--primary) !important;
+    *{
+      color: var(--primary) !important;
+    }
+  }
+
   &--whatsapp {
     background: var(--light-green);
     *{
       color: var(--green);
     }
   }
+   &--whatsapp-dark {
+    background: var(--green);
+    padding: 1.3rem 2.2rem !important;
+    *{
+      color: var(--white);
+    }
+  }
+  &--telegram {
+    background: var(--primary);
+    padding: 1.3rem 2.2rem !important;
+    *{
+      color: var(--white);
+    }
+  }
   &--icon {
     display: flex;
     gap: .5rem;
     align-items: center;
+    text-decoration: none;
   }
   &__gmail {
     background: #FFF;
@@ -41,4 +74,35 @@
     }
   }
 
+}
+
+
+
+.app-button {
+  border: none;
+  border-radius: 0.8rem;
+  &__primary {
+    background-color: var(--primary);
+    span {
+      color: var(--white);
+    }
+  }
+  &__primary-plain {
+    background: #008dd221;
+    span {
+      color: var(--primary);
+    }
+  }
+  &__text-primary {
+    background: none;
+    span {
+      color: var(--primary);
+    }
+  }
+  &__text-danger {
+    background: none;
+    span {
+      color: red;
+    }
+  }
 }

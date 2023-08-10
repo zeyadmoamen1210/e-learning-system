@@ -10,12 +10,18 @@
 @import "./layout/navbar";
 @import "./layout/footer";
 @import "./layout/default";
+@import "./layout/dashboard";
+@import "./layout/dashboard-sidebar";
+@import "./layout/mobile-menu";
 
 @import "./components/button";
 @import "./components/popup";
+@import "./components/table";
+@import "./components/status";
 @import "./vendors/element-ui";
 
 @import "./pages/student/course/course-content";
+@import "./pages/student/course/exam";
 @import "./pages/student/my-courses";
 @import "./pages/student/home-page";
 @import "./pages/login";

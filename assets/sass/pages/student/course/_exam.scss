@@ -1,0 +1,136 @@
+.exam-template {
+  &__timer {
+    color: #FF1D1D;
+    padding: 1rem 1.5rem;
+    background: #ff000014;
+    border-radius: 0.5rem;
+
+    .font-h5 {
+      color: #FF1D1D;
+    }
+  }
+  &__mins {
+    color: #FF1D1D;
+  }
+
+  .swiper-container {
+    padding: 1rem 5rem;
+  }
+
+  .swiper-button-prev, .swiper-button-next {
+    border: .1rem solid var(--primary);
+    background: #FFF;
+    height: 4.5rem;
+    border-radius: 0.8rem;
+  }
+
+  .swiper-button-prev {
+    right: 0 !important;
+  }
+
+  .swiper-button-prev:after, .swiper-container-rtl .swiper-button-next:after {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+}
+
+
+.question-number {
+  height: 5rem;
+  border-radius: 50%;
+  width: 5rem;
+  line-height: 5rem;
+  text-align: center;
+  color: var(--primary);
+  background-color: #008dd230;
+  border: none;
+  position: relative;
+
+  &::after {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, 0);
+    right: -71%;
+    height: 200px;
+    background-color: rgba(0, 141, 210, 0.1882352941);
+    height: 1px;
+    content: "";
+    width: 50%;
+  }
+
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, 0);
+    left: -20%;
+    height: 200px;
+    background-color: rgba(0, 141, 210, 0.1882352941);
+    height: 1px;
+    content: "";
+    width: 50%;
+  }
+
+  &.active {
+    color: #FFF;
+    background-color: var(--primary);
+  }
+}
+
+
+.choose-item {
+  cursor: pointer;
+
+  &__header {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+    background-color: rgb(203 203 203 / 22%);
+
+    span {
+      background-color: rgb(226 226 226 / 94%);
+      padding: 1rem 2.5rem 1rem 4rem;
+      position: relative;
+      &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        content: "";
+        border-width: 25px 14px 25px 14px;
+        border-style: solid;
+        border-color: transparent transparent rgb(255 255 255 / 52%) rgb(255 255 255 / 52%);
+      }
+    }
+  }
+
+  &__img {
+    padding: 2rem 1rem;
+    background: rgba(203, 203, 203, 0.22);
+    text-align: center;
+    border: .2rem solid rgba(203, 203, 203, 0.22) ;
+    img {
+      height: 100%;
+    }
+  }
+
+  &.selected-item {
+    .choose-item__header {
+      background-color: rgba(238, 156, 13, 0.22);
+
+      span {
+          color: #FFF;
+        background-color: rgba(234, 127, 12, 0.94);
+
+        &::after {
+          border-color:transparent transparent rgb(249 232 218) rgb(249 232 218)
+        }
+      }
+    }
+    .choose-item__img {
+      border: .2rem solid rgba(234, 127, 12, 0.94); ;
+    }
+  }
+}
