@@ -1,18 +1,31 @@
 <template>
   <div>
     <div class="mb-5">
-      <div class="d-flex gap-3 flex-wrap">
-        <Button
-          @click.native="activeTab = 'students'"
-          :type="activeTab === 'students' ? 'primary' : 'primary-plain'"
-          text="الطلاب"
-        ></Button>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex gap-3 flex-wrap">
+          <Button
+            @click.native="activeTab = 'students'"
+            :type="activeTab === 'students' ? 'primary' : 'primary-plain'"
+            text="الطلاب"
+          ></Button>
 
-        <Button
-          @click.native="activeTab = 'users'"
-          :type="activeTab === 'users' ? 'primary' : 'primary-plain'"
-          text="مستخدمين المنصة"
-        ></Button>
+          <Button
+            @click.native="activeTab = 'users'"
+            :type="activeTab === 'users' ? 'primary' : 'primary-plain'"
+            text="مستخدمين المنصة"
+          ></Button>
+        </div>
+        <div>
+          <Button
+            type="success"
+            text="إضافة مستخدم جديد"
+            @click.native="addUserPopup = true"
+          >
+            <template>
+              <img src="@/assets/imgs/dashboard/add-circle-bulk.svg" alt="">
+            </template>
+          </Button>
+        </div>
       </div>
     </div>
 
@@ -66,6 +79,7 @@
 
     <EnableUserPopup @close="enableUserPopup = false" :isOpened="enableUserPopup" />
     <DisableUserPopup @close="disableUserPopup = false" :isOpened="disableUserPopup" />
+    <AddUserPopup @close="addUserPopup = false" :isOpened="addUserPopup" />
   </div>
 </template>
 
@@ -74,12 +88,15 @@ import Button from "@/components/Layouts/Button.vue";
 import Status from "@/components/Layouts/Status.vue";
 import EnableUserPopup from '@/components/Dashboard/Popups/EnableUser';
 import DisableUserPopup from '@/components/Dashboard/Popups/DisableUser';
+import AddUserPopup from '@/components/Dashboard/Popups/AddUser';
+
 export default {
   components: {
     Button,
     Status,
     EnableUserPopup,
-    DisableUserPopup
+    DisableUserPopup,
+    AddUserPopup
   },
   layout: "dashboard",
   data() {
@@ -87,6 +104,7 @@ export default {
       activeTab: "students",
       enableUserPopup: false,
       disableUserPopup: false,
+      addUserPopup: false,
     };
   },
 };

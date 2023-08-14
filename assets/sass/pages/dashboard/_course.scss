@@ -1,0 +1,27 @@
+.dashboard-course {
+  box-shadow: 0 0 15px 6px #f7f7f7;
+  border-radius: 1.7rem;
+  margin-bottom: 3rem;
+  padding: 1.8rem 1rem;
+
+  &__inner {
+    display: flex;
+    gap: 1.5rem;
+    @media screen and (max-width: 1200px) {
+      flex-wrap: wrap;
+    }
+  }
+
+  &__btns {
+    @media screen and (max-width: 1200px) {
+      flex-wrap: wrap;
+    }
+  }
+
+  &__img {
+    overflow: hidden;
+    object-fit: cover;
+    width: 17rem;
+    border-radius: 1rem;
+  }
+}

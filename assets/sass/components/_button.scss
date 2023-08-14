@@ -93,6 +93,12 @@
       color: var(--primary);
     }
   }
+  &__danger-plain {
+    background: #ff1d1d26;
+    span {
+      color: #FF1D1D;
+    }
+  }
   &__text-primary {
     background: none;
     span {
@@ -103,6 +109,18 @@
     background: none;
     span {
       color: red;
+    }
+  }
+  &__success {
+    background: #2FC503;
+    span {
+      color: #fff;
+    }
+  }
+  &__success-plain {
+    background: #2fc50333;
+    span {
+      color: #36cd09;
     }
   }
 }

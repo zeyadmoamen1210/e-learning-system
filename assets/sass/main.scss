@@ -18,10 +18,13 @@
 @import "./components/popup";
 @import "./components/table";
 @import "./components/status";
+@import "./components/attach-photo";
 @import "./vendors/element-ui";
 
 @import "./pages/student/course/course-content";
 @import "./pages/student/course/exam";
 @import "./pages/student/my-courses";
 @import "./pages/student/home-page";
+@import "./pages/dashboard/course";
+@import "./pages/dashboard/question";
 @import "./pages/login";

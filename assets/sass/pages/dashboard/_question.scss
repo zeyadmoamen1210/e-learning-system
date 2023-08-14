@@ -1,0 +1,59 @@
+.question-card {
+  box-shadow: 0 0 15px 6px #f7f7f7;
+  border-radius: 1.2rem;
+  margin-bottom: 3rem;
+  padding: 1.5rem 1rem;
+}
+
+
+.question-details-popup {
+
+
+  .question-answers {
+    > div {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 2rem;
+
+
+
+
+    }
+  }
+
+}
+
+.correct-answer {
+  .answer-name {
+    color: #2FC503;
+    font-weight: 700;
+  }
+  .answer-index {
+    background-color: #2FC503;
+    color: #FFF;
+  }
+}
+
+.answer-index {
+  background-color: #008dd230;
+  color: var(--primary);
+
+  width: 3.2rem;
+  height: 3.2rem;
+  text-align: center;
+  border-radius: 50%;
+  line-height: 3.2rem;
+}
+
+.add-choose {
+  display: flex;
+  gap: 1rem;
+}
+
+
+.question-correct {
+  background: #F8F8F8;
+  border-radius: 1rem;
+  padding: 3rem 2rem;
+}

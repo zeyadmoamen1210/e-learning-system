@@ -62,17 +62,16 @@ export default {
     manifest: {
       name: 'Madkor Salama E-Learning',
       short_name: 'Madkor Salama',
+      description: 'Madkor Salama E-Learning',
       lang: 'ar',
       start_url: "/student/",
       display: "standalone",
       background_color: "#E5F3FB",
       theme_color: "#008DD2"
     },
-    workbox: {
-      enabled: true,
-    },
     icon: {
-      source: '/static/icon.png', // Path to your app's icon
+      fileName: 'icon.png', // Path to your app's icon
+      sizes: [64, 120, 144, 152, 192, 384, 512]
     },
   },
 

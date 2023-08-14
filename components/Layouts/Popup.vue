@@ -9,7 +9,10 @@
           <slot name="header" />
         </h6>
       </div>
-      <div class="app-popup__content app-popup__content-centered">
+      <div
+        class="app-popup__content"
+        :class="contentCentered ? 'app-popup__content-centered' : ''"
+      >
         <slot name="body" />
       </div>
     </div>

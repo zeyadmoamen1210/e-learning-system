@@ -1,0 +1,71 @@
+<template>
+  <div class="dashboard-course">
+    <div class="dashboard-course__inner">
+      <div>
+        <img class="dashboard-course__img" :src="details.image" alt="" />
+      </div>
+      <div>
+        <h6 class="font-h5 mb-3 font--regular mt-2">{{ details.name }}</h6>
+        <p class="font--light font-h6">{{ details.description }}</p>
+
+        <div class="d-flex gap-3">
+          <div>
+            <img src="@/assets/imgs/course-imgs/timer-broken.png" alt="" />
+            <span class="font-h6 font--regular">4 ساعات</span>
+          </div>
+          <div>
+            <img src="@/assets/imgs/course-imgs/vuesax-broken-wallet.png" alt="" />
+            <span class="font-h6 font--regular">750 جنية</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4 d-flex gap-2 dashboard-course__btns">
+      <Button
+        class="flex-grow-1"
+        padding="1rem 4rem"
+        :type="'null'"
+        :center="true"
+        text="عرض التفاصيل"
+        text-classes="font-h5 font--regular"
+      >
+        <img src="@/assets/imgs/dashboard/vuesax-bulk-frame.svg" alt="" />
+      </Button>
+      <Button
+        class="flex-grow-1"
+        padding="1rem"
+        :type="'primary-plain'"
+        :center="true"
+        text="تعديل"
+        text-classes="font-h5 font--regular"
+      >
+        <img src="@/assets/imgs/dashboard/vuesax-bulk-edit-2.svg" alt="" />
+      </Button>
+      <Button
+        class="flex-grow-1"
+        padding="1rem"
+        :center="true"
+        :type="'danger-plain'"
+        text="حذف"
+        text-classes="font-h5 font--regular"
+      >
+        <img src="@/assets/imgs/dashboard/trash-bulk.svg" alt="" />
+      </Button>
+    </div>
+  </div>
+</template>
+
+<script>
+import Button from "@/components/Layouts/Button.vue";
+
+export default {
+  components: {
+    Button,
+  },
+  props: {
+    details: {
+      required: true,
+    },
+  },
+};
+</script>

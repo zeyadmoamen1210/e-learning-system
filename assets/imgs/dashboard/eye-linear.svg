@@ -1,0 +1,9 @@
+<svg id="eye_linear" data-name="eye/linear" xmlns="http://www.w3.org/2000/svg" width="20.055" height="20.055" viewBox="0 0 20.055 20.055">
+  <g id="vuesax_linear_eye" data-name="vuesax/linear/eye">
+    <g id="eye">
+      <path id="Vector" d="M5.983,2.991A2.991,2.991,0,1,1,2.991,0,2.988,2.988,0,0,1,5.983,2.991Z" transform="translate(7.036 7.036)" fill="none" stroke="#008dd2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <path id="Vector-2" data-name="Vector" d="M8.176,13.829c2.95,0,5.7-1.738,7.612-4.746a4.45,4.45,0,0,0,0-4.337C13.875,1.738,11.126,0,8.176,0S2.478,1.738.564,4.746a4.45,4.45,0,0,0,0,4.337C2.478,12.091,5.227,13.829,8.176,13.829Z" transform="translate(1.851 3.108)" fill="none" stroke="#008dd2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <path id="Vector-3" data-name="Vector" d="M0,0H20.055V20.055H0Z" transform="translate(20.055 20.055) rotate(180)" fill="none" opacity="0"/>
+    </g>
+  </g>
+</svg>

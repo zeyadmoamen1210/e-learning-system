@@ -14,7 +14,7 @@
     background-color: #FFF;
     width: 98%;
     max-width: 70rem;
-    padding: 5rem 4rem 2rem;
+    padding: 3rem 3rem 2rem;
   }
   &__header {
     text-align: center;
@@ -22,12 +22,13 @@
   }
   &__content {
     padding: 1.5rem 0;
-    text-align: center;
+
   }
   &__content-centered {
     width: 100%;
     max-width: 40rem;
     margin: auto;
+    text-align: center;
   }
   &__close {
     position: absolute;

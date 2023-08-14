@@ -8,3 +8,18 @@
     font-size: 1.8rem;
   }
 }
+
+
+.el-radio {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  &__label {
+    font-family: 'fontLight';
+    font-size: 1.8rem;
+  }
+  &__inner {
+    width: 21px;
+    height: 22px;
+  }
+}

@@ -3,15 +3,21 @@
     class="app-button"
     :class="{
       'app-button__primary': type === 'primary',
+      'app-button__success': type === 'success',
       'app-button__primary-plain': type === 'primary-plain',
+      'app-button__danger-plain': type === 'danger-plain',
       'app-button__text-primary': type === 'text-primary',
       'app-button__text-danger': type === 'text-danger',
+      'app-button__success-plain': type === 'success-plain',
     }"
     :style="{ 'font-size': fontSize, padding: padding }"
   >
-    <div class="d-flex gap-3 align-items-center">
+    <div
+      class="d-flex gap-3 align-items-center"
+      :class="center ? 'justify-content-center' : ''"
+    >
       <slot></slot>
-      <span>{{ text }}</span>
+      <span :class="textClasses">{{ text }}</span>
     </div>
   </button>
 </template>
@@ -21,7 +27,7 @@ export default {
   props: {
     type: {
       required: true,
-      // 'primary', 'primary-plain', 'text-primary', 'text-danger'
+      // 'primary', 'primary-plain', 'text-primary', 'text-danger', 'success', 'danger-plain', 'success-plain'
       type: String,
     },
     text: {
@@ -34,6 +40,14 @@ export default {
     },
     padding: {
       default: "1.7rem 3rem",
+      type: String,
+    },
+    center: {
+      type: Boolean,
+      default: false,
+    },
+    textClasses: {
+      default: "",
       type: String,
     },
   },

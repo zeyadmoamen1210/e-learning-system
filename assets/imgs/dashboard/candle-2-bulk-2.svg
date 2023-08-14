@@ -1,0 +1,11 @@
+<svg id="candle-2_bulk" data-name="candle-2/bulk" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+  <g id="vuesax_bulk_candle-2" data-name="vuesax/bulk/candle-2">
+    <g id="candle-2">
+      <path id="Vector" d="M0,0H36V36H0Z" fill="none" opacity="0"/>
+      <g id="Group" transform="translate(1.875 21.75)">
+        <path id="Vector-2" data-name="Vector" d="M32.25,4.5a1.133,1.133,0,0,1-1.125,1.125h-10.5V6a2.685,2.685,0,0,1-3,3h-9a2.685,2.685,0,0,1-3-3V5.625h-4.5a1.125,1.125,0,0,1,0-2.25h4.5V3a2.685,2.685,0,0,1,3-3h9a2.685,2.685,0,0,1,3,3v.375h10.5A1.133,1.133,0,0,1,32.25,4.5Z" fill="#008dd2"/>
+      </g>
+      <path id="Vector-3" data-name="Vector" d="M32.25,4.5a1.133,1.133,0,0,1-1.125,1.125h-4.5V6a2.685,2.685,0,0,1-3,3h-9a2.685,2.685,0,0,1-3-3V5.625H1.125a1.125,1.125,0,0,1,0-2.25h10.5V3a2.685,2.685,0,0,1,3-3h9a2.685,2.685,0,0,1,3,3v.375h4.5A1.133,1.133,0,0,1,32.25,4.5Z" transform="translate(1.875 5.25)" fill="#008dd2" opacity="0.4"/>
+    </g>
+  </g>
+</svg>
