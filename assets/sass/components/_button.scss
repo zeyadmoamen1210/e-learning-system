@@ -111,6 +111,12 @@
       color: red;
     }
   }
+  &__text-orange {
+    background: none;
+    span {
+      color: #E17F00;
+    }
+  }
   &__success {
     background: #2FC503;
     span {

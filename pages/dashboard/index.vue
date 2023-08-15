@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-5">
-      <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
         <div class="d-flex gap-3 flex-wrap">
           <Button
             @click.native="activeTab = 'students'"
