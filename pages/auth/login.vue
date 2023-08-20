@@ -17,7 +17,7 @@
         </div>
 
         <div>
-          <el-form :model="loginForm">
+          <el-form :model="loginForm" ref="loginFormRef">
             <el-form-item
               prop="email"
               :rules="
@@ -44,7 +44,13 @@
             >
           </div>
 
-          <button class="button button--primary w-100 mb-4 mt-4 p-3">الدخول</button>
+          <button
+            v-loading.fullscreen.lock="fullScreenLoading"
+            @click="submitLogin"
+            class="button button--primary w-100 mb-4 mt-4 p-3"
+          >
+            الدخول
+          </button>
           <button
             @click="$router.push('/auth/signup')"
             class="button button--primary-plain w-100 p-3"
@@ -59,10 +65,39 @@
 
 <script>
 export default {
+  middleware: "loggedIn",
   data() {
     return {
       loginForm: {},
+      fullScreenLoading: false,
     };
+  },
+  methods: {
+    submitLogin() {
+      this.$refs.loginFormRef.validate(async (valid) => {
+        if (valid) {
+          this.fullScreenLoading = true;
+          try {
+            const res = await this.$auth.loginWith("local", { data: this.loginForm });
+            await this.$auth.setUser(res.data.user);
+            console.log(res.data.user);
+            if (res.data.user.role_id != 1) {
+              this.$router.push("/student");
+            } else {
+              this.$router.push("/dashboard");
+            }
+          } catch (err) {
+            console.log(err);
+            this.$notify.error({
+              title: "خطأ",
+              message: " البريد الإلكتروني او كلمة المرور غير صحيح",
+            });
+          } finally {
+            this.fullScreenLoading = false;
+          }
+        }
+      });
+    },
   },
 };
 </script>

@@ -1,0 +1,9 @@
+<svg id="video-square_broken" data-name="video-square/broken" xmlns="http://www.w3.org/2000/svg" width="28.229" height="28.229" viewBox="0 0 28.229 28.229">
+  <g id="vuesax_broken_video-square" data-name="vuesax/broken/video-square">
+    <g id="video-square">
+      <path id="Vector" d="M0,12.879V15.29c0,5.881,2.352,8.233,8.233,8.233H15.29c5.881,0,8.233-2.352,8.233-8.233V8.233C23.524,2.352,21.171,0,15.29,0H8.233C2.352,0,0,2.352,0,8.233" transform="translate(2.352 2.352)" fill="none" stroke="#2fc503" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <path id="Vector-2" data-name="Vector" d="M3.529,8.029C1.588,9.147,0,8.229,0,5.995V2.513C0,.267,1.588-.639,3.529.478l1.506.87,1.506.87c1.941,1.117,1.941,2.952,0,4.07" transform="translate(10.703 9.86)" fill="none" stroke="#2fc503" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <path id="Vector-3" data-name="Vector" d="M0,0H28.229V28.229H0Z" fill="none" opacity="0"/>
+    </g>
+  </g>
+</svg>

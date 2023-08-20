@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-loading="fullScreenLoading">
     <div class="text-center" v-if="courses.length === 0">
       <div>
         <img src="@/assets/imgs/dashboard/note-linear-courses.svg" alt="" />
@@ -7,7 +7,12 @@
       <h6 class="text-center font-h4 mt-3">الكورسات</h6>
       <p class="font--light mb-4 mt-3">لم يتم إضافة أي كورسات</p>
 
-      <Button type="success" text="إضافة كورس" padding="1rem 2.5rem">
+      <Button
+        @click.native="$router.push('/dashboard/courses/add')"
+        type="success"
+        text="إضافة كورس"
+        padding="1rem 2.5rem"
+      >
         <template>
           <img src="@/assets/imgs/dashboard/add-circle-bulk.svg" alt="" />
         </template>
@@ -22,6 +27,7 @@
             text="إضافة كورس جديد"
             padding="1.2rem 1.5rem"
             textClasses="font-h5 font--regular"
+            @click.native="$router.push('/dashboard/courses/add')"
           >
             <template>
               <img src="@/assets/imgs/dashboard/add-circle-bulk.svg" alt="" />
@@ -32,7 +38,7 @@
 
       <div class="container">
         <div class="row">
-          <div class="col-md-6" v-for="(item, index) in courses" :key="index">
+          <div class="col-md-6" v-for="(item, index) in allCourses" :key="index">
             <div>
               <Course :details="item" />
             </div>
@@ -55,6 +61,10 @@ export default {
   },
   data() {
     return {
+      allCourses: [],
+      currPage: 1,
+      totalPages: 1,
+      fullScreenLoading: false,
       courses: [
         {
           image: "https://i.ibb.co/K5bffN7/course-img.jpg",
@@ -79,6 +89,24 @@ export default {
         },
       ],
     };
+  },
+  mounted() {
+    this.getAllCourses();
+  },
+  methods: {
+    async getAllCourses() {
+      this.fullScreenLoading = true;
+      try {
+        const res = await this.$axios.get("/admin/courses");
+        this.allCourses = res.data.data;
+        this.currPage = res.data.current_page;
+        this.totalPages = res.data.last_page;
+      } catch (err) {
+        console.log(err);
+      } finally {
+        this.fullScreenLoading = false;
+      }
+    },
   },
 };
 </script>

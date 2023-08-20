@@ -1,0 +1,28 @@
+.lesson-video {
+  padding: 1rem;
+  box-shadow: 0 0 20px 0 #dddddd6b;
+  margin-top: 1rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+
+  img {
+    width: 18rem;
+    height: 14rem;
+    object-fit: cover;
+  }
+
+  &__title {
+
+  }
+  &__desc {
+    display: block;
+  }
+}
+.lesson-pdf {
+  padding: 1rem;
+  box-shadow: 0 0 20px 0 #dddddd6b;
+  margin-top: 1rem;
+}

@@ -10,6 +10,10 @@
       'app-button__text-danger': type === 'text-danger',
       'app-button__text-orange': type === 'text-orange',
       'app-button__success-plain': type === 'success-plain',
+      'app-button__dark': type === 'dark',
+      'app-button__dark-reverse': type === 'dark-reverse',
+      'app-button__btn-orange': type === 'btn-orange',
+
     }"
     :style="{ 'font-size': fontSize, padding: padding }"
   >
@@ -28,7 +32,7 @@ export default {
   props: {
     type: {
       required: true,
-      // 'primary', 'primary-plain', 'text-primary', 'text-danger', 'success', 'danger-plain', 'success-plain', 'text-orange'
+      // 'primary', 'primary-plain', 'text-primary', 'text-danger', 'success', 'danger-plain', 'success-plain', 'text-orange', 'dark', 'dark-reverse', 'btn-orange'
       type: String,
     },
     text: {

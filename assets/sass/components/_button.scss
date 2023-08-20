@@ -117,6 +117,12 @@
       color: #E17F00;
     }
   }
+  &__btn-orange {
+    background: #E17F00;
+    span {
+      color: #fff;
+    }
+  }
   &__success {
     background: #2FC503;
     span {
@@ -129,4 +135,27 @@
       color: #36cd09;
     }
   }
+
+  &__dark {
+    background:#363443;
+    span {
+      color: #fff;
+    }
+  }
+  &__dark-reverse {
+    background: #fff;
+    box-shadow: 0 1px 21px -4px #ddd;
+    span {
+      color: #363443;
+    }
+  }
+
+  &__dark-reverse {
+    background: #fff;
+    box-shadow: 0 1px 21px -4px #ddd;
+    span {
+      color: #363443;
+    }
+  }
+
 }

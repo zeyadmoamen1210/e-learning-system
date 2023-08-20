@@ -15,7 +15,7 @@
           </div>
           <div>
             <img src="@/assets/imgs/course-imgs/vuesax-broken-wallet.png" alt="" />
-            <span class="font-h6 font--regular">750 جنية</span>
+            <span class="font-h6 font--regular"> {{ details.price }} جنية</span>
           </div>
         </div>
       </div>
@@ -28,6 +28,7 @@
         :center="true"
         text="عرض التفاصيل"
         text-classes="font-h5 font--regular"
+        @click.native="$router.push(`/dashboard/courses/${details.id}`)"
       >
         <img src="@/assets/imgs/dashboard/vuesax-bulk-frame.svg" alt="" />
       </Button>
@@ -38,6 +39,7 @@
         :center="true"
         text="تعديل"
         text-classes="font-h5 font--regular"
+        @click.native="$router.push(`/dashboard/courses/${details.id}`)"
       >
         <img src="@/assets/imgs/dashboard/vuesax-bulk-edit-2.svg" alt="" />
       </Button>

@@ -1,6 +1,4 @@
-html {
-  font-family: fontRegular;
-}
+
 
 *{
   font: inherit;
@@ -9,28 +7,31 @@ html {
 
 @font-face {
   font-family: fontBold;
-  src: url(@/assets/font/Rubik/static/Rubik-Bold.ttf);
+  src: url(@/assets/font/Almarai/Almarai-ExtraBold.ttf);
 }
 
 @font-face {
   font-family: fontMedium;
-  src: url(@/assets/font/Rubik/static/Rubik-Medium.ttf);
+  src: url(@/assets/font/Almarai/Almarai-Bold.ttf);
 }
 @font-face {
   font-family: fontLight;
-  src: url(@/assets/font/Rubik/static/Rubik-Light.ttf);
+  src: url(@/assets/font/Almarai/Almarai-Light.ttf);
 }
 
 @font-face {
   font-family: fontSemiBold;
-  src: url(@/assets/font/Rubik/static/Rubik-SemiBold.ttf);
+  src: url(@/assets/font/Almarai/Almarai-Regular.ttf);
 }
 
 @font-face {
   font-family: fontRegular;
-  src: url(@/assets/font/Rubik/static/Rubik-Regular.ttf);
+  src: url(@/assets/font/Almarai/Almarai-Regular.ttf);
 }
 
+* {
+  font-family: fontRegular;
+}
 
 .font-h6 {
   font-size: 1.5rem;

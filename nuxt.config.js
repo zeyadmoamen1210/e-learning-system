@@ -49,8 +49,10 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
     'vue-social-sharing/nuxt',
   ],
+
 
 
   pwa: {
@@ -78,7 +80,52 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    baseURL: 'https://e-learning.mongz-cashier.com/api/',
+
+  },
+
+  auth: {
+    redirect: {
+      logout: '/auth/login',
+      login: '/',
+      home: false
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: '/auth/login',
+            method: 'post',
+            propertyName: 'access_token'
+          },
+          logout: false,
+          user: {
+            url: '/auth/me',
+            method: 'post',
+            propertyName: ''
+          }
+        },
+        token: {
+          property: 'access_token',
+          type: 'Bearer',
+          maxAge: false,
+          global: true,
+        },
+        user: {
+          property: '',
+          autoFetch: false
+        },
+        refreshToken: {
+          property: false,
+          maxAge: false
+        },
+        autoLogout: false
+      }
+    },
+    plugins: [{
+      src: '~plugins/auth.js',
+      ssr: false
+    }]
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

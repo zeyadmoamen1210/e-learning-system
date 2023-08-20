@@ -38,10 +38,17 @@
 
           <div class="col-lg-3 d-flex flex-row-reverse d-none d-lg-block">
             <div class="app-navbar__btns" v-if="!isLoggedIn">
-              <button class="app-navbar__btn--login">تسجيل الدخول</button>
-              <button class="app-navbar__btn--signup">إنشاء حساب</button>
+              <button @click="$router.push('/auth/login')" class="app-navbar__btn--login">
+                تسجيل الدخول
+              </button>
+              <button
+                @click="$router.push('/auth/signup')"
+                class="app-navbar__btn--signup"
+              >
+                إنشاء حساب
+              </button>
             </div>
-            <ProfileDropdown :from_dashboard="true" v-else />
+            <ProfileDropdown :from_dashboard="from_dashboard" v-else />
           </div>
 
           <div class="col-3 d-flex flex-row-reverse d-block d-lg-none">
@@ -78,9 +85,13 @@ export default {
   },
   data() {
     return {
-      isLoggedIn: true,
       openMenu: false,
     };
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$auth.loggedIn;
+    },
   },
 };
 </script>

@@ -17,7 +17,7 @@
         <div class="d-flex justify-content-between gap-4 align-items-center">
           <div class="d-flex justify-content-between gap-2 align-items-center">
             <img src="@/assets/imgs/navbar-imgs/vuesax-linear-profile.svg" alt="" />
-            <h6 class="font-h6 mb-0 text-white">مرحبا بك , خالد</h6>
+            <h6 class="font-h6 mb-0 text-white">{{ $auth.user.name }}</h6>
           </div>
           <div>
             <img
@@ -45,7 +45,7 @@
                 >تعديل بياناتى
               </span>
             </li>
-            <li>
+            <li role="button" @click="$auth.logout()">
               <img src="@/assets/imgs/navbar-imgs/vuesax-linear-logout.svg" alt="" />
               <span class="font-h6 font--bold font--danger">تسجيل الخروج</span>
             </li>
@@ -62,7 +62,12 @@
             </div>
           </div>
         </div>
-        <div v-if="from_dashboard" class="button--danger px-2 profile-dropdown__logout">
+        <div
+          role="button"
+          @click="$auth.logout()"
+          v-if="from_dashboard"
+          class="button--danger px-2 profile-dropdown__logout"
+        >
           <img src="@/assets/imgs/navbar-imgs/export-twotone.svg" alt="" />
         </div>
       </div>

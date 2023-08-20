@@ -99,7 +99,7 @@
                 </el-form-item>
 
                 <div v-if="addNewQuestion.type === 'choose-with-photo'">
-                  <AttachPhoto />
+                  <AttachPhoto title="صورة السؤال" />
                 </div>
 
                 <template
@@ -152,7 +152,7 @@
                           </div>
                         </div>
                         <div>
-                          <AttachPhoto />
+                          <AttachPhoto title="صورة السؤال" />
                         </div>
                       </div>
                     </div>
