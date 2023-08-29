@@ -81,6 +81,7 @@ import ExamCorrectionFilter from "@/components/Dashboard/Popups/ExamCorrectionFi
 
 export default {
   layout: "dashboard",
+  middleware: ['prevent-student'],
   components: {
     Button,
     ExamCorrectionFilter

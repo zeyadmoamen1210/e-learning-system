@@ -3,7 +3,7 @@
     <Popup :contentCentered="true" :open="isOpened" @close="$emit('close', false)">
       <template #header> </template>
       <template #body>
-        <div>
+        <div v-loading="loading">
           <div class="mb-4 mt-2">
             <img src="@/assets/imgs/dashboard/vuesax-linear-close-circle.svg" alt="" />
           </div>
@@ -37,6 +37,9 @@ export default {
       required: true,
       default: false,
       type: Boolean,
+    },
+    loading: {
+      required: false,
     },
   },
   data() {

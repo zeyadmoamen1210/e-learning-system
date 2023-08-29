@@ -31,6 +31,8 @@ import CoursesList from "@/components/Students/LandingPage/CoursesList.vue";
 
 export default {
   name: "IndexPage",
+  middleware: ["not-admin"],
+  auth: false,
   components: {
     Header,
     AboutUs,

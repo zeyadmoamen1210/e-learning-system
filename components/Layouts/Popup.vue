@@ -1,6 +1,6 @@
 <template>
   <div class="app-popup" v-if="open">
-    <div class="app-popup__outer">
+    <div class="app-popup__outer" :style="{ 'max-width': maxWidth }">
       <div class="app-popup__header">
         <button @click="$emit('close', false)" class="app-popup__close">
           <img src="@/assets/imgs/close.svg" alt="" />
@@ -30,6 +30,11 @@ export default {
     contentCentered: {
       required: true,
       default: false,
+    },
+    maxWidth: {
+      required: false,
+      default: "70rem",
+      //120rem
     },
   },
 };

@@ -10,14 +10,14 @@
       </button>
       <button
         class="profile-dropdown"
-        v-if="!from_dashboard"
+        v-if="$auth.user.role_id == 3"
         @mouseover="mouseOver"
         @mouseleave="mouseLeave"
       >
         <div class="d-flex justify-content-between gap-4 align-items-center">
           <div class="d-flex justify-content-between gap-2 align-items-center">
             <img src="@/assets/imgs/navbar-imgs/vuesax-linear-profile.svg" alt="" />
-            <h6 class="font-h6 mb-0 text-white">{{ $auth.user.name }}</h6>
+            <h6 class="font-h6 mb-0 text-white">{{ $auth?.user?.name }}</h6>
           </div>
           <div>
             <img
@@ -45,7 +45,7 @@
                 >تعديل بياناتى
               </span>
             </li>
-            <li role="button" @click="$auth.logout()">
+            <li role="button" @click="logout()">
               <img src="@/assets/imgs/navbar-imgs/vuesax-linear-logout.svg" alt="" />
               <span class="font-h6 font--bold font--danger">تسجيل الخروج</span>
             </li>
@@ -53,19 +53,18 @@
         </div>
       </button>
 
-      <div class="d-flex">
-        <div v-if="from_dashboard" class="profile-dropdown">
+      <div class="d-flex" v-if="$auth.user.role_id != 3">
+        <div class="profile-dropdown">
           <div class="d-flex justify-content-between gap-4 align-items-center">
             <div class="d-flex justify-content-between gap-2 align-items-center">
               <img src="@/assets/imgs/navbar-imgs/vuesax-linear-profile.svg" alt="" />
-              <h6 class="font-h6 mb-0 text-white">مرحبا بك , خالد</h6>
+              <h6 class="font-h6 mb-0 text-white">{{ $auth?.user?.name }}</h6>
             </div>
           </div>
         </div>
         <div
           role="button"
-          @click="$auth.logout()"
-          v-if="from_dashboard"
+          @click="logout()"
           class="button--danger px-2 profile-dropdown__logout"
         >
           <img src="@/assets/imgs/navbar-imgs/export-twotone.svg" alt="" />
@@ -77,18 +76,16 @@
 
 <script>
 export default {
-  props: {
-    from_dashboard: {
-      required: true,
-      default: false,
-    },
-  },
   data() {
     return {
       isDropdownActive: false,
     };
   },
   methods: {
+    logout() {
+      this.$auth.logout();
+      this.$router.push("/auth/login");
+    },
     mouseOver(e) {
       this.isDropdownActive = true;
     },

@@ -2,15 +2,11 @@
   <div class="selected-content">
     <div
       class="selected-content__video mb-4"
-      v-if="selectedContent.type == 'video' && !selectedContentStarted"
+      v-if="selectedContent.type == 'VIDEO' && !selectedContentStarted"
       @click="openVideo(selectedContent)"
       role="button"
     >
-      <img
-        class="selected-content__video-photo"
-        src="@/assets/imgs/course-imgs/course-img.jpeg"
-        alt=""
-      />
+      <img class="selected-content__video-photo" :src="course.image" alt="" />
 
       <div class="selected-content__video-title">
         <div class="d-flex gap-3 align-items-end">
@@ -28,7 +24,7 @@
 
     <div
       class="selected-content__pdf"
-      v-if="selectedContent.type == 'pdf' && !selectedContentStarted"
+      v-if="selectedContent.type == 'PDF' && !selectedContentStarted"
     >
       <div class="selected-content__pdf-inner">
         <img src="@/assets/imgs/course-imgs/pdf-icon.svg" alt="" />
@@ -45,7 +41,7 @@
 
     <div
       class="selected-content__pdf"
-      v-if="selectedContent.type == 'test' && !selectedContentStarted && !examSubmitted"
+      v-if="selectedContent.type == 'EXAM' && !selectedContentStarted && !examSubmitted"
     >
       <div class="selected-content__pdf-inner">
         <img src="@/assets/imgs/course-imgs/test.svg" alt="" />
@@ -64,12 +60,16 @@
 
     <div
       class="selected-content__pdf"
-      v-if="selectedContent.type == 'test' && selectedContentStarted"
+      v-if="selectedContent.type == 'EXAM' && selectedContentStarted"
     >
       <ExamTemplate @submit="(examSubmitted = true), (selectedContentStarted = false)" />
     </div>
 
-    <div v-if="selectedContentStarted && selectedContent.type == 'video'">
+    <div
+      v-if="
+        selectedContentStarted && selectedContent.type == 'VIDEO' && selectedContent.link
+      "
+    >
       <iframe
         style="width: 100%; height: 50.5rem"
         :src="selectedContent.link"
@@ -77,7 +77,11 @@
       ></iframe>
     </div>
 
-    <div v-if="selectedContentStarted && selectedContent.type == 'pdf'">
+    <div
+      v-if="
+        selectedContentStarted && selectedContent.type == 'PDF' && selectedContent.link
+      "
+    >
       <object
         style="height: 50.5rem; width: 100%"
         :data="selectedContent.link + '#toolbar=0&navpanes=0&scrollbar=0'"
@@ -116,6 +120,9 @@ export default {
   },
   props: {
     selectedContent: {
+      required: false,
+    },
+    course: {
       required: true,
     },
   },

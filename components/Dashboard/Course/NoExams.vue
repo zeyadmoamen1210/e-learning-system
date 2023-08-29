@@ -18,9 +18,10 @@
 
     <AddExamPopup
       :isOpened="addExamPopup"
-      :lessonIndex="lessonIndex"
+      :lessonId="lessonId"
       :course="course"
       @close="addExamPopup = false"
+      @added="$emit('reloadCourse')"
     />
   </div>
 </template>
@@ -35,7 +36,7 @@ export default {
     AddExamPopup,
   },
   props: {
-    lessonIndex: {
+    lessonId: {
       required: true,
     },
     course: {

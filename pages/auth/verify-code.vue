@@ -41,6 +41,8 @@
 
 <script>
 export default {
+  auth: false,
+  middleware: ["loggedIn"],
   methods: {
     handleOnComplete(value) {
       console.log("OTP completed: ", value);

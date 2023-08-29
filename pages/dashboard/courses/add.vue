@@ -39,24 +39,7 @@
                 </div>
               </div>
 
-              <div class="col-md-3 col-lg-2">
-                <div>
-                  <el-form-item
-                    prop="duration"
-                    :rules="[
-                      { required: true, message: 'هذا الحقل مطلوب' },
-                      { type: 'number', message: 'يجب ان يكون رقم صحيح' },
-                    ]"
-                  >
-                    <el-input
-                      placeholder="مدة الكورس"
-                      class="w-100"
-                      v-model.number="addCourse.duration"
-                    ></el-input>
-                  </el-form-item>
-                </div>
-              </div>
-              <div class="col-md-3 col-lg-2">
+              <div class="col-md-6 col-lg-4">
                 <div>
                   <el-form-item
                     prop="price"
@@ -176,6 +159,7 @@ export default {
     Button,
     AttachPhoto,
   },
+  middleware: ["prevent-student"],
   data() {
     return {
       loading: false,

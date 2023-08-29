@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <Navbar :from_dashboard="true" />
+      <Navbar />
     </div>
 
     <main id="dashboard-layout">

@@ -14,19 +14,19 @@
           <div>
             <span
               class="d-block font-h5 font--light text-success"
-              v-if="question.difficulty == 1"
+              v-if="question.level == 'LOW'"
             >
               سهل
             </span>
             <span
               class="d-block font-h5 font--light text-warning"
-              v-if="question.difficulty == 2"
+              v-if="question.level == 'MID'"
             >
               متوسط
             </span>
             <span
               class="d-block font-h5 font--light text-danger"
-              v-if="question.difficulty == 3"
+              v-if="question.level == 'HIGH'"
             >
               صعب
             </span>
@@ -41,17 +41,14 @@
               الإجابة النموذجية
             </h6>
             <p class="font-h5 font--light">
-              {{ question.answer }}
+              {{ question.correct_answer }}
             </p>
           </div>
 
-          <div
-            class="question-answers mt-5"
-            v-if="question.type === 'choose' && question.images.length === 0"
-          >
+          <div class="question-answers mt-5" v-if="question.type === 'choose'">
             <div
-              :class="question.answer === index ? 'correct-answer' : ''"
-              v-for="(item, index) in question.options"
+              :class="question.correct_answer == index ? 'correct-answer' : ''"
+              v-for="(item, index) in question.answers"
               :key="index"
             >
               <span class="answer-index"> {{ index + 1 }} </span>
@@ -59,24 +56,21 @@
             </div>
           </div>
 
-          <div
-            class="mt-5"
-            v-if="question.type === 'choose' && question.images.length != 0"
-          >
+          <div class="mt-5" v-if="question.type === 'choose_image'">
             <div class="row">
               <div
                 class="col-md-6 mb-4"
-                v-for="(item, index) in question.options"
+                v-for="(item, index) in question.answers"
                 :key="index"
               >
                 <div class="question-answers mb-2">
-                  <div :class="question.answer === index ? 'correct-answer' : ''">
+                  <div :class="question.correct_answer == index ? 'correct-answer' : ''">
                     <span class="answer-index"> {{ index + 1 }} </span>
-                    <span class="font-h5 answer-name"> {{ item }} </span>
+                    <span class="font-h5 answer-name"> الصورة {{ index + 1 }} </span>
                   </div>
                 </div>
                 <div>
-                  <img :src="question.images[index]" />
+                  <img class="answer-img" :src="question.answers[index]" />
                 </div>
               </div>
             </div>

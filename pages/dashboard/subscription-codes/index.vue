@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-loading="loading">
     <div class="text-center mt-5" v-if="codes.length === 0">
       <div>
         <img src="@/assets/imgs/dashboard/tag-linear-222.svg" alt="" />
@@ -55,16 +55,16 @@
             </th>
           </thead>
           <tbody>
-            <tr v-for="x in 15" :key="x">
-              <td> مبادئ أساسيات الفيزياء </td>
-              <td> 10</td>
+            <tr v-for="(item, index) in codes" :key="index">
+              <td> {{ item?.course?.name }} </td>
+              <td> {{ item.count }} </td>
               <td>
-                18-06-2023
+                {{ new Date(item.updated_at).toLocaleString() }}
               </td>
               <td>
                 <div class="d-flex gap-5">
                   <Button
-                    @click.native="$router.push(`/dashboard/subscription-codes/1`)"
+                    @click.native="$router.push(`/dashboard/subscription-codes/${item.course_id}`)"
                     padding="0"
                     type="text-primary"
                     text="تفاصيل الأسئلة">
@@ -79,8 +79,8 @@
 
     </div>
 
-    <AddSubscriptionCodes :isOpened="addSubscriptionCodesPopup" @close="addSubscriptionCodesPopup = false" />
-    <FilterSubscriptionCodes :isOpened="filterCodesPopup" @close="filterCodesPopup = false" />
+    <AddSubscriptionCodes v-if="addSubscriptionCodesPopup" :isOpened="addSubscriptionCodesPopup" @close="addSubscriptionCodesPopup = false" @reload="filters = {}, getCodeGroups()" />
+    <FilterSubscriptionCodes @filter="setFilterValues" v-if="filterCodesPopup" :isOpened="filterCodesPopup" @close="filterCodesPopup = false" />
   </div>
 </template>
 
@@ -91,16 +91,43 @@ import FilterSubscriptionCodes from "@/components/Dashboard/Popups/FilterSubscri
 
 export default {
   layout: "dashboard",
+  middleware: ['prevent-student'],
   components: {
     Button,
     AddSubscriptionCodes,
     FilterSubscriptionCodes
   },
+  mounted() {
+    this.getCodeGroups();
+  },
+  methods: {
+    setFilterValues(e) {
+      this.filters = e;
+      this.getCodeGroups();
+    },
+    async getCodeGroups() {
+      this.loading = true;
+      try {
+        const res = await this.$axios.get(`/courses-codes/grouped`, {
+          params: {
+            ...this.filters
+          }
+        });
+        this.codes = res.data;
+      } catch(err) {
+      } finally {
+        this.loading = false;
+      }
+    }
+  },
   data() {
     return {
-      codes: [""],
+      codes: [],
+      filters: {},
       addSubscriptionCodesPopup: false,
       filterCodesPopup: false,
+
+      loading: false,
     };
   },
 };

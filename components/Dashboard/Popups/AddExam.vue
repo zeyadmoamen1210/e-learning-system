@@ -89,7 +89,7 @@ export default {
       default: false,
       type: Boolean,
     },
-    lessonIndex: {
+    lessonId: {
       required: true,
     },
     course: {
@@ -99,17 +99,14 @@ export default {
   data() {
     return {
       loading: false,
-      addExam: {
-        type: "EXAM",
-        lesson_id: this.course.lessons[this.lessonIndex].id,
-      },
+      addExam: {},
     };
   },
   methods: {
     resetExamform() {
       this.addExam = {
         type: "EXAM",
-        lesson_id: this.course.lessons[this.lessonIndex].id,
+        lesson_id: this.lessonId,
       };
     },
     submitAddExam() {
@@ -117,7 +114,11 @@ export default {
         if (valid) {
           this.loading = true;
           try {
-            const res = await this.$axios.post(`/materials/exam`, this.addExam);
+            const res = await this.$axios.post(`/materials/exam`, {
+              ...this.addExam,
+              lesson_id: this.lessonId,
+              type: "EXAM",
+            });
             this.resetExamform();
             this.$emit("close", false);
             this.$emit("added", false);

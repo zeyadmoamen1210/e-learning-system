@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h6 class="font-h6 text-primary mb-4">تفاصيل الكورس</h6>
+      <h6 class="font-h6 text-primary mb-4">محتوي الكورس</h6>
     </div>
     <div class="d-flex gap-3 mb-4 flex-wrap">
       <div v-for="(lesson, index) in course.lessons" :key="index">
@@ -25,7 +25,7 @@
         </Button>
       </div>
     </div>
-    <div v-if="course?.lessons?.length > 0" class="mb-4 d-flex gap-4">
+    <div v-if="course?.lessons?.length > 0" class="mb-4 d-flex gap-4 flex-wrap">
       <Button
         padding="1.3rem 2.5rem"
         @click.native="activeLessonTab = 0"
@@ -109,17 +109,19 @@
     </div>
     <!-- Lesson Exams -->
     <div v-if="course?.lessons?.length > 0 && activeLessonTab == 2">
-      <div v-if="lessonExams.length > 0">
-        <div v-for="(exam, index) in lessonExams" :key="index">
-          <ExamCard
-            :exam="exam"
-            :lessonId="course?.lessons?.[activeLesson]?.id"
-            @reloadCourse="reloadCourse"
-          />
-        </div>
-      </div>
+      <ExamCards
+        :course="course"
+        :lessonId="course?.lessons?.[activeLesson]?.id"
+        v-if="lessonExams.length > 0"
+        @reloadCourse="reloadCourse"
+        :exams="lessonExams"
+      />
       <div v-else>
-        <NoExamsExist :course="course" :lessonIndex="activeLesson" />
+        <NoExamsExist
+          @reloadCourse="reloadCourse"
+          :course="course"
+          :lessonId="course?.lessons?.[activeLesson]?.id"
+        />
       </div>
     </div>
 
@@ -141,7 +143,7 @@ import AddLessonPopup from "@/components/Dashboard/Popups/AddLesson.vue";
 
 import VideoCards from "@/components/Dashboard/Course/VideoCards.vue";
 import PdfCards from "@/components/Dashboard/Course/PdfCards.vue";
-import ExamCard from "@/components/Dashboard/Course/ExamCard.vue";
+import ExamCards from "@/components/Dashboard/Course/ExamCards.vue";
 
 export default {
   components: {
@@ -151,7 +153,7 @@ export default {
     NoPdfsExist,
     AddLessonPopup,
 
-    ExamCard,
+    ExamCards,
     VideoCards,
     PdfCards,
   },

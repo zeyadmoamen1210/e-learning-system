@@ -18,17 +18,24 @@
                 class="w-100"
                 v-model="addCodes.course"
                 placeholder="اختر الكورس"
-              ></el-select>
+              >
+                <el-option
+                  v-for="(item, index) in courses"
+                  :key="index"
+                  :label="item.name"
+                  :value="item.id"
+                ></el-option>
+              </el-select>
             </el-form-item>
             <el-form-item
-              prop="exam"
+              prop="count"
               :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
             >
-              <el-select
+              <el-input
                 class="w-100"
-                v-model="addCodes.exam"
+                v-model="addCodes.count"
                 placeholder="عدد الأكواد"
-              ></el-select>
+              ></el-input>
             </el-form-item>
           </el-form>
 
@@ -57,12 +64,47 @@ export default {
   data() {
     return {
       addCodes: {},
+      loading: false,
+      courses: [],
     };
   },
+  mounted() {
+    this.getAllCourses();
+  },
   methods: {
+    async getAllCourses() {
+      this.loading = true;
+      try {
+        const res = await this.$axios.get(`/courses-all`);
+        this.courses = res.data;
+      } catch (err) {
+      } finally {
+        this.loading = false;
+      }
+    },
     submitFilter() {
-      this.$refs.addCodesRef.validate((valid) => {
+      this.$refs.addCodesRef.validate(async (valid) => {
         if (valid) {
+          this.loading = true;
+          try {
+            const res = await this.$axios.post(`/courses/${this.addCodes.course}/codes`, {
+              count: this.addCodes.count,
+            });
+            this.$emit("close");
+            this.$emit("reload");
+            this.$notify({
+              title: "تم بنجاح",
+              message: "تم إضافة الاكواد بنجاح",
+              type: "success",
+            });
+          } catch (err) {
+            this.$notify.error({
+              title: " خطأ",
+              message: " حدث خطأ ما",
+            });
+          } finally {
+            this.loading = false;
+          }
         }
       });
     },

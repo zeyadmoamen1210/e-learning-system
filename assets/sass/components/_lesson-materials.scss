@@ -26,3 +26,11 @@
   box-shadow: 0 0 20px 0 #dddddd6b;
   margin-top: 1rem;
 }
+
+.lesson-exam {
+  &__box {
+    background: #dddddd70;
+    border-radius: 1rem;
+    padding: 1.5rem 2.5rem;
+  }
+}

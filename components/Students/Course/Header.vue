@@ -5,8 +5,10 @@
         <div class="col-md-6 col-lg-7">
           <div>
             <h4 class="course-header__name font-h4 mb-4">
-              <span>مبادئ أساسيات الفيزياء</span>
-              <span class="course-header__offer-perc" v-if="isHasOffer">20%</span>
+              <span> {{ course.name }} </span>
+              <span class="course-header__offer-perc" v-if="+course.discount > 0">
+                {{ +course.discount }}%
+              </span>
             </h4>
             <div class="d-flex gap-2 align-items-center flex-wrap">
               <div class="d-flex gap-2 align-items-center">
@@ -15,7 +17,9 @@
                 </div>
                 <h6 class="mb-0 font-h6">مدة الكورس :</h6>
               </div>
-              <h6 class="mb-0 font-h6 font--orange">4 ساعات</h6>
+              <h6 class="mb-0 font-h6 font--orange">
+                {{ minutesToHours(+course.duration) }} ساعة
+              </h6>
             </div>
 
             <div class="d-flex gap-2 align-items-center mt-3" v-if="!isSubscribedIn">
@@ -26,10 +30,15 @@
                 <h6 class="mb-0 font-h6">سعر الكورس :</h6>
               </div>
               <h6 class="mb-0 font-h6 d-flex gap-4 flex-wrap align-items-end">
-                <span class="font--orange">720 جنية</span>
+                <span class="font--orange">{{ course.price }} جنية</span>
 
-                <span v-if="isHasOffer" class="course-header__rather-than font-h5">
-                  بدلاً من <span>900</span> جنية
+                <span
+                  v-if="+course.discount > 0"
+                  class="course-header__rather-than font-h5"
+                >
+                  بدلاً من
+                  <span> {{ beforeDiscount }} </span>
+                  جنية
                 </span>
               </h6>
             </div>
@@ -38,10 +47,7 @@
         <div class="col-md-6 col-lg-5">
           <div v-if="!isSubscribedIn">
             <div>
-              <button
-                @click="openCourseSubscribeCourse = !openCourseSubscribeCourse"
-                class="button button--primary w-100 mb-4"
-              >
+              <button @click="subscribe()" class="button button--primary w-100 mb-4">
                 الاشتراك بالكورس
               </button>
             </div>
@@ -59,7 +65,7 @@
                   url=""
                   @open="openPopup"
                   title="السلام عليكم و رحمة اللٌه و بركاته"
-                  :description="`أريد الإشتراك في هذا الكورس \n** الاسم/  زياد مؤمن السيد \n ** المُعلم/  مدكور سلامة \n ** المادة/  الفيزياء \n ** اسم الكورس/  الفزياء الحديثة \n ** رابط الكورس/  \n  localhost:3000/student/course/1/preview`"
+                  :description="subscriptionMessage()"
                 >
                   <img src="@/assets/imgs/course-imgs/whatsapp.png" alt="" />
                   <span>واتساب</span>
@@ -68,11 +74,19 @@
             </div>
           </div>
           <div v-else class="d-flex gap-2 flex-row-reverse flex-wrap">
-            <button class="button button--icon button--telegram">
+            <button
+              v-if="course.telegram"
+              @click="join(course.telegram)"
+              class="button button--icon button--telegram"
+            >
               <img src="@/assets/imgs/course-imgs/telegram.svg" alt="" />
               <span class="font-h6">الانضمام إلى جروب التليجرام</span>
             </button>
-            <button class="button button--icon button--whatsapp-dark">
+            <button
+              v-if="course.whatsapp"
+              @click="join(course.whatsapp)"
+              class="button button--icon button--whatsapp-dark"
+            >
               <img src="@/assets/imgs/course-imgs/708.svg" alt="" />
               <span class="font-h6">الانضمام إلى جروب الواتساب</span>
             </button>
@@ -81,12 +95,7 @@
 
         <div class="col-md-12">
           <p>
-            هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن
-            التركيز على الشكل الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها.
-            ولذلك يتم استخدام طريقة لوريم إيبسوم لأنها تعطي توزيعاَ طبيعياَ -إلى حد ما-
-            للأحرف عوضاً عن استخدام "هنا يوجد محتوى نصي، هنا يوجد محتوى نصي" فتجعلها تبدو
-            (أي الأحرف) وكأنها نص مقروء. العديد من برامح النشر المكتبي وبرامح تحرير صفحات
-            الويب تستخدم لوريم
+            {{ course.description }}
           </p>
         </div>
       </div>
@@ -112,13 +121,12 @@ export default {
     SubscriptionDoneSuccessfully,
   },
   props: {
-    isHasOffer: {
-      default: false,
-      type: Boolean,
-    },
     isSubscribedIn: {
       default: false,
       type: Boolean,
+    },
+    course: {
+      required: true,
     },
   },
   data() {
@@ -127,10 +135,29 @@ export default {
       openSubscriptionDoneSuccessfully: false,
     };
   },
+
+  computed: {
+    beforeDiscount() {
+      return +this.course.price + +this.course.price * (+this.course.discount / 100);
+    },
+  },
   methods: {
+    join(link) {
+      window.open(link, "_blank");
+    },
+    subscriptionMessage() {
+      return `أريد الإشتراك في هذا الكورس \n ** المُعلم/  مدكور سلامة \n ** المادة/  الفيزياء \n ** اسم الكورس/ ${this.course.name} \n ** رابط الكورس/  \n  localhost:3000/student/course/${this.course.id}/preview
+      `;
+    },
     openPopup() {
       console.log("open pop up");
       location.reload();
+    },
+    subscribe() {
+      if (!this.$auth.loggedIn) {
+        this.$router.push("/auth/login");
+      }
+      // @click="openCourseSubscribeCourse = !openCourseSubscribeCourse"
     },
   },
 };

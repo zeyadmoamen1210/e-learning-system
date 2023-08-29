@@ -30,6 +30,7 @@ export default {
     { src: "@/plugins/CodeInput.js", mode: "client" },
     { src: "@/plugins/social-sharing.js" },
     '@/plugins/vue-awesome-swiper.js',
+    '@/plugins/mixins.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -84,6 +85,10 @@ export default {
 
   },
 
+  router: {
+    middleware: ['auth']
+  },
+
   auth: {
     redirect: {
       logout: '/auth/login',
@@ -121,11 +126,7 @@ export default {
         },
         autoLogout: false
       }
-    },
-    plugins: [{
-      src: '~plugins/auth.js',
-      ssr: false
-    }]
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

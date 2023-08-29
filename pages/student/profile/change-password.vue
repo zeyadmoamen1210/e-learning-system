@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login" v-loading="loading">
     <div class="container">
       <div class="login__inner">
         <h6
@@ -13,18 +13,15 @@
         </h6>
 
         <div>
-          <el-form :model="loginForm">
-            <el-form-item
-              prop="currentPassword"
-              :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
-            >
+          <el-form :model="loginForm" ref="loginFormRef" :rules="loginFormRules">
+            <el-form-item prop="currentPassword">
               <el-input
                 type="password"
                 placeholder="كلمة المرور الحالية"
                 v-model="loginForm.currentPassword"
               ></el-input>
             </el-form-item>
-            <div class="d-flex flex-row-reverse">
+            <!-- <div class="d-flex flex-row-reverse">
               <nuxt-link
                 role="button"
                 tag="span"
@@ -33,21 +30,15 @@
               >
                 هل نسيت كلمة المرور ؟
               </nuxt-link>
-            </div>
-            <el-form-item
-              prop="newPassword"
-              :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
-            >
+            </div> -->
+            <el-form-item prop="newPassword">
               <el-input
                 type="password"
                 placeholder="كلمة المرور الجديدة"
                 v-model="loginForm.newPassword"
               ></el-input>
             </el-form-item>
-            <el-form-item
-              prop="confirmNewPassword"
-              :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
-            >
+            <el-form-item prop="confirmNewPassword">
               <el-input
                 type="password"
                 placeholder="تأكيد كلمة المرور الجديدة"
@@ -56,7 +47,10 @@
             </el-form-item>
           </el-form>
 
-          <button class="button button--primary w-100 mb-3 mt-4 p-4">
+          <button
+            @click="submitChangePassword"
+            class="button button--primary w-100 mb-3 mt-4 p-4"
+          >
             حفظ كلمة المرور
           </button>
         </div>
@@ -67,10 +61,67 @@
 
 <script>
 export default {
+  middleware: ["not-admin"],
   data() {
+    let validateConfirmPass = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("هذا الحقل مطلوب"));
+      } else if (value !== this.loginForm.newPassword) {
+        callback(new Error("كلمة المرور غير متطابقة!"));
+      } else {
+        callback();
+      }
+    };
+
     return {
       loginForm: {},
+      loading: false,
+      loginFormRules: {
+        currentPassword: [{ required: true, message: "هذا الحقل مطلوب" }],
+        newPassword: [{ required: true, message: "هذا الحقل مطلوب" }],
+        confirmNewPassword: [
+          { required: true, message: "هذا الحقل مطلوب" },
+          { validator: validateConfirmPass, trigger: "blur" },
+        ],
+      },
     };
+  },
+  methods: {
+    submitChangePassword() {
+      this.$refs.loginFormRef.validate(async (valid) => {
+        if (valid) {
+          this.loading = true;
+          try {
+            const res = await this.$axios.post("/change-password", {
+              password: this.loginForm.currentPassword,
+              new_password: this.loginForm.newPassword,
+              new_password_confirmation: this.loginForm.confirmNewPassword,
+            });
+            this.loginForm = {};
+            this.$notify({
+              title: "تم بنجاح",
+              message: "تم تغيير كلمة المرور",
+              type: "success",
+            });
+          } catch (err) {
+            console.log(err);
+            if (err.response.status === 403) {
+              this.$notify.error({
+                title: "خطأ",
+                message: "كلمة المرور القديمة غير صحيحة",
+              });
+              return;
+            }
+            this.$notify.error({
+              title: "خطأ",
+              message: "هناك خطأ ما",
+            });
+          } finally {
+            this.loading = false;
+          }
+        }
+      });
+    },
   },
 };
 </script>

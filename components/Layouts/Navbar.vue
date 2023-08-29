@@ -48,7 +48,7 @@
                 إنشاء حساب
               </button>
             </div>
-            <ProfileDropdown :from_dashboard="from_dashboard" v-else />
+            <ProfileDropdown v-else />
           </div>
 
           <div class="col-3 d-flex flex-row-reverse d-block d-lg-none">
@@ -77,12 +77,7 @@ export default {
     MobileMenu,
     ProfileDropdown,
   },
-  props: {
-    from_dashboard: {
-      required: false,
-      default: false,
-    },
-  },
+
   data() {
     return {
       openMenu: false,

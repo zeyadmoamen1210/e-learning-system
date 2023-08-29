@@ -1,6 +1,6 @@
 <template>
   <div v-loading="fullScreenLoading">
-    <div class="text-center" v-if="courses.length === 0">
+    <div class="text-center" v-if="allCourses.length === 0">
       <div>
         <img src="@/assets/imgs/dashboard/note-linear-courses.svg" alt="" />
       </div>
@@ -44,6 +44,17 @@
             </div>
           </div>
         </div>
+
+        <div class="d-flex flex-row-reverse" v-if="total > 1">
+          <el-pagination
+            :current-page.sync="currPage"
+            background
+            layout="prev, pager, next"
+            :total="total * 10"
+            @current-change="getAllCourses"
+          >
+          </el-pagination>
+        </div>
       </div>
     </div>
   </div>
@@ -59,35 +70,14 @@ export default {
     Button,
     Course,
   },
+  middleware: ["prevent-student"],
   data() {
     return {
       allCourses: [],
       currPage: 1,
-      totalPages: 1,
+      total: 1,
       fullScreenLoading: false,
-      courses: [
-        {
-          image: "https://i.ibb.co/K5bffN7/course-img.jpg",
-          name: "مبادئ أساسيات الفيزياء",
-          description: "هنا يكتب بنذة بسيطة عن هنا يكتب بنذة بسيطة عن ",
-          time: 4,
-          price: 452,
-        },
-        {
-          image: "https://i.ibb.co/K5bffN7/course-img.jpg",
-          name: "مبادئ أساسيات الفيزياء",
-          description: "هنا يكتب بنذة بسيطة عن هنا يكتب بنذة بسيطة عن ",
-          time: 4,
-          price: 452,
-        },
-        {
-          image: "https://i.ibb.co/K5bffN7/course-img.jpg",
-          name: "مبادئ أساسيات الفيزياء",
-          description: "هنا يكتب بنذة بسيطة عن هنا يكتب بنذة بسيطة عن ",
-          time: 4,
-          price: 452,
-        },
-      ],
+      courses: [],
     };
   },
   mounted() {
@@ -97,10 +87,14 @@ export default {
     async getAllCourses() {
       this.fullScreenLoading = true;
       try {
-        const res = await this.$axios.get("/admin/courses");
+        const res = await this.$axios.get("/admin/courses", {
+          params: {
+            page: this.currPage,
+          },
+        });
         this.allCourses = res.data.data;
-        this.currPage = res.data.current_page;
-        this.totalPages = res.data.last_page;
+        this.page = res.data.current_page;
+        this.total = res.data.last_page;
       } catch (err) {
         console.log(err);
       } finally {

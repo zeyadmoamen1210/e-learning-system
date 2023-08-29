@@ -51,6 +51,7 @@ import QuestionToCorrect from "@/components/Dashboard/Questions/Correct.vue/";
 import ExamCorrectedSuccessfully from "@/components/Dashboard/Popups/ExamCorrectedSuccessfully.vue";
 
 export default {
+  middleware: ["prevent-student"],
   layout: "dashboard",
   components: {
     Button,

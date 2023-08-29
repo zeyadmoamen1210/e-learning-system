@@ -32,6 +32,8 @@
 
 <script>
 export default {
+  auth: false,
+  middleware: ["loggedIn"],
   data() {
     return {
       loginForm: {},

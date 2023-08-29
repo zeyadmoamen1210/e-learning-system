@@ -32,7 +32,7 @@
                 </el-form-item>
 
                 <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                     <div>
                       <el-form-item
                         prop="duration"
@@ -49,7 +49,7 @@
                     </div>
                   </div>
 
-                  <div class="col-md-6">
+                  <!-- <div class="col-md-6">
                     <div>
                       <el-form-item
                         prop="view_limit"
@@ -64,7 +64,7 @@
                         ></el-input>
                       </el-form-item>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
 
                 <el-form-item
@@ -116,7 +116,9 @@ export default {
   data() {
     return {
       loading: false,
-      addVideo: {},
+      addVideo: {
+        view_limit: 999999999,
+      },
     };
   },
   methods: {
@@ -124,6 +126,7 @@ export default {
       this.addVideo = {
         type: "VIDEO",
         lesson_id: this.lessonId,
+        view_limit: 999999999,
       };
     },
     submitAddVideo() {

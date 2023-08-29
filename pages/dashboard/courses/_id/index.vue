@@ -1,7 +1,26 @@
 <template>
   <div v-loading="loading">
     <div class="container">
-      <div>
+      <div class="d-flex gap-2 mb-4">
+        <Button
+          padding="1.4rem 2rem"
+          :type="currTab === 1 ? 'primary' : 'primary-plain'"
+          @click.native="currTab = 1"
+          :center="true"
+          text="تفاصيل الكورس"
+          text-classes="font-h5 font--regular"
+        ></Button>
+        <Button
+          padding="1.4rem 2rem"
+          :type="currTab === 2 ? 'primary' : 'primary-plain'"
+          @click.native="currTab = 2"
+          :center="true"
+          text="محتوي الكورس"
+          text-classes="font-h5 font--regular"
+        ></Button>
+      </div>
+
+      <div v-if="currTab == 1">
         <div class="d-flex justify-content-between mb-3 align-items-center flex-wrap">
           <h6 class="font-h4 font--regular mb-0">تعديل الكورس</h6>
           <div>
@@ -39,24 +58,7 @@
                 </div>
               </div>
 
-              <div class="col-md-3 col-lg-2">
-                <div>
-                  <el-form-item
-                    prop="duration"
-                    :rules="[
-                      { required: true, message: 'هذا الحقل مطلوب' },
-                      { type: 'number', message: 'يجب ان يكون رقم صحيح' },
-                    ]"
-                  >
-                    <el-input
-                      placeholder="مدة الكورس"
-                      class="w-100"
-                      v-model.number="editCourse.duration"
-                    ></el-input>
-                  </el-form-item>
-                </div>
-              </div>
-              <div class="col-md-3 col-lg-2">
+              <div class="col-md-6 col-lg-4">
                 <div>
                   <el-form-item
                     prop="price"
@@ -169,7 +171,9 @@
         </div>
       </div>
 
-      <CourseLessonsDetails @reloadCourse="getCourseDetails()" :course="editCourse" />
+      <div v-if="currTab == 2">
+        <CourseLessonsDetails @reloadCourse="getCourseDetails()" :course="editCourse" />
+      </div>
     </div>
   </div>
 </template>
@@ -180,6 +184,7 @@ import AttachPhoto from "@/components/Layouts/AttachPhoto.vue";
 import CourseLessonsDetails from "@/components/Dashboard/Course/LessonDetails.vue";
 
 export default {
+  middleware: ["prevent-student"],
   components: {
     Button,
     AttachPhoto,
@@ -188,6 +193,7 @@ export default {
   data() {
     return {
       loading: false,
+      currTab: 1,
       editCourse: {
         ifHasDiscount: true,
       },
@@ -229,12 +235,18 @@ export default {
             formData.append("promo", this.editCourse.promo);
             formData.append("telegram", this.editCourse.telegram);
             formData.append("whatsapp", this.editCourse.whatsapp);
-            // formData.append("image", this.editCourse.image);
+            formData.append("_method", "put");
+            if (typeof this.editCourse.image !== "string") {
+              formData.append("image", this.editCourse.image);
+            }
 
-            const res = await this.$axios.put(`/courses/${this.editCourse.id}`, formData);
+            const res = await this.$axios.post(
+              `/courses/${this.editCourse.id}`,
+              formData
+            );
             this.$notify({
               title: "تم بنجاح",
-              message: "تم إضافة الفيديو بنجاح",
+              message: "تم تعديل الكورس بنجاح",
               type: "success",
             });
             this.$router.push(`/dashboard/courses/${res.data.id}`);

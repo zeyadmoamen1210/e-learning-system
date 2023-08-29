@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login" v-loading="loading">
     <div class="container">
       <div class="login__inner">
         <h6
@@ -13,28 +13,25 @@
         </h6>
 
         <div>
-          <el-form :model="loginForm">
-            <el-form-item
-              prop="name"
-              :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
-            >
+          <el-form :model="loginForm" ref="loginFormRef" :rules="loginFormRules">
+            <el-form-item prop="name">
               <el-input placeholder="الاسم" v-model="loginForm.name"></el-input>
             </el-form-item>
-            <el-form-item
-              prop="email"
-              :rules="[
-                { required: true, message: 'هذا الحقل مطلوب' },
-                { type: 'email', message: 'يجب ان يكون بريد إلكتروني صالح' },
-              ]"
-            >
+            <el-form-item prop="email">
               <el-input
                 placeholder="البريد الإلكتروني"
                 v-model="loginForm.email"
               ></el-input>
             </el-form-item>
+            <el-form-item prop="phone">
+              <el-input placeholder="رقم الموبايل" v-model="loginForm.phone"></el-input>
+            </el-form-item>
           </el-form>
 
-          <button class="button button--primary w-100 mb-3 mt-4 p-4">
+          <button
+            @click="submitUpdateProfile"
+            class="button button--primary w-100 mb-3 mt-4 p-4"
+          >
             حفظ التعديلات
           </button>
           <button
@@ -57,10 +54,81 @@
 
 <script>
 export default {
+  middleware: ["not-admin"],
   data() {
+    var validatePhone = (rule, value, callback) => {
+      if (value === "" || value === undefined) {
+        return callback(new Error("هذا الحقل مطلوب"));
+      }
+      const regex = /^01[0125][0-9]{8}$/;
+      if (!value.match(regex)) {
+        return callback(new Error("رقم الموبايل غير صالح يجب ان يكون رقم موبايل مصري"));
+      }
+      callback();
+    };
     return {
       loginForm: {},
+      loading: false,
+      loginFormRules: {
+        name: [{ required: true, message: "هذا الحقل مطلوب" }],
+        phone: [{ validator: validatePhone, trigger: "blur" }],
+        email: [
+          { required: true, message: "هذا الحقل مطلوب" },
+          { type: "email", message: "يجب ان يكون بريد إلكتروني صالح" },
+        ],
+      },
     };
+  },
+  mounted() {
+    this.getMe();
+  },
+  methods: {
+    //
+    submitUpdateProfile() {
+      this.$refs.loginFormRef.validate(async (valid) => {
+        if (valid) {
+          this.loading = true;
+          try {
+            const res = await this.$axios.post("/profile", {
+              name: this.loginForm.name,
+              phone: this.loginForm.phone,
+              email: this.loginForm.email,
+            });
+            this.$notify({
+              title: "تم بنجاح",
+              message: "تم تعديل البروفايل بنجاح",
+              type: "success",
+            });
+          } catch (err) {
+            console.log(err);
+            if (err.response.status === 422) {
+              this.$notify.error({
+                title: " خطأ",
+                message: err.response?.data?.message,
+              });
+              return;
+            }
+            this.$notify.error({
+              title: "خطأ",
+              message: "هناك خطأ ما",
+            });
+          } finally {
+            this.loading = false;
+          }
+        }
+      });
+    },
+    async getMe() {
+      this.loading = true;
+      try {
+        const res = await this.$axios.post(`/auth/me`);
+        this.loginForm = res.data;
+      } catch (err) {
+        console.log(err);
+      } finally {
+        this.loading = false;
+      }
+    },
   },
 };
 </script>

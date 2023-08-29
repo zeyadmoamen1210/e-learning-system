@@ -3,7 +3,7 @@
     <Popup :contentCentered="true" :open="isOpened" @close="$emit('close', false)">
       <template #header> </template>
       <template #body>
-        <div>
+        <div v-loading="loading">
           <div class="mb-2 mt-2">
             <img src="@/assets/imgs/dashboard/profile-tick-linear-2.png" alt="" />
           </div>
@@ -14,9 +14,10 @@
             هل أنت متأكد من تسليم هذا الكود
           </span>
 
-          <span class="py-2 px-4 d-inline-block bg-light mb-4">ewas0125084</span>
+          <span class="py-2 px-4 d-inline-block bg-light mb-4"> {{ code.code }} </span>
 
           <button
+            @click="$emit('submit')"
             class="button button--primary mb-2 d-flex gap-3 justify-content-center m-auto py-3 font-h5 px-5 w-100"
           >
             تأكيد التسليم
@@ -34,10 +35,17 @@ export default {
     Popup,
   },
   props: {
+    loading: {
+      required: false,
+      type: Boolean,
+    },
     isOpened: {
       required: true,
       default: false,
       type: Boolean,
+    },
+    code: {
+      required: true,
     },
   },
   data() {

@@ -13,7 +13,7 @@
       'app-button__dark': type === 'dark',
       'app-button__dark-reverse': type === 'dark-reverse',
       'app-button__btn-orange': type === 'btn-orange',
-
+      'app-button__orange-plain': type === 'orange-plain',
     }"
     :style="{ 'font-size': fontSize, padding: padding }"
   >
