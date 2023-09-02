@@ -1,54 +1,39 @@
 <template>
-  <div class="choose">
+  <div class="choose" v-viewer>
     <p class="font--light">
       {{ question.title }}
     </p>
-
+    <div v-if="question.image" class="question-main-img">
+      <img :src="question.image" alt="" />
+    </div>
     <div class="row mt-5">
       <div
-        @click="selectedAnswer = index"
+        @click="(selectedAnswerVar = index), $emit('answer', index)"
         class="col-md-6 mb-4"
-        v-for="(item, index) in question.items"
+        v-for="(item, index) in question.answers"
         :key="index"
       >
-        <div class="choose-item" :class="selectedAnswer === index ? 'selected-item' : ''">
+        <div
+          class="choose-item"
+          :class="selectedAnswerVar == index ? 'selected-item' : ''"
+        >
           <div class="choose-item__header">
             <span> {{ index + 1 }} </span>
-            <h6 class="font-h5 mb-0 font--light font--regular">{{ item.title }}</h6>
+            <h6
+              v-if="question.type === 'choose'"
+              class="font-h5 mb-0 font--light font--regular"
+            >
+              {{ item }}
+            </h6>
+            <h6 v-else class="font-h5 mb-0 font--light font--regular">
+              الإجابة رقم {{ index + 1 }}
+            </h6>
           </div>
-          <div class="choose-item__img">
-            <img :src="item.img" alt="" />
+          <div v-if="question.type == 'choose_image'" class="choose-item__img">
+            <img :src="item" alt="" />
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="d-flex flex-row-reverse gap-3 flex-wrap mb-4">
-      <button
-        v-if="questionIndex < 14"
-        class="button button--primary d-flex gap-3 justify-content-center align-items-center px-5 py-3"
-        @click="$emit('goNext')"
-      >
-        <span>التالي</span>
-        <img src="@/assets/imgs/course-imgs/arrow-left-linear-white.svg" alt="" />
-      </button>
-
-      <button
-        v-else
-        class="button button--primary d-flex gap-3 justify-content-center align-items-center px-5 py-3"
-        @click="$emit('submit')"
-      >
-        <span>تسليم الامتحان</span>
-        <img src="@/assets/imgs/course-imgs/arrow-left-linear-white.svg" alt="" />
-      </button>
-
-      <button
-        @click="$emit('goPrev')"
-        class="button button--linear d-flex gap-3 justify-content-center align-items-center px-5 py-3"
-      >
-        <img src="@/assets/imgs/course-imgs/arrow-left-linear-grey.svg" alt="" />
-        <span class="font--light">السابق</span>
-      </button>
     </div>
   </div>
 </template>
@@ -59,14 +44,24 @@ export default {
     question: {
       required: true,
     },
-    questionIndex: {
+    selectedAnswer: {
       required: true,
     },
   },
   data() {
     return {
-      selectedAnswer: 0,
+      selectedAnswerVar: this.selectedAnswer != null ? +this.selectedAnswer : null,
     };
+  },
+  created() {
+    console.log(
+      this.selectedAnswer != null ? +this.selectedAnswer : null,
+      this.selectedAnswer
+    );
+  },
+  methods: {},
+  destroyed() {
+    this.selectedAnswerVar = null;
   },
 };
 </script>

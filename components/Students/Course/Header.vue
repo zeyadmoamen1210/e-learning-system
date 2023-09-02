@@ -59,17 +59,14 @@
                 </p>
               </div>
               <div>
-                <ShareNetwork
+                <a
                   class="button button--icon button--whatsapp"
-                  network="whatsapp"
-                  url=""
-                  @open="openPopup"
-                  title="السلام عليكم و رحمة اللٌه و بركاته"
-                  :description="subscriptionMessage()"
+                  :href="generateWhatsAppLink('+201278313765')"
+                  target="_blank"
                 >
                   <img src="@/assets/imgs/course-imgs/whatsapp.png" alt="" />
                   <span>واتساب</span>
-                </ShareNetwork>
+                </a>
               </div>
             </div>
           </div>
@@ -101,13 +98,16 @@
       </div>
     </div>
 
-    <!-- <SubscribeCoursePopup
+    <SubscribeCoursePopup
       :isOpened="openCourseSubscribeCourse"
       @close="openCourseSubscribeCourse = false"
-    /> -->
+      :course_id="course.id"
+      @reload="$emit('reload')"
+    />
+
     <SubscriptionDoneSuccessfully
-      :isOpened="openCourseSubscribeCourse"
-      @close="openCourseSubscribeCourse = false"
+      :isOpened="openSubscriptionDoneSuccessfully"
+      @close="openSubscriptionDoneSuccessfully = false"
     />
   </div>
 </template>
@@ -145,9 +145,19 @@ export default {
     join(link) {
       window.open(link, "_blank");
     },
-    subscriptionMessage() {
-      return `أريد الإشتراك في هذا الكورس \n ** المُعلم/  مدكور سلامة \n ** المادة/  الفيزياء \n ** اسم الكورس/ ${this.course.name} \n ** رابط الكورس/  \n  localhost:3000/student/course/${this.course.id}/preview
+    generateWhatsAppLink(phoneNumber) {
+      let message = `السلام عليكم و رحمة اللٌه و بركاته
+      \n ** أريد الإشتراك في هذا الكورس \n ** المُعلم/  مدكور سلامة \n ** المادة/  الفيزياء \n ** اسم الكورس/ ${this.course.name} \n ** كود الكورس/ ${this.course.id} \n ** رابط الكورس/  \n  https://poe.com/student/course/${this.course.id}/preview
       `;
+      // Encode the message and replace line breaks with %0A
+      const encodedMessage = encodeURIComponent(message)
+        .replace(/%20/g, "%20")
+        .replace(/%0A/g, "%0A");
+
+      // Construct the WhatsApp link
+      const link = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
+
+      return link;
     },
     openPopup() {
       console.log("open pop up");
@@ -157,6 +167,7 @@ export default {
       if (!this.$auth.loggedIn) {
         this.$router.push("/auth/login");
       }
+      this.openCourseSubscribeCourse = true;
       // @click="openCourseSubscribeCourse = !openCourseSubscribeCourse"
     },
   },

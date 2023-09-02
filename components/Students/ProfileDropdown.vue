@@ -1,13 +1,13 @@
 <template>
   <section>
-    <div class="d-flex gap-3">
-      <button class="profile-notification">
+    <div class="d-flex gap-3 flex-row-reverse">
+      <!-- <button class="profile-notification">
         <span class="profile-notification__number">5</span>
         <img
           src="@/assets/imgs/navbar-imgs/notification-broken-notification.svg"
           alt=""
         />
-      </button>
+      </button> -->
       <button
         class="profile-dropdown"
         v-if="$auth.user.role_id == 3"

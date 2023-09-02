@@ -1,12 +1,12 @@
 <template>
-  <div class="exam-template">
+  <div class="exam-template" v-loading="loading">
     <div class="row">
       <div class="col-md-8 mb-4">
         <div class="d-flex gap-2 align-items-center">
           <img src="@/assets/imgs/course-imgs/test-primary.svg" alt="" />
           <div>
-            <h6 class="font-h5 mb-0 font--regular">اختبار الدرس الأول</h6>
-            <span class="font--light font-h6">الاختبار الخاص بالدرس</span>
+            <h6 class="font-h5 mb-0 font--regular">{{ exam?.exam?.title }}</h6>
+            <span class="font--light font-h6"> {{ exam?.exam?.description }} </span>
           </div>
         </div>
       </div>
@@ -18,7 +18,33 @@
               <img src="@/assets/imgs/course-imgs/timer-broken.svg" alt="" />
               <span class="font-h5">مدة الاختبار : </span>
             </div>
-            <h6 class="font-h4 mb-0 exam-template__mins">04:32</h6>
+            <div>
+              <vac
+                @finish="endExam"
+                ref="vac1"
+                :end-time="
+                  new Date(exam?.openedSolution?.created_at).getTime() +
+                  exam?.exam?.content?.duration * 60000
+                "
+              >
+                <template v-slot:process="{ timeObj }">
+                  <div class="d-flex justify-content-center gap-1">
+                    <h6 class="exam-template__mins mb-0 font-h4">
+                      {{ ` ${timeObj.s}` }}
+                    </h6>
+                    <h6 class="exam-template__mins mb-0 font-h4">:</h6>
+                    <h6 class="exam-template__mins mb-0 font-h4">
+                      {{ ` ${timeObj.m}` }}
+                    </h6>
+                    <h6 class="exam-template__mins mb-0 font-h4">:</h6>
+                    <h6 class="exam-template__mins mb-0 font-h4">
+                      {{ ` ${timeObj.h}` }}
+                    </h6>
+                  </div>
+                </template>
+                <span slot="finish"> تم إنتهاء الوقت </span>
+              </vac>
+            </div>
           </div>
         </div>
       </div>
@@ -26,9 +52,9 @@
 
     <div>
       <swiper :options="swiperOption" class="mb-5">
-        <swiper-slide v-for="(x, i) in 15" :key="i">
+        <swiper-slide v-for="(question, i) in exam?.exam?.exam_questions" :key="i">
           <button
-            @click="activeQuestion = i"
+            @click="setActiveQuestion(i)"
             class="question-number"
             :class="i == activeQuestion ? 'active' : ''"
           >
@@ -43,8 +69,19 @@
 
     <div>
       <ExamQuestion
+        v-if="reload"
         :questionIndex="activeQuestion"
-        :question="currQuestion"
+        :question="exam?.exam?.exam_questions?.[activeQuestion]"
+        :openedSolution="exam?.openedSolution?.id"
+        :solutionAnswers="exam?.solutionAnswer"
+      />
+    </div>
+
+    <div>
+      <ExamFooter
+        v-if="reload"
+        :questionIndex="activeQuestion"
+        :questionsLenght="exam?.exam?.exam_questions?.length"
         @goNext="goNext"
         @goPrev="goPrev"
         @submit="$emit('submit')"
@@ -55,54 +92,59 @@
 
 <script>
 import ExamQuestion from "./ExamQuestion.vue";
+import ExamFooter from "./ExamFooter.vue";
 export default {
   components: {
     ExamQuestion,
+    ExamFooter,
+  },
+  props: {
+    exam: {
+      required: true,
+    },
   },
   methods: {
-    goNext() {
+    async setActiveQuestion(index) {
+      this.reload = false;
+      this.activeQuestion = index;
+      await this.$nextTick();
+      this.reload = true;
+    },
+    endExam() {
+      this.$emit("timeFinished");
+    },
+    async goNext() {
       if (this.activeQuestion == 14) {
         return;
       }
+      this.reload = false;
       this.activeQuestion++;
+      await this.$nextTick();
+      this.reload = true;
     },
-    goPrev() {
+    async goPrev() {
       if (this.activeQuestion == 0) {
         return;
       }
+      this.reload = false;
       this.activeQuestion--;
+      await this.$nextTick();
+      this.reload = true;
     },
   },
   data() {
     return {
-      currQuestion: {
-        type: "choose",
-        title: "أي من الأشكال التالية يمثل  الإجابة ؟",
-        items: [
-          {
-            title: "الإجابة الأولى",
-            img: "https://i.ibb.co/dmhLJyw/Group-1852.png",
-          },
-          {
-            title: "الإجابة الثانية",
-            img: "https://i.ibb.co/RjbJvnf/Group-1853.png",
-          },
-          {
-            title: "الإجابة الثالثة",
-            img: "https://i.ibb.co/jL8T5mC/Group-1855.png",
-          },
-          {
-            title: "الإجابة الرابعة",
-            img: "https://i.ibb.co/pZg81L4/Group-1856.png",
-          },
-        ],
-      },
+      reload: true,
+      loading: false,
+
       activeQuestion: 0,
+      submitExamLoading: false,
+      examCorrected: false,
       swiperOption: {
         autoplay: false,
         breakpoints: {
           1024: {
-            slidesPerView: 9,
+            slidesPerView: 8,
             spaceBetween: 5,
           },
           768: {

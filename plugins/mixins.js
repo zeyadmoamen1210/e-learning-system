@@ -2,6 +2,15 @@ import Vue from 'vue';
 
 Vue.mixin({
   methods: {
+    formatMinutes(minutes) {
+      var mins = Math.floor(minutes);
+      var secs = Math.floor((minutes % 1) * 60);
+
+      var formattedMins = mins < 10 ? '0' + mins : mins;
+      var formattedSecs = secs < 10 ? '0' + secs : secs;
+
+      return formattedMins + ':' + formattedSecs;
+    },
     minutesToHours(minutes) {
       let hours = minutes / 60;
       return hours;

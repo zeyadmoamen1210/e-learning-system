@@ -142,10 +142,8 @@ export default {
     async updateUserStatus(enable) {
       this.popupLoading= true;
       try {
-        await this.$axios.post(`/profile`, {
-          name: this.currUser.name,
-          email: this.currUser.email,
-          phone: this.currUser.phone,
+        await this.$axios.post(`/profile-status`, {
+          user_id: this.currUser.id,
           active: enable ? 1 : 0,
         });
         enable ? this.enableUserPopup = false : this.disableUserPopup = false;

@@ -339,6 +339,7 @@ export default {
   watch: {
     activeTab(val) {
       if (val == 0) {
+        this.page = 1;
         this.getBankQuestions();
       }
     },
@@ -385,6 +386,23 @@ export default {
           });
           return;
         }
+
+        const examَQuestionsMarks = this.examAddedQuestions.reduce(
+          (prev, curr) => (prev += +curr.mark),
+          0
+        );
+        const questionsMarks = this.examQuestions.reduce(
+          (prev, curr) => (prev += +curr.mark),
+          0
+        );
+
+        if (examَQuestionsMarks + questionsMarks < this.exam?.content?.pass_from) {
+          this.$notify.error({
+            title: "خطأ",
+            message: "مجموع درجات الأسئلة اصغر من درجة النجاح ! ",
+          });
+          return;
+        }
         const questionsArray = questions.map((ele) => {
           return { id: ele.question?.id || ele.id, mark: ele.mark };
         });
@@ -392,7 +410,7 @@ export default {
           questions: questionsArray,
         });
         this.$emit("reloadExam");
-        // this.$emit("close");
+        this.$emit("close");
         this.examQuestions = [];
         this.activeTab = 2;
         this.$notify({

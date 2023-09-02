@@ -38,9 +38,17 @@
         </span>
       </div>
     </div>
-    <!-- <div v-if="lessonMaterial.type === 'VIDEO'" class="lesson__time">
-      {{ lessonMaterial.time }}
-    </div> -->
+    <div
+      v-if="
+        lessonMaterial &&
+        lessonMaterial.type === 'VIDEO' &&
+        lessonMaterial.content &&
+        lessonMaterial.content.duration
+      "
+      class="lesson__time"
+    >
+      {{ formatMinutes(lessonMaterial.content.duration) }}
+    </div>
   </div>
 </template>
 
@@ -48,6 +56,9 @@
 export default {
   props: {
     lessonMaterial: {
+      required: true,
+    },
+    is_subscribed: {
       required: true,
     },
   },

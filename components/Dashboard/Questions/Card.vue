@@ -4,7 +4,7 @@
 
     <div class="d-flex gap-2 align-items-end flex-wrap justify-content-between">
       <div>
-        <div class="d-flex gap-2 align-items-center" v-if="question.mark">
+        <div class="d-flex gap-2 align-items-center" v-if="question.mark && !addMark">
           <span class="font-h6">الدرجة : </span>
           <span class="d-block font--semibold text-plain-success">
             {{ question.mark }}
@@ -77,7 +77,7 @@
       </div>
     </div>
     <div v-if="addMark" class="d-flex gap-2 flex-wrap align-items-center">
-      <div class="flex-fill">
+      <div class="flex-fill question-mark-input">
         <el-input placeholder="حدد درجة السؤال" v-model.number="question.mark"></el-input>
       </div>
       <div>
@@ -130,3 +130,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.question-mark-input {
+  .el-input__inner {
+    height: 37px !important;
+  }
+}
+</style>

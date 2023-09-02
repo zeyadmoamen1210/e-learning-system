@@ -3,7 +3,7 @@
     <Popup :contentCentered="false" :open="isOpened" @close="$emit('close', false)">
       <template #header> </template>
       <template #body>
-        <div class="mt-5 question-details-popup">
+        <div class="mt-5 question-details-popup" v-viewer>
           <h6 class="font-h4 font--regular">
             {{ question.title }}
           </h6>

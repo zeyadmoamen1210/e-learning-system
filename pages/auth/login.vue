@@ -135,6 +135,13 @@ export default {
             }
           } catch (err) {
             console.log(err);
+            if (err.response.status == 403) {
+              this.$notify.error({
+                title: "خطأ",
+                message: "هذا الحساب قد تم تعطيله من قبل الأدمن",
+              });
+              return;
+            }
             this.$notify.error({
               title: "خطأ",
               message: " البريد الإلكتروني او كلمة المرور غير صحيح",

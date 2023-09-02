@@ -131,6 +131,12 @@
                   {{ totalMarks }}
                 </span>
               </div>
+              <div v-if="+totalMarks < examWithQuestions?.exam?.content?.pass_from">
+                <h6 class="font-h5 text-danger">
+                  مجموع درجات الأسئلة المُضافة إلي هذا الإمتحان اصغر من درجة النجاح !
+                </h6>
+                <h6 class="font-h5 text-danger">سوف يؤدي ذلك إلي رسوب جميع الطُلاب</h6>
+              </div>
             </div>
             <div class="row">
               <div

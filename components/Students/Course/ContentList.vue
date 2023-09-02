@@ -1,7 +1,12 @@
 <template>
   <div class="content-list">
     <!-- Preview -->
-    <LessonCard :lessonMaterial="null" @click.native="$emit('showPreview')" />
+    <LessonCard
+      :is_subscribed="false"
+      :lessonMaterial="null"
+      @click.native="$emit('showPreview')"
+    />
+
     <template v-if="course.lessons?.length > 0">
       <div
         v-for="(lesson, i) in course.lessons"
@@ -35,9 +40,24 @@
         </section>
 
         <div v-if="activeTab == i" @click.stop>
-          <div v-for="(item, index2) in lesson.materials" :key="index2">
-            <LessonCard @click.native="selectContent(item)" :lessonMaterial="item" />
-          </div>
+          <template v-if="!course.is_subscribed">
+            <div v-for="(item, index2) in lesson.sections" :key="index2">
+              <LessonCard
+                @click.native="selectContent(item)"
+                :lessonMaterial="item"
+                :is_subscribed="false"
+              />
+            </div>
+          </template>
+          <template v-else>
+            <div v-for="(item, index2) in lesson.materials" :key="index2">
+              <LessonCard
+                @click.native="selectContent(item)"
+                :lessonMaterial="item"
+                :is_subscribed="true"
+              />
+            </div>
+          </template>
         </div>
       </div>
     </template>
