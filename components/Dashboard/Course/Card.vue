@@ -4,9 +4,11 @@
       <div>
         <img class="dashboard-course__img" :src="details.image" alt="" />
       </div>
-      <div>
+      <div class="dashboard-course__body">
         <h6 class="font-h5 mb-3 font--regular mt-2">{{ details.name }}</h6>
-        <p class="font--light font-h6">{{ details.description }}</p>
+        <p class="font--light font-h6 dashboard-course__desc">
+          {{ details.description }}
+        </p>
 
         <div class="d-flex gap-3">
           <div>

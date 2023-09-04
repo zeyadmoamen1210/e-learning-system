@@ -1,6 +1,8 @@
 <template>
   <div class="question-card">
-    <h6 class="font-h6 font--regular mb-4">{{ theQuestion.title }}</h6>
+    <h6 class="font-h6 font--regular mb-4 question-card__title">
+      {{ theQuestion.title }}
+    </h6>
 
     <div class="d-flex gap-2 align-items-end flex-wrap justify-content-between">
       <div>

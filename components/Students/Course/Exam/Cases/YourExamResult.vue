@@ -3,7 +3,6 @@
     <CorrectedAndPassed
       :points="examData?.userLastSolution?.mark"
       :totalMarks="totalMarks"
-      :timeSpent="timeSpent"
       v-if="ifStudentPassedTheExam"
       :canSolveAgain="canSolveAgain"
       @solveAgain="$emit('solveAgain')"
@@ -13,7 +12,6 @@
       v-else
       :points="examData?.userLastSolution?.mark"
       :totalMarks="totalMarks"
-      :timeSpent="timeSpent"
       :canSolveAgain="canSolveAgain"
       @solveAgain="$emit('solveAgain')"
       @showModelAnswer="$emit('showModelAnswer')"
@@ -38,12 +36,6 @@ export default {
     },
   },
   computed: {
-    timeSpent() {
-      return (
-        new Date(this.examData?.userLastSolution?.end_at).getTime() -
-        new Date(this.examData?.userLastSolution?.created_at).getTime()
-      );
-    },
     totalMarks() {
       return this.examData?.exam?.exam_questions?.reduce(
         (prev, curr) => (prev += +curr.mark),

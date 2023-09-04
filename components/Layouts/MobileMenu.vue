@@ -15,45 +15,81 @@
 
     <div class="mobile-menu__body">
       <ul>
-        <li>
-          <nuxt-link to="/student" @click.native="$emit('close')">الرئيسية</nuxt-link>
-        </li>
-        <li>
-          <nuxt-link @click.native="$emit('close')" to="/student#about-us"
-            >نبذة بسيطة</nuxt-link
-          >
-        </li>
-        <li>
-          <nuxt-link @click.native="$emit('close')" to="/student#about-physics"
-            >عن الفيزياء</nuxt-link
-          >
-        </li>
-        <li>
-          <nuxt-link @click.native="$emit('close')" to="/student#courses-list"
-            >قائمة الكورسات</nuxt-link
-          >
-        </li>
-        <li>
-          <nuxt-link @click.native="$emit('close')" to="/student/my-courses"
-            >كورساتي</nuxt-link
-          >
-        </li>
-        <li>
-          <nuxt-link @click.native="$emit('close')" to="/student/profile/edit"
-            >تعديل بياناتي</nuxt-link
-          >
-        </li>
+        <template v-if="!$auth.loggedIn || $auth?.user?.role_id === 3">
+          <li>
+            <nuxt-link to="/student" @click.native="$emit('close')">الرئيسية</nuxt-link>
+          </li>
+          <li>
+            <nuxt-link @click.native="$emit('close')" to="/student#about-us"
+              >نبذة بسيطة</nuxt-link
+            >
+          </li>
+          <li>
+            <nuxt-link @click.native="$emit('close')" to="/student#about-physics"
+              >عن الفيزياء</nuxt-link
+            >
+          </li>
+          <li>
+            <nuxt-link @click.native="$emit('close')" to="/student#courses-list"
+              >قائمة الكورسات</nuxt-link
+            >
+          </li>
+        </template>
+        <template v-if="$auth.loggedIn && $auth?.user?.role_id === 3">
+          <li>
+            <nuxt-link @click.native="$emit('close')" to="/student/my-courses"
+              >كورساتي</nuxt-link
+            >
+          </li>
+          <li>
+            <nuxt-link @click.native="$emit('close')" to="/student/profile/edit"
+              >تعديل بياناتي</nuxt-link
+            >
+          </li>
+        </template>
 
-        <li>
-          <nuxt-link @click.native="$emit('close')" to="/auth/login"
-            >تسجيل الدخول</nuxt-link
-          >
-        </li>
-        <li>
-          <nuxt-link @click.native="$emit('close')" to="/auth/signup">
-            إنشاء حساب</nuxt-link
-          >
-        </li>
+        <template v-if="!$auth.loggedIn">
+          <li>
+            <nuxt-link @click.native="$emit('close')" to="/auth/login"
+              >تسجيل الدخول</nuxt-link
+            >
+          </li>
+          <li>
+            <nuxt-link @click.native="$emit('close')" to="/auth/signup">
+              إنشاء حساب</nuxt-link
+            >
+          </li>
+        </template>
+
+        <template v-if="$auth.loggedIn && $auth?.user?.role_id != 3">
+          <li>
+            <nuxt-link @click.native="$emit('close')" to="/dashboard">
+              المستخدمين</nuxt-link
+            >
+          </li>
+          <li>
+            <nuxt-link @click.native="$emit('close')" to="/dashboard/courses">
+              الكورسات</nuxt-link
+            >
+          </li>
+          <li>
+            <nuxt-link @click.native="$emit('close')" to="/dashboard/questions-bank">
+              بنك الأسئلة</nuxt-link
+            >
+          </li>
+          <li>
+            <nuxt-link @click.native="$emit('close')" to="/dashboard/exam-correction">
+              تصحيح الإختبارات</nuxt-link
+            >
+          </li>
+          <li>
+            <nuxt-link @click.native="$emit('close')" to="/dashboard/subscription-codes">
+              أكواد الإشتراك</nuxt-link
+            >
+          </li>
+        </template>
+
+        <li @click="logout()" v-if="$auth.loggedIn" class="text-danger">تسجيل الخروج</li>
       </ul>
     </div>
   </div>
@@ -63,5 +99,12 @@
 import ProfileDropdown from "../Students/ProfileDropdown.vue";
 export default {
   props: {},
+  methods: {
+    logout() {
+      this.$auth.logout();
+      this.$emit("close");
+      this.$router.push("/auth/login");
+    },
+  },
 };
 </script>

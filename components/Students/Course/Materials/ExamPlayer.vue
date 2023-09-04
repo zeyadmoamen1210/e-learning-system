@@ -27,7 +27,11 @@
       @showModelAnswer="showModelAnswer"
     />
 
-    <ExamModelAnswers :answers="examModelAnswers" v-if="showExamModelAnswer" />
+    <ExamModelAnswers
+      :examData="checkExamData"
+      :answers="examModelAnswers"
+      v-if="showExamModelAnswer"
+    />
 
     <SubmitExamPopup
       :isOpened="confirmSubmitExamPopup"
@@ -93,6 +97,7 @@ export default {
         const res = await this.$axios.post(
           `/answers/${this.checkExamData?.userLastSolution?.id}/show`
         );
+        this.resetExamCases();
         this.examModelAnswers = res.data;
         this.showExamModelAnswer = true;
       } catch (err) {
@@ -181,7 +186,7 @@ export default {
           this.checkExamData.userLastSolution?.answers_shown === 1 &&
           this.checkExamData.userLastSolution?.is_closed === 1
         ) {
-          this.showTheModelAnswerDirectly = true;
+          this.showModelAnswer();
         }
       } catch (err) {
         console.log(err);

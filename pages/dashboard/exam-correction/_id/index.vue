@@ -34,7 +34,11 @@
 
     <div class="mt-5">
       <div class="mb-4" v-for="(question, index) in questions" :key="index">
-        <QuestionToCorrect :question="question" @setQuestionMark="setQuestionMark" />
+        <QuestionToCorrect
+          :question="question"
+          @removeFromSolution="removeFromSolution"
+          @setQuestionMark="setQuestionMark"
+        />
       </div>
     </div>
 
@@ -62,6 +66,10 @@ export default {
     this.getSolutionDetails();
   },
   methods: {
+    removeFromSolution(id) {
+      const index = this.solutions.findIndex((ele) => ele.id == id);
+      this.solutions.splice(index, 1);
+    },
     async submitCorrection() {
       if (this.solutions.length === this.questions.length) {
         this.loading = true;

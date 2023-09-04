@@ -22,13 +22,28 @@
             <p class="lesson-video__desc font--light font-h6 mb-0">
               {{ video.description }}
             </p>
-            <a target="_blank" class="font-h6" :href="video.content?.url">رابط الفيديو</a>
             <span class="d-block font-h6 font--orange">
               {{ video.content.duration }} دقيقة
             </span>
-            <span class="d-block font-h6 font--primary">
+            <!-- <span class="d-block font-h6 font--primary">
               {{ video.content.view_limit }} مرات مشاهدة
-            </span>
+            </span> -->
+            <div class="d-flex gap-3 align-items-center">
+              <Button
+                padding="0rem"
+                :type="'text-primary'"
+                :center="true"
+                text="تعديل"
+                text-classes="font-h5 font--regular"
+                @click.native="
+                  (currVideo = { ...currVideo, ...video }), (updateVideoPopup = true)
+                "
+              >
+              </Button>
+              <a target="_blank" class="font-h6" :href="video.content?.url"
+                >رابط الفيديو</a
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -41,17 +56,33 @@
       @close="addVideoPopup = false"
       @added="$emit('reloadCourse')"
     />
+
+    <UpdateVideoPopup
+      v-if="updateVideoPopup"
+      :isOpened="updateVideoPopup"
+      :lessonId="lessonId"
+      :course="course"
+      :currVideo="{
+        ...currVideo,
+        url: currVideo?.content?.url,
+        duration: currVideo?.content?.duration,
+      }"
+      @close="updateVideoPopup = false"
+      @added="$emit('reloadCourse')"
+    />
   </div>
 </template>
 
 <script>
 import Button from "@/components/Layouts/Button.vue";
 import AddVideoPopup from "@/components/Dashboard/Popups/AddVideo.vue";
+import UpdateVideoPopup from "@/components/Dashboard/Popups/UpdateVideo.vue";
 
 export default {
   components: {
     Button,
     AddVideoPopup,
+    UpdateVideoPopup,
   },
   props: {
     videos: {
@@ -67,6 +98,11 @@ export default {
   data() {
     return {
       addVideoPopup: false,
+      updateVideoPopup: false,
+      currVideo: {
+        url: "",
+        duration: "",
+      },
     };
   },
 };

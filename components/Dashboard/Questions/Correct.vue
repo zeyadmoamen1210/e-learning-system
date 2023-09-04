@@ -42,7 +42,9 @@
         </Button>
       </div>
     </div>
-
+    <span
+      >الدرجة القًصوي : <span> {{ question?.full_mark }} </span></span
+    >
     <div class="mt-5">
       <h6 class="font-h5 font--semibold mt-4 text-plain-success">إجابة الطالب</h6>
       <p class="font-h5 font--light">
@@ -87,6 +89,26 @@ export default {
   },
   methods: {
     setQuestionMark(e) {
+      if (e <= 0) {
+        this.$notify.error({
+          title: "خطأ",
+          message: "الدرجة يجب ان تكون اكبر من الصفر",
+        });
+        this.question.questionMark = null;
+        this.$emit(`removeFromSolution`, this.question?.id);
+        return;
+      }
+
+      if (this.question?.full_mark < e) {
+        this.$notify.error({
+          title: "خطأ",
+          message: "الدرجة أكبر من الدرجة القًصوي لهذا السؤال",
+        });
+        this.$emit(`removeFromSolution`, this.question?.id);
+        this.question.questionMark = null;
+        return;
+      }
+
       this.$emit(`setQuestionMark`, {
         mark: +e,
         solution_id: this.question?.id,

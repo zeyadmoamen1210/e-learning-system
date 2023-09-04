@@ -11,15 +11,7 @@
           {{ Number((points * 100) / totalMarks).toFixed(2) }}%
         </h6>
       </div>
-      <div class="d-flex gap-2 align-items-center justify-content-center mt-4">
-        <div class="exam-template__timer d-flex align-items-center gap-2">
-          <div class="d-flex gap-2 align-items-center">
-            <img class="mb-0" src="@/assets/imgs/course-imgs/timer-broken.svg" alt="" />
-            <span class="font-h5"> لقد استغرقت : </span>
-          </div>
-          <h6 class="font-h4 mb-0 exam-template__mins">{{ timeSpent }}</h6>
-        </div>
-      </div>
+
       <div class="d-flex gap-2 align-item-center flex-wrap justify-content-center">
         <button @click="$emit('showModelAnswer')" class="button button--primary mt-3">
           عرض إجاباتي
@@ -46,9 +38,6 @@ export default {
       required: true,
     },
     canSolveAgain: {
-      required: true,
-    },
-    timeSpent: {
       required: true,
     },
   },

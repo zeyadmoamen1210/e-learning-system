@@ -25,7 +25,21 @@
             <div>
               <h6 class="font-h5">{{ pdf.title }}</h6>
               <p class="font--light font-h6 mb-0">{{ pdf.description }}</p>
-              <a target="_blank" :href="pdf.content.url" class="font-h6">رابط الملف</a>
+
+              <div class="d-flex gap-3 align-items-center">
+                <Button
+                  padding="0rem"
+                  :type="'text-primary'"
+                  :center="true"
+                  text="تعديل"
+                  text-classes="font-h5 font--regular"
+                  @click.native="
+                    (currPdf = { ...currPdf, ...pdf }), (updatePdfPopup = true)
+                  "
+                >
+                </Button>
+                <a target="_blank" :href="pdf.content.url" class="font-h6">رابط الملف</a>
+              </div>
             </div>
           </div>
         </div>
@@ -39,17 +53,32 @@
       @close="addPdfPopup = false"
       @added="$emit('reloadCourse')"
     />
+
+    <UpdatePdfPopup
+      v-if="updatePdfPopup"
+      :isOpened="updatePdfPopup"
+      :lessonId="lessonId"
+      :course="course"
+      :currPdf="{
+        ...currPdf,
+        url: currPdf?.content?.url,
+      }"
+      @close="updatePdfPopup = false"
+      @added="$emit('reloadCourse')"
+    />
   </div>
 </template>
 
 <script>
 import Button from "@/components/Layouts/Button.vue";
 import AddPdfPopup from "@/components/Dashboard/Popups/AddPdf.vue";
+import UpdatePdfPopup from "@/components/Dashboard/Popups/UpdatePdf.vue";
 
 export default {
   components: {
     Button,
     AddPdfPopup,
+    UpdatePdfPopup,
   },
   props: {
     pdfs: {
@@ -65,6 +94,8 @@ export default {
   data() {
     return {
       addPdfPopup: false,
+      updatePdfPopup: false,
+      currPdf: {},
     };
   },
 };
