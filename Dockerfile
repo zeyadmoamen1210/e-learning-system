@@ -1,26 +1,17 @@
 # build stage
 FROM node:14.21.3 as build-stage
-
-# create destination directory
-RUN mkdir -p /usr/src/nuxt-app
-WORKDIR /usr/src/nuxt-app
-
-
-# copy the app, note .dockerignore
-COPY . /usr/src/nuxt-app/
+WORKDIR /app
+COPY package*.json ./
 RUN npm install
-
-# build necessary, even if no static files are needed,
-# since it builds the server as well
+COPY . .
 RUN npm run build
 
-# expose 5000 on container
-EXPOSE 5000
+# production stage
 
-# set app serving to permissive / assigned
-ENV NUXT_HOST=0.0.0.0
-# set app port
-ENV NUXT_PORT=5000
+FROM nginx as production-stage
+RUN mkdir /app
+COPY --from=build-stage /app /app
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# start the app
-CMD [ "npm", "start" ]
+EXPOSE 4000
+CMD ["nginx", "-g", "daemon off;"]
