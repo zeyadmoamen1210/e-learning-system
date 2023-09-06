@@ -166,8 +166,9 @@ export default {
     subscribe() {
       if (!this.$auth.loggedIn) {
         this.$router.push("/auth/login");
+      } else {
+        this.openCourseSubscribeCourse = true;
       }
-      this.openCourseSubscribeCourse = true;
       // @click="openCourseSubscribeCourse = !openCourseSubscribeCourse"
     },
   },
