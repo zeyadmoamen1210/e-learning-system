@@ -1,12 +1,10 @@
-# Base image
-FROM node:14.17.0-alpine
+# build stage
+FROM node:14.21.3 as build-stage
 
+# create destination directory
 RUN mkdir -p /usr/src/nuxt-app
 WORKDIR /usr/src/nuxt-app
 
-# update and install dependency
-RUN apk update && apk upgrade
-RUN apk add git
 
 # copy the app, note .dockerignore
 COPY . /usr/src/nuxt-app/
@@ -23,3 +21,6 @@ EXPOSE 5000
 ENV NUXT_HOST=0.0.0.0
 # set app port
 ENV NUXT_PORT=5000
+
+# start the app
+CMD [ "npm", "start" ]
