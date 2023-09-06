@@ -1,7 +1,6 @@
-yaml
-version: 3
-app: 
-  dockerfileLines:
+{
+  "schemaVersion": 2,
+  "dockerfileLines": [
     FROM node:14.17.6-alpine
     RUN mkdir -p /usr/src/app
     WORKDIR /usr/src/app
@@ -15,3 +14,6 @@ app:
     ENV NUXT_PORT=3000
     EXPOSE 3000
     CMD [ "npm", "run", "start" ]
+
+      ]
+}
