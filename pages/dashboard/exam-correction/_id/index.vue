@@ -79,18 +79,12 @@ export default {
           });
           this.submitCorrectionPopup = true;
         } catch (err) {
-          this.$notify.error({
-            title: "خطأ",
-            message: "حدث خطأ ما",
-          });
+          this.$awn.alert("حدث خطأ ما");
         } finally {
           this.loading = false;
         }
       } else {
-        this.$notify.error({
-          title: "خطأ",
-          message: "هناك أسئلة لم يتم تصحيحها",
-        });
+        this.$awn.alert("هناك أسئلة لم يتم تصحيحها");
       }
     },
     setQuestionMark(e) {

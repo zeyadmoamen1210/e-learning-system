@@ -9,7 +9,12 @@
       <img class="selected-content__video-photo" :src="course.image" alt="" />
 
       <div class="selected-content__video-title">
-        <div class="d-flex gap-3 align-items-end flex-wrap">
+        <div class="selected-content__click-here">
+          <h6 class="font-h5">اضغط لعرض الفيديو</h6>
+        </div>
+        <div
+          class="d-flex gap-3 align-items-end flex-wrap selected-content__video-details"
+        >
           <div>
             <div class="selected-content__video-time">{{ selectedContent.time }}</div>
             <img src="@/assets/imgs/course-imgs/vuesax-broken-video-square.svg" alt="" />

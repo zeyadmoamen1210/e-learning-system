@@ -78,9 +78,21 @@ export default {
       loading: false,
       loginFormRules: {
         currentPassword: [{ required: true, message: "هذا الحقل مطلوب" }],
-        newPassword: [{ required: true, message: "هذا الحقل مطلوب" }],
+        newPassword: [
+          { required: true, message: "هذا الحقل مطلوب" },
+          {
+            min: 6,
+            message: "كلمة المرور يجب ان تكون علي الأقل 6 حروف",
+            trigger: "blur",
+          },
+        ],
         confirmNewPassword: [
           { required: true, message: "هذا الحقل مطلوب" },
+          {
+            min: 6,
+            message: "كلمة المرور يجب ان تكون علي الأقل 6 حروف",
+            trigger: "blur",
+          },
           { validator: validateConfirmPass, trigger: "blur" },
         ],
       },
@@ -98,24 +110,16 @@ export default {
               new_password_confirmation: this.loginForm.confirmNewPassword,
             });
             this.loginForm = {};
-            this.$notify({
-              title: "تم بنجاح",
-              message: "تم تغيير كلمة المرور",
-              type: "success",
-            });
+            this.$awn.success("تم تغيير كلمة المرور");
+            this.$router.push("/student/profile/edit");
           } catch (err) {
             console.log(err);
             if (err.response.status === 403) {
-              this.$notify.error({
-                title: "خطأ",
-                message: "كلمة المرور القديمة غير صحيحة",
-              });
+              this.$awn.alert("كلمة المرور القديمة غير صحيحة");
+
               return;
             }
-            this.$notify.error({
-              title: "خطأ",
-              message: "هناك خطأ ما",
-            });
+            this.$awn.alert("هناك خطأ ما");
           } finally {
             this.loading = false;
           }

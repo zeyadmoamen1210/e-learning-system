@@ -18,11 +18,13 @@
               :model="examCorrectionFilter"
             >
               <el-form-item prop="course">
+                <label for="course" class="text-end d-block font-h6"> اختر الكورس </label>
                 <el-select
                   class="w-100"
                   clearable
                   v-model="examCorrectionFilter.course"
                   placeholder="اختر الكورس"
+                  id="course"
                 >
                   <el-option
                     v-for="(examAndCourse, index) in coursesAndExams"
@@ -33,11 +35,13 @@
                 </el-select>
               </el-form-item>
               <el-form-item prop="exam">
+                <label for="exam" class="text-end d-block font-h6"> اختر الاختبار </label>
                 <el-select
                   class="w-100"
                   clearable
                   v-model="examCorrectionFilter.exam"
                   placeholder="اختر الاختبار"
+                  id="exam"
                 >
                   <el-option
                     v-for="(examAndCourse, index) in coursesAndExams"

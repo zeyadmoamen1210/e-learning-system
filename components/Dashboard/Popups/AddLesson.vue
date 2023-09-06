@@ -7,14 +7,21 @@
           <h6 class="font font--semibold mb-4 font-h4">إضافة درس</h6>
           <p class="font-h5 font--light">قم بإضافة بيانات الدرس</p>
 
-          <div class="mt-5">
+          <div class="mt-3">
             <div>
               <el-form ref="addLessonRef" class="mb-4" :model="addLesson">
                 <el-form-item
                   prop="name"
                   :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
                 >
-                  <el-input v-model="addLesson.name" placeholder="عنوان الدرس"></el-input>
+                  <label for="lesson-name" class="text-end d-block font-h6"
+                    >عنوان الدرس
+                  </label>
+                  <el-input
+                    id="lesson-name"
+                    v-model="addLesson.name"
+                    placeholder="عنوان الدرس"
+                  ></el-input>
                 </el-form-item>
               </el-form>
 
@@ -73,16 +80,9 @@ export default {
             });
             this.resetLessonform();
             this.$emit("finished", false);
-            this.$notify({
-              title: "تم بنجاح",
-              message: "تم إضافة الدرس بنجاح",
-              type: "success",
-            });
+            this.$awn.success("تم إضافة الدرس بنجاح");
           } catch {
-            this.$notify.error({
-              title: " خطأ",
-              message: " هناك خطأ ما",
-            });
+            this.$awn.alert(" هناك خطأ ما");
           } finally {
             this.loading = false;
           }

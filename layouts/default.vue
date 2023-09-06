@@ -20,8 +20,7 @@ import Footer from "@/components/Layouts/Footer";
 export default {
   components: {
     Navbar,
-    Footer
-  }
-}
+    Footer,
+  },
+};
 </script>
-

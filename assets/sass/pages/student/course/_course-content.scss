@@ -91,6 +91,16 @@
     object-fit: cover;
     width: 100%;
   }
+  &__click-here {
+    top: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFF;
+    span , h6 {
+      color: #FFF;
+    }
+  }
   &__video-title {
     position: absolute;
     top: 0;
@@ -100,14 +110,15 @@
     height: 100%;
     background: linear-gradient(to top, #0b3771 , transparent);
 
-    > div {
-      bottom: 4rem;
-      position: absolute;
-      right: 4rem;
+
+  }
+  &__video-details {
+    bottom: 4rem;
+    position: absolute;
+    right: 4rem;
+    color: #FFF;
+    span , h6 {
       color: #FFF;
-      span , h6 {
-        color: #FFF;
-      }
     }
   }
   &__video-time {

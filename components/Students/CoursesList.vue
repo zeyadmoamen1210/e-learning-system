@@ -61,16 +61,15 @@
         </div>
       </div>
 
-      <div class="d-flex flex-row-reverse">
-        <Button
-          padding="1rem"
-          :type="'primary-plain'"
-          :center="true"
-          text="عرض المزيد من الكورسات"
-          text-classes="font-h5 font--regular"
-          @click.native="$router.push(`/student/course/all`)"
+      <div class="d-flex flex-row-reverse" v-if="total > 1">
+        <el-pagination
+          :current-page.sync="page"
+          background
+          layout="prev, pager, next"
+          :total="total * 10"
+          @current-change="getCourses"
         >
-        </Button>
+        </el-pagination>
       </div>
     </template>
     <NoData v-else text="لا توجد كورسات" />
@@ -79,19 +78,21 @@
 
 <script>
 import NoData from "~/components/NoData.vue";
-import Button from "@/components/Layouts/Button.vue";
+
 export default {
   methods: {
     async getCourses() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
       this.loading = true;
       try {
         const res = await this.$axios.get(`/courses`, {
           params: {
             page: this.page,
-            limit: 6,
           },
         });
         this.courses = res.data.data;
+        this.page = res.data.current_page;
+        this.total = res.data.last_page;
       } catch (err) {
         console.log(err);
       } finally {
@@ -104,10 +105,12 @@ export default {
   },
   data() {
     return {
+      page: 1,
+      total: 7,
       courses: [],
       loading: false,
     };
   },
-  components: { NoData, Button },
+  components: { NoData },
 };
 </script>

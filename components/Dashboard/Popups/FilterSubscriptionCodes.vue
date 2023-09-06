@@ -13,14 +13,17 @@
 
           <div class="mt-5">
             <el-form ref="codesFilterRef" class="mb-4" :model="codesFilter">
-              <el-form-item
-                prop="course_id"
-                :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
-              >
+              <el-form-item prop="course_id">
+                <label for="course_id" class="text-end d-block font-h6">
+                  اختر الكورس
+                </label>
+
                 <el-select
                   class="w-100"
                   v-model="codesFilter.course_id"
                   placeholder="اختر الكورس"
+                  id="course_id"
+                  clearable
                 >
                   <el-option
                     v-for="(item, index) in courses"

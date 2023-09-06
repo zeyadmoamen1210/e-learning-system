@@ -18,16 +18,26 @@
                   prop="url"
                   :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
                 >
-                  <el-input v-model="addVideo.url" placeholder="رابط الفيديو"></el-input>
+                  <label for="url" class="text-end d-block font-h6"> رابط الفيديو </label>
+                  <el-input
+                    id="url"
+                    v-model="addVideo.url"
+                    placeholder="رابط الفيديو"
+                  ></el-input>
                 </el-form-item>
 
                 <el-form-item
                   prop="title"
                   :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
                 >
+                  <label for="title" class="text-end d-block font-h6">
+                    عنوان الفيديو
+                  </label>
+
                   <el-input
                     v-model="addVideo.title"
                     placeholder="عنوان الفيديو"
+                    id="title"
                   ></el-input>
                 </el-form-item>
 
@@ -41,9 +51,13 @@
                           { type: 'number', message: 'يجب ان يكون رقم صحيح' },
                         ]"
                       >
+                        <label for="duration" class="text-end d-block font-h6">
+                          مدة الفيديو
+                        </label>
                         <el-input
                           v-model.number="addVideo.duration"
                           placeholder="مدة الفيديو"
+                          id="duration"
                         ></el-input>
                       </el-form-item>
                     </div>
@@ -67,13 +81,14 @@
                   </div> -->
                 </div>
 
-                <el-form-item
-                  prop="description"
-                  :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
-                >
+                <el-form-item prop="description">
+                  <label for="description" class="text-end d-block font-h6">
+                    وصف الفيديو
+                  </label>
                   <el-input
                     type="textarea"
                     :rows="5"
+                    id="description"
                     v-model="addVideo.description"
                     placeholder="وصف الفيديو"
                   ></el-input>
@@ -142,16 +157,9 @@ export default {
             this.resetVideoform();
             this.$emit("added", false);
             this.$emit("close", false);
-            this.$notify({
-              title: "تم بنجاح",
-              message: "تم إضافة الفيديو بنجاح",
-              type: "success",
-            });
+            this.$awn.success("تم إضافة الفيديو بنجاح");
           } catch {
-            this.$notify.error({
-              title: " خطأ",
-              message: " هناك خطأ ما",
-            });
+            this.$awn.alert(" هناك خطأ ما");
           } finally {
             this.loading = false;
           }

@@ -18,9 +18,13 @@
                   prop="title"
                   :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
                 >
+                  <label for="exam-title" class="text-end d-block font-h6"
+                    >عنوان الإحتبار</label
+                  >
                   <el-input
                     v-model="addExam.title"
                     placeholder="عنوان الاختبار"
+                    id="exam-title"
                   ></el-input>
                 </el-form-item>
 
@@ -31,9 +35,13 @@
                     { type: 'number', message: 'هذا الحقل يجب ان يكون رقم صحيح' },
                   ]"
                 >
+                  <label for="exam-duration" class="text-end d-block font-h6"
+                    >مدة الإختبار</label
+                  >
                   <el-input
                     v-model.number="addExam.duration"
                     placeholder="حدد المدة الزمنية لحل الاختبار"
+                    id="exam-duration"
                   ></el-input>
                 </el-form-item>
 
@@ -44,21 +52,26 @@
                     { type: 'number', message: 'هذا الحقل يجب ان يكون رقم صحيح' },
                   ]"
                 >
+                  <label for="exam-pass_from" class="text-end d-block font-h6"
+                    >درجة النجاح
+                  </label>
                   <el-input
                     v-model.number="addExam.pass_from"
                     placeholder="حدد درجة النجاح للاختبار "
+                    id="exam-pass_from"
                   ></el-input>
                 </el-form-item>
 
-                <el-form-item
-                  prop="description"
-                  :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
-                >
+                <el-form-item prop="description">
+                  <label for="exam-description" class="text-end d-block font-h6"
+                    >الوصف
+                  </label>
                   <el-input
                     type="textarea"
                     :rows="5"
                     v-model="addExam.description"
                     placeholder="وصف الامتحان"
+                    id="exam-description"
                   ></el-input>
                 </el-form-item>
               </el-form>
@@ -122,16 +135,9 @@ export default {
             this.resetExamform();
             this.$emit("close", false);
             this.$emit("added", false);
-            this.$notify({
-              title: "تم بنجاح",
-              message: "تم إضافة الامتحان بنجاح",
-              type: "success",
-            });
+            this.$awn.success("تم إضافة الامتحان بنجاح");
           } catch {
-            this.$notify.error({
-              title: " خطأ",
-              message: " هناك خطأ ما",
-            });
+            this.$awn.alert("هناك خطأ ما");
           } finally {
             this.loading = false;
           }

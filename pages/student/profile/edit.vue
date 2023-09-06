@@ -94,24 +94,15 @@ export default {
               phone: this.loginForm.phone,
               email: this.loginForm.email,
             });
-            this.$notify({
-              title: "تم بنجاح",
-              message: "تم تعديل البروفايل بنجاح",
-              type: "success",
-            });
+            this.$awn.success("تم تعديل البروفايل بنجاح");
           } catch (err) {
             console.log(err);
             if (err.response.status === 422) {
-              this.$notify.error({
-                title: " خطأ",
-                message: err.response?.data?.message,
-              });
+              this.$awn.alert(err.response?.data?.message);
+
               return;
             }
-            this.$notify.error({
-              title: "خطأ",
-              message: "هناك خطأ ما",
-            });
+            this.$awn.alert("هناك خطأ ما");
           } finally {
             this.loading = false;
           }

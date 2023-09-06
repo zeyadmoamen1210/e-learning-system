@@ -4,7 +4,7 @@
       <template #header></template>
       <template #body>
         <div v-loading="loading">
-          <h6 class="font font--semibold mb-4 font-h4">إضافة ملف PDF</h6>
+          <h6 class="font font--semibold mb-4 font-h4">تعديل ملف PDF</h6>
 
           <div class="mt-5">
             <div>
@@ -13,13 +13,24 @@
                   prop="title"
                   :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
                 >
-                  <el-input v-model="pdf.title" placeholder="عنوان الملف"></el-input>
+                  <label for="pdf-name" class="text-end d-block font-h6"
+                    >عنوان الملف
+                  </label>
+                  <el-input
+                    id="pdf-name"
+                    v-model="pdf.title"
+                    placeholder="عنوان الملف"
+                  ></el-input>
                 </el-form-item>
-                <el-form-item
-                  prop="description"
-                  :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
-                >
-                  <el-input v-model="pdf.description" placeholder="وصف الملف"></el-input>
+                <el-form-item prop="description">
+                  <label for="pdf-description" class="text-end d-block font-h6"
+                    >وصف الملف
+                  </label>
+                  <el-input
+                    v-model="pdf.description"
+                    placeholder="وصف الملف"
+                    id="pdf-description"
+                  ></el-input>
                 </el-form-item>
               </el-form>
               <div>
@@ -40,7 +51,7 @@
                 @click="submitAddPdf"
                 class="button button--primary w-100 mb-4 py-3"
               >
-                إضافة
+                تعديل
               </button>
             </div>
           </div>
@@ -96,7 +107,9 @@ export default {
           try {
             const formData = new FormData();
             formData.append("title", this.pdf.title);
-            formData.append("description", this.pdf.description);
+            if (this.pdf.description) {
+              formData.append("description", this.pdf.description);
+            }
             formData.append("type", "PDF");
             if (this.pdf.file) {
               formData.append("file", this.pdf.file);
@@ -106,16 +119,9 @@ export default {
             const res = await this.$axios.post(`/materials/pdf/${this.pdf.id}`, formData);
             this.$emit("close", false);
             this.$emit("added", false);
-            this.$notify({
-              title: "تم بنجاح",
-              message: "تم تعديل الامتحان بنجاح",
-              type: "success",
-            });
+            this.$awn.success("تم تعديل الملف بنجاح");
           } catch {
-            this.$notify.error({
-              title: " خطأ",
-              message: " هناك خطأ ما",
-            });
+            this.$awn.alert(" هناك خطأ ما");
           } finally {
             this.loading = false;
           }

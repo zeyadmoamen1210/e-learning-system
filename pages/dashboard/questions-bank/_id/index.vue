@@ -319,10 +319,8 @@ export default {
               });
 
               if (imagesError) {
-                this.$notify.error({
-                  title: "خطأ",
-                  message: "جميع الصور الاجابات مطلوبة",
-                });
+                this.$awn.alert("جميع الصور الاجابات مطلوبة");
+
                 return;
               }
             }
@@ -346,18 +344,11 @@ export default {
               _method: "put",
             });
             this.$router.push("/dashboard/questions-bank");
-            this.$notify({
-              title: "تم",
-              message: "تم تعديل السؤال بنجاح",
-              type: "success",
-            });
+            this.$awn.success("تم تعديل السؤال بنجاح");
           } catch (err) {
             this.loading = false;
             console.log(err);
-            this.$notify.error({
-              title: "خطأ",
-              message: "حدث خطأ ما",
-            });
+            this.$awn.alert("حدث خطأ ما");
           } finally {
             this.loading = false;
           }

@@ -38,7 +38,9 @@
                   "
                 >
                 </Button>
-                <a target="_blank" :href="pdf.content.url" class="font-h6">رابط الملف</a>
+                <a role="button" target="_blank" :href="pdf.content.url" class="font-h6"
+                  >رابط الملف</a
+                >
               </div>
             </div>
           </div>

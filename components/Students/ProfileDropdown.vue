@@ -30,14 +30,6 @@
         <div class="profile-dropdown__list" v-if="isDropdownActive">
           <ul>
             <li>
-              <img src="@/assets/imgs/navbar-imgs/vuesax-linear-note.svg" alt="" />
-              <span
-                @click="$router.push('/student/my-courses')"
-                class="font-h6 font--bold font--primary"
-                >كورساتي</span
-              >
-            </li>
-            <li>
               <img src="@/assets/imgs/navbar-imgs/vuesax-linear-edit.svg" alt="" />
               <span
                 @click="$router.push('/student/profile/edit')"

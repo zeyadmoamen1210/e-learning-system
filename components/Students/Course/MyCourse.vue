@@ -13,7 +13,7 @@
           <h6 class="mb-0 font-h5 font--light">مدة الكورس :</h6>
         </div>
         <h6 class="mb-0 font-h5 font--light font--orange">
-          {{ minutesToHours(course.duration) }} ساعات
+          {{ Number(minutesToHours(course.duration)).toFixed(2) }} ساعات
         </h6>
       </div>
 

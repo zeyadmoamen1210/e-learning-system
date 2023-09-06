@@ -6,6 +6,7 @@
   &__inner {
     height: 55px !important;
     font-size: 1.8rem;
+    line-height: 55px !important;
   }
 }
 
@@ -31,4 +32,12 @@
 
 .el-select-dropdown {
   z-index: 999999999 !important;
+}
+
+
+.el-form-item {
+  label {
+    line-height: normal !important;
+    margin-bottom: 1rem !important;
+  }
 }

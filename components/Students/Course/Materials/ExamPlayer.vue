@@ -4,7 +4,7 @@
 
     <div class="selected-content__pdf" v-if="examStartedSuccessfully">
       <ExamTemplate
-        @timeFinished="submitExam"
+        @timeFinished="submitExam(true)"
         :exam="currExam"
         @submit="confirmSubmitExamPopup = true"
       />
@@ -40,6 +40,12 @@
       @submit="submitExam"
       :submitExamLoading="submitExamLoading"
     />
+
+    <ExamTimeOver
+      :isOpened="examTimeOver"
+      v-if="examTimeOver"
+      @close="examTimeOver = false"
+    />
   </div>
 </template>
 
@@ -51,6 +57,7 @@ import SubmitExamPopup from "../Popups/SubmitExamPopup.vue";
 import YourExamResult from "../Exam/Cases/YourExamResult.vue";
 import ContinueSolvingYourExam from "../Exam/Cases/ContinueSolvingYourExam";
 import ExamModelAnswers from "../Exam/Cases/ExamModelAnswers";
+import ExamTimeOver from "../Exam/Cases/ExamTimeOver";
 
 export default {
   components: {
@@ -61,6 +68,7 @@ export default {
     ContinueSolvingYourExam,
     YourExamResult,
     ExamModelAnswers,
+    ExamTimeOver,
   },
   props: {
     selectedContent: {
@@ -85,6 +93,7 @@ export default {
       showExamResult: false,
       showTheModelAnswerDirectly: false,
       examStartedSuccessfully: false,
+      examTimeOver: false,
     };
   },
   mounted() {
@@ -101,10 +110,7 @@ export default {
         this.examModelAnswers = res.data;
         this.showExamModelAnswer = true;
       } catch (err) {
-        this.$notify.error({
-          title: "خطأ",
-          message: "هناك خطأ ما",
-        });
+        this.$awn.alert("هناك خطأ ما");
       } finally {
         this.examLoading = false;
       }
@@ -118,7 +124,10 @@ export default {
       this.examIsWatingReview = false;
       this.showExamModelAnswer = false;
     },
-    async submitExam() {
+    async submitExam(isTimeFinished) {
+      if (isTimeFinished) {
+        this.examTimeOver = true;
+      }
       this.submitExamLoading = true;
       try {
         const res = await this.$axios.post(
@@ -128,16 +137,11 @@ export default {
         this.examStartedSuccessfully = false;
 
         this.getTheExam();
-        this.$notify({
-          title: "تم بنجاح",
-          message: "تم تسليم الإمتحان",
-          type: "success",
-        });
+        if (!isTimeFinished) {
+          this.$awn.success("تم تسليم الإمتحان");
+        }
       } catch (err) {
-        this.$notify.error({
-          title: "خطأ",
-          message: "هناك خطأ ما!",
-        });
+        this.$awn.alert("هناك خطأ ما!");
       } finally {
         this.submitExamLoading = false;
       }
@@ -197,10 +201,7 @@ export default {
 
     async startTheExam() {
       if (!this.checkExamData.canOpen) {
-        this.$notify.error({
-          title: "خطأ",
-          message: "هذا الامتحان تم حله من قبل",
-        });
+        this.$awn.alert("هذا الامتحان تم حله من قبل");
         return;
       }
       this.resetExamCases();

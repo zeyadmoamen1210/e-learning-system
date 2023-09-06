@@ -3,6 +3,7 @@
     <CorrectedAndPassed
       :points="examData?.userLastSolution?.mark"
       :totalMarks="totalMarks"
+      :passFrom="examData?.exam?.content?.pass_from"
       v-if="ifStudentPassedTheExam"
       :canSolveAgain="canSolveAgain"
       @solveAgain="$emit('solveAgain')"
@@ -11,6 +12,7 @@
     <CorrectedAndNotPassed
       v-else
       :points="examData?.userLastSolution?.mark"
+      :passFrom="examData?.exam?.content?.pass_from"
       :totalMarks="totalMarks"
       :canSolveAgain="canSolveAgain"
       @solveAgain="$emit('solveAgain')"

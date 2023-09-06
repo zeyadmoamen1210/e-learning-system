@@ -14,6 +14,7 @@
   &__inner {
     display: flex;
     gap: 1.5rem;
+    align-items: center;
     @media screen and (max-width: 1200px) {
       flex-wrap: wrap;
     }
@@ -26,9 +27,9 @@
   }
 
   &__img {
-    overflow: hidden;
     object-fit: cover;
     width: 17rem;
+    height: 13rem;
     border-radius: 1rem;
   }
 }

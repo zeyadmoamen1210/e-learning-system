@@ -5,7 +5,7 @@
         <img class="dashboard-course__img" :src="details.image" alt="" />
       </div>
       <div class="dashboard-course__body">
-        <h6 class="font-h5 mb-3 font--regular mt-2">{{ details.name }}</h6>
+        <h6 class="font-h5 mb-3 font--regular">{{ details.name }}</h6>
         <p class="font--light font-h6 dashboard-course__desc">
           {{ details.description }}
         </p>

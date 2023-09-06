@@ -354,17 +354,10 @@ export default {
       try {
         await this.$axios.delete(`/exam-questions/${this.currQuestion.id}`);
         this.deleteQuestionPopup = false;
-        this.$notify({
-          title: "تم بنجاح",
-          message: "تم حذف السؤال من الامتحان بنجاح",
-          type: "success",
-        });
+        this.$awn.success("تم حذف السؤال من الامتحان بنجاح");
         this.$emit("reloadExam");
       } catch (err) {
-        this.$notify.error({
-          title: "خطأ",
-          message: "حدث خطأ ما",
-        });
+        this.$awn.alert("حدث خطأ ما");
       } finally {
         this.deleteLoading = false;
       }
@@ -380,10 +373,7 @@ export default {
           }
         });
         if (error) {
-          this.$notify.error({
-            title: "خطأ",
-            message: "يجب ادخال درجة لكل الاسئلة وتكون اكبر من الصفر",
-          });
+          this.$awn.alert("يجب ادخال درجة لكل الاسئلة وتكون اكبر من الصفر");
           return;
         }
 
@@ -397,10 +387,7 @@ export default {
         );
 
         if (examَQuestionsMarks + questionsMarks < this.exam?.content?.pass_from) {
-          this.$notify.error({
-            title: "خطأ",
-            message: "مجموع درجات الأسئلة اصغر من درجة النجاح ! ",
-          });
+          this.$awn.alert("مجموع درجات الأسئلة اصغر من درجة النجاح ! ");
           return;
         }
         const questionsArray = questions.map((ele) => {
@@ -413,17 +400,10 @@ export default {
         this.$emit("close");
         this.examQuestions = [];
         this.activeTab = 2;
-        this.$notify({
-          title: "تم بنجاح",
-          message: "تم إضافة الأسئلة بنجاح",
-          type: "success",
-        });
+        this.$awn.success("تم إضافة الأسئلة بنجاح");
       } catch (err) {
         console.log(err);
-        this.$notify.error({
-          title: " خطأ",
-          message: " حدث خطأ ما",
-        });
+        this.$awn.alert(" حدث خطأ ما");
       } finally {
         this.loading = false;
       }

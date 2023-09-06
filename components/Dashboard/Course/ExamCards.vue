@@ -260,17 +260,10 @@ export default {
       try {
         await this.$axios.delete(`/exam-questions/${this.currQuestion.id}`);
         this.deleteQuestionPopup = false;
-        this.$notify({
-          title: "تم بنجاح",
-          message: "تم حذف السؤال من الامتحان بنجاح",
-          type: "success",
-        });
+        this.$awn.success("تم حذف السؤال من الامتحان بنجاح");
         this.getExamWithQuestion(this.exams[this.activeExam]?.id);
       } catch (err) {
-        this.$notify.error({
-          title: "خطأ",
-          message: "حدث خطأ ما",
-        });
+        this.$awn.alert("حدث خطأ ما");
       } finally {
         this.deleteLoading = false;
       }

@@ -23,18 +23,32 @@
             :type="loginType === 1 ? 'primary' : 'primary-plain'"
             @click.native="loginType = 1"
             :center="true"
-            text="التسجيل بالبريد الإلكتروني"
+            text=""
             text-classes="font-h5 font--regular"
-          ></Button>
+          >
+            <template>
+              <i
+                :style="{ color: loginType === 1 ? '#fff' : null }"
+                class="el-icon-message"
+              ></i>
+            </template>
+          </Button>
           <Button
             class="flex-grow-1"
             padding="1rem"
             :type="loginType === 2 ? 'primary' : 'primary-plain'"
             @click.native="loginType = 2"
             :center="true"
-            text="التسجيل برقم الموبايل"
+            text=""
             text-classes="font-h5 font--regular"
-          ></Button>
+          >
+            <template>
+              <i
+                :style="{ color: loginType === 2 ? '#fff' : null }"
+                class="el-icon-phone-outline"
+              ></i>
+            </template>
+          </Button>
         </div>
 
         <div>
@@ -133,19 +147,14 @@ export default {
             } else {
               this.$router.push("/dashboard");
             }
+            this.$awn.success(`مرحباً يا ${res.data?.user?.name}`);
           } catch (err) {
             console.log(err);
             if (err.response.status == 403) {
-              this.$notify.error({
-                title: "خطأ",
-                message: "هذا الحساب قد تم تعطيله من قبل الأدمن",
-              });
+              this.$awn.alert("هذا الحساب قد تم تعطيله من قبل الأدمن");
               return;
             }
-            this.$notify.error({
-              title: "خطأ",
-              message: " البريد الإلكتروني او كلمة المرور غير صحيح",
-            });
+            this.$awn.alert(" البريد الإلكتروني او كلمة المرور غير صحيح");
           } finally {
             this.fullScreenLoading = false;
           }

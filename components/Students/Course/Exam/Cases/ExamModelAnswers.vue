@@ -7,7 +7,7 @@
       </div>
       <div>
         <h6 class="font-h4 text-plain-success">
-          درجتك : {{ totalMarks() }} / {{ examData?.userLastSolution?.mark }}
+          درجتك : {{ examData?.userLastSolution?.mark }} من {{ totalMarks() }}
         </h6>
         <h6 class="font-h4 text-center">
           {{

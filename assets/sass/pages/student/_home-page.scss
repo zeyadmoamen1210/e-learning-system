@@ -1,3 +1,54 @@
+@keyframes HeaderImageMoves {
+  0% {
+    transform: translate(0);
+  }
+  0% {
+    transform: translate(-1.5rem, 1.5rem);
+  }
+}
+body {
+  overflow-x: hidden;
+}
+.snowflake-container {
+  position: relative;
+}
+
+.snowflake {
+  --size: 1vw;
+  width: var(--size);
+  height: var(--size);
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: -5vh;
+}
+
+@keyframes snowfall {
+  0% {
+    transform: translate3d(var(--left-ini), 0, 0);
+  }
+  100% {
+    transform: translate3d(var(--left-end), 110vh, 0);
+  }
+}
+
+@for $i from 1 through 50 {
+  .snowflake:nth-child(#{$i}) {
+    --size: #{random(5) * 0.2}vw;
+    --left-ini: #{random(20) - 10}vw;
+    --left-end: #{random(20) - 10}vw;
+    left: #{random(100)}vw;
+    animation: snowfall #{5 + random(10)}s linear infinite;
+    animation-delay: -#{random(10)}s;
+  }
+}
+
+/* added small blur every 6 snowflakes*/
+.snowflake:nth-child(6n) {
+  filter: blur(1px);
+}
+
+
 .home-page {
     background-image: url(@/assets/imgs/landing-page/header.png);
     padding: 3rem;
@@ -7,9 +58,15 @@
     min-height: 70vh;
     margin-top: -10rem;
     padding-top: 10rem;
+    overflow: hidden;
+
+    .typed-cursor {
+      font-size: 7rem;
+      color: #008DD2;
+    }
     &__title {
       font-size: 4.2rem;
-      margin-top: 8rem;
+      margin-top: 4rem;
 
       @media screen and (max-width: 1000px) {
         margin-top: 1rem;
@@ -27,8 +84,11 @@
     &__img {
       img {
         display: block;
-      margin: auto;
-      max-width: 100%;
+        margin: auto;
+        max-width: 100%;
+        transition: all 0.5s linear;
+        animation: HeaderImageMoves 1.5s ease-in infinite;
+        animation-direction: alternate-reverse;
       }
     }
 }

@@ -39,7 +39,7 @@
         <el-input @change="getUsers()" v-model="filter.phone" placeholder="رقم الهاتف"></el-input>
       </div>
       <div>
-        <el-select @change="getUsers()" v-model="filter.active" placeholder="حالة الحساب">
+        <el-select clearable @change="getUsers()" v-model="filter.active" placeholder="حالة الحساب">
           <el-option :value="1" label="مُفعل"></el-option>
           <el-option :value="0" label="مُعطل"></el-option>
         </el-select>
@@ -75,6 +75,7 @@
             <td>
               <div class="d-flex gap-5">
                 <Button
+                  v-if="user.active == 0"
                   @click.native="currUser = {...user}, enableUserPopup = true"
                   padding="0"
                   type="text-primary"
@@ -83,6 +84,7 @@
                 </Button>
 
                 <Button
+                v-if="user.active == 1"
                   @click.native="currUser = {...user}, disableUserPopup = true"
                   padding="0"
                   type="text-danger"
@@ -147,17 +149,12 @@ export default {
           active: enable ? 1 : 0,
         });
         enable ? this.enableUserPopup = false : this.disableUserPopup = false;
-        this.$notify({
-          title: "تم بنجاح",
-          message: "تم تعديل حالة المُستخدم بنجاح",
-          type: "success",
-        });
+        this.$awn.success("تم تعديل حالة المُستخدم بنجاح");
+
         this.getUsers();
       } catch(err) {
-        this.$notify.error({
-          title: " خطأ",
-          message: " هناك خطأ ما",
-        });
+        this.$awn.alert(" هناك خطأ ما");
+
       } finally {
         this.popupLoading= false;
       }
@@ -172,10 +169,10 @@ export default {
         this.filter.name ? req.name = this.filter.name : null;
         this.filter.email ? req.email = this.filter.email : null;
         this.filter.phone ? req.phone = this.filter.phone : null;
+        this.filter.active ? req.active = this.filter.active : null;
 
         const res = await this.$axios.get('/users', {params: {
           ...req,
-          active: this.filter.active,
           is_student: this.filter.is_student,
           page: this.page,
         }})

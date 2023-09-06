@@ -289,10 +289,8 @@ export default {
               });
 
               if (imagesError) {
-                this.$notify.error({
-                  title: "خطأ",
-                  message: "جميع الصور الاجابات مطلوبة",
-                });
+                this.$awn.alert("جميع الصور الاجابات مطلوبة");
+
                 return;
               }
             }
@@ -311,17 +309,10 @@ export default {
             }
             await this.$axios.post("/questions", this.addNewQuestion);
             this.$router.push("/dashboard/questions-bank");
-            this.$notify({
-              title: "تم",
-              message: "تم إضافة السؤال بنجاح",
-              type: "success",
-            });
+            this.$awn.success("تم إضافة السؤال بنجاح");
           } catch (err) {
             this.loading = false;
-            this.$notify.error({
-              title: "خطأ",
-              message: "حدث خطأ ما",
-            });
+            this.$awn.alert("حدث خطأ ما");
           } finally {
             this.loading = false;
           }

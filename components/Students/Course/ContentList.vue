@@ -82,18 +82,14 @@ export default {
   },
   methods: {
     selectContent(item) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
       if (!this.$auth.loggedIn) {
-        this.$notify.error({
-          title: "خطأ",
-          message: "قم بتسجيل الدخول اولاً",
-        });
+        this.$awn.alert("قم بتسجيل الدخول اولاً");
         return;
       }
       if (!this.course.is_subscribed) {
-        this.$notify.error({
-          title: "خطأ",
-          message: "أنت غير مُشترك في هذا الكورس",
-        });
+        this.$awn.alert("أنت غير مُشترك في هذا الكورس");
         return;
       }
       this.$emit("selectContent", item);

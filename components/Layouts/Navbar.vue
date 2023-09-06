@@ -5,33 +5,82 @@
         <div class="row align-items-center">
           <div class="col-9 col-lg-3">
             <div>
-              <img src="@/assets/imgs/navbar-imgs/logo.png" alt="" />
+              <img
+                @click="$router.push('/')"
+                src="@/assets/imgs/navbar-imgs/logo.png"
+                alt=""
+              />
             </div>
           </div>
 
           <div class="col-lg-6 d-none d-lg-block">
             <div class="app-navbar__list">
               <ul>
-                <li>
-                  <nuxt-link enter-active-class="active-link" to="/student"
-                    >الرئيسية</nuxt-link
-                  >
-                </li>
-                <li>
-                  <nuxt-link enter-active-class="active-link" to="/student#about-us"
-                    >نبذة بسيطة</nuxt-link
-                  >
-                </li>
-                <li>
-                  <nuxt-link enter-active-class="active-link" to="/student#about-physics">
-                    عن الفيزياء</nuxt-link
-                  >
-                </li>
-                <li>
-                  <nuxt-link enter-active-class="active-link" to="/student#courses-list"
-                    >قائمة الكورسات</nuxt-link
-                  >
-                </li>
+                <template
+                  v-if="($auth.loggedIn && $auth.user?.role_id == 3) || !$auth.loggedIn"
+                >
+                  <li>
+                    <nuxt-link enter-active-class="active-link" to="/student"
+                      >الرئيسية</nuxt-link
+                    >
+                  </li>
+                  <li>
+                    <nuxt-link enter-active-class="active-link" to="/student#about-us"
+                      >نبذة بسيطة</nuxt-link
+                    >
+                  </li>
+                  <li>
+                    <nuxt-link
+                      enter-active-class="active-link"
+                      to="/student#about-physics"
+                    >
+                      عن الفيزياء</nuxt-link
+                    >
+                  </li>
+                  <li>
+                    <nuxt-link enter-active-class="active-link" to="/student#courses-list"
+                      >قائمة الكورسات</nuxt-link
+                    >
+                  </li>
+                  <li v-if="$auth.loggedIn && $auth?.user?.role_id == 3">
+                    <nuxt-link enter-active-class="active-link" to="/student/my-courses">
+                      كورساتي</nuxt-link
+                    >
+                  </li>
+                </template>
+                <template v-else>
+                  <li>
+                    <nuxt-link enter-active-class="active-link" to="/dashboard"
+                      >المستخدمين</nuxt-link
+                    >
+                  </li>
+                  <li>
+                    <nuxt-link enter-active-class="active-link" to="/dashboard/courses"
+                      >الكورسات</nuxt-link
+                    >
+                  </li>
+                  <li>
+                    <nuxt-link
+                      enter-active-class="active-link"
+                      to="/dashboard/questions-bank"
+                      >بنك الأسئلة</nuxt-link
+                    >
+                  </li>
+                  <li>
+                    <nuxt-link
+                      enter-active-class="active-link"
+                      to="/dashboard/exam-correction"
+                      >تصحيح الاختبارات</nuxt-link
+                    >
+                  </li>
+                  <li>
+                    <nuxt-link
+                      enter-active-class="active-link"
+                      to="/dashboard/subscription-codes"
+                      >أكواد الإشتراك</nuxt-link
+                    >
+                  </li>
+                </template>
               </ul>
             </div>
           </div>

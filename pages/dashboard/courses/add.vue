@@ -87,10 +87,7 @@
                 </div>
               </div>
               <div class="col-md-12">
-                <el-form-item
-                  prop="description"
-                  :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
-                >
+                <el-form-item prop="description">
                   <el-input
                     placeholder="تفاصيل الكورس"
                     type="textarea"
@@ -100,10 +97,7 @@
                 </el-form-item>
               </div>
               <div class="col-md-6">
-                <el-form-item
-                  prop="telegram"
-                  :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
-                >
+                <el-form-item prop="telegram">
                   <el-input
                     placeholder="رابط جروب التليجرام"
                     v-model="addCourse.telegram"
@@ -111,10 +105,7 @@
                 </el-form-item>
               </div>
               <div class="col-md-6">
-                <el-form-item
-                  prop="whatsapp"
-                  :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
-                >
+                <el-form-item prop="whatsapp">
                   <el-input
                     placeholder="رابط جروب الواتساب"
                     v-model="addCourse.whatsapp"
@@ -164,7 +155,7 @@ export default {
     return {
       loading: false,
       addCourse: {
-        ifHasDiscount: true,
+        ifHasDiscount: false,
       },
     };
   },
@@ -176,36 +167,37 @@ export default {
       this.$refs.addCourseRef.validate(async (valid) => {
         if (valid) {
           if (!this.addCourse.image) {
-            this.$notify.error({
-              title: " صورة الكورس مطلوبة",
-              message: " قم بإرفاق صورة للكورس",
-            });
+            this.$awn.alert(" قم بإرفاق صورة للكورس صورة الكورس مطلوبة");
             return;
           }
           this.loading = true;
           try {
+            if (!this.addCourse.ifHasDiscount) {
+              this.addCourse.discount = 0;
+            }
+
             const formData = new FormData();
             formData.append("name", this.addCourse.name);
             formData.append("price", this.addCourse.price);
             formData.append("discount", this.addCourse.discount);
-            formData.append("description", this.addCourse.description);
+            if (this.addCourse.description) {
+              formData.append("description", this.addCourse.description);
+            }
+            if (this.addCourse.telegram) {
+              formData.append("telegram", this.addCourse.telegram);
+            }
+            if (this.addCourse.whatsapp) {
+              formData.append("whatsapp", this.addCourse.whatsapp);
+            }
             formData.append("promo", this.addCourse.promo);
-            formData.append("telegram", this.addCourse.telegram);
-            formData.append("whatsapp", this.addCourse.whatsapp);
             formData.append("image", this.addCourse.image);
 
             const res = await this.$axios.post(`/courses`, formData);
-            this.$notify({
-              title: "تم بنجاح",
-              message: "تم إضافة الفيديو بنجاح",
-              type: "success",
-            });
+            this.$awn.success("تم إضافة الفيديو بنجاح");
+
             this.$router.push(`/dashboard/courses/${res.data.id}`);
           } catch {
-            this.$notify.error({
-              title: " خطأ",
-              message: " هناك خطأ ما",
-            });
+            this.$awn.alert(" هناك خطأ ما");
           } finally {
             this.loading = false;
           }

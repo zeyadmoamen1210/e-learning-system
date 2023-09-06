@@ -20,7 +20,7 @@ export default {
   css: [
     'element-ui/lib/theme-chalk/index.css',
     '@/assets/sass/main.scss',
-    "~/node_modules/bootstrap/dist/css/bootstrap.min.css"
+    "~/node_modules/bootstrap/dist/css/bootstrap.min.css",
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -29,8 +29,11 @@ export default {
     { src: "~/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js", mode: "client" },
     { src: "@/plugins/CodeInput.js", mode: "client" },
     { src: "@/plugins/countdown.js", mode: "client" },
+    { src: "@/plugins/typed.js", mode: "client" },
+    { src: "@/plugins/custom-cursor.js", mode: "client" },
     { src: "@/plugins/social-sharing.js" },
     { src: "@/plugins/v-viwer.js" },
+    { src: "@/plugins/awsome-notifications.js" , mode: "client"},
     '@/plugins/vue-awesome-swiper.js',
     '@/plugins/mixins.js',
   ],

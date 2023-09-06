@@ -16,41 +16,61 @@
               :rules="addUserRules"
             >
               <el-form-item prop="name">
-                <el-input v-model="addUser.name" placeholder="الاسم"></el-input>
+                <label for="name" class="text-end d-block font-h6"> الاسم </label>
+                <el-input id="name" v-model="addUser.name" placeholder="الاسم"></el-input>
               </el-form-item>
 
               <el-form-item prop="email">
+                <label for="email" class="text-end d-block font-h6">
+                  البريد الإلكترونى
+                </label>
                 <el-input
                   v-model="addUser.email"
                   placeholder="البريد الإلكترونى"
+                  id="email"
                 ></el-input>
               </el-form-item>
 
               <el-form-item prop="phone">
-                <el-input v-model="addUser.phone" placeholder="رقم الموبايل"></el-input>
+                <label for="phone" class="text-end d-block font-h6"> رقم الموبايل </label>
+                <el-input
+                  id="phone"
+                  v-model="addUser.phone"
+                  placeholder="رقم الموبايل"
+                ></el-input>
               </el-form-item>
 
               <el-form-item prop="password">
+                <label for="password" class="text-end d-block font-h6">
+                  كلمة المرور
+                </label>
                 <el-input
                   type="password"
                   v-model="addUser.password"
                   placeholder="كلمة المرور"
+                  id="password"
                 ></el-input>
               </el-form-item>
 
               <el-form-item prop="passwordConfirm">
+                <label for="password-confirm" class="text-end d-block font-h6">
+                  تأكيد كلمة المرور
+                </label>
                 <el-input
                   v-model="addUser.passwordConfirm"
                   type="password"
                   placeholder="تأكيد كلمة المرور"
+                  id="password-confirm"
                 ></el-input>
               </el-form-item>
 
               <el-form-item prop="role_id">
+                <label for="role_id" class="text-end d-block font-h6"> الصلاحية </label>
                 <el-select
                   style="width: 100%"
                   v-model="addUser.role_id"
                   placeholder="الصلاحية"
+                  id="role_id"
                 >
                   <el-option
                     v-for="role in roles"
@@ -144,24 +164,14 @@ export default {
               ...this.addUser,
             });
             this.addUser = {};
-            this.$notify({
-              title: "تم بنجاح",
-              message: "تم إضافة المُستخدم بنجاح",
-              type: "success",
-            });
+            this.$awn.success("تم إضافة المُستخدم بنجاح");
             this.$emit("done");
           } catch (err) {
             if (err.response.status === 422) {
-              this.$notify.error({
-                title: " خطأ",
-                message: err.response?.data?.message,
-              });
+              this.$awn.alert(err.response?.data?.message);
               return;
             }
-            this.$notify.error({
-              title: " خطأ",
-              message: " هناك خطأ ما",
-            });
+            this.$awn.alert(" هناك خطأ ما");
           } finally {
             this.loading = false;
           }

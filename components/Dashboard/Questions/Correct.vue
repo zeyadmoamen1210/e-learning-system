@@ -90,20 +90,15 @@ export default {
   methods: {
     setQuestionMark(e) {
       if (e <= 0) {
-        this.$notify.error({
-          title: "خطأ",
-          message: "الدرجة يجب ان تكون اكبر من الصفر",
-        });
+        this.$awn.alert("الدرجة يجب ان تكون اكبر من الصفر");
         this.question.questionMark = null;
         this.$emit(`removeFromSolution`, this.question?.id);
         return;
       }
 
       if (this.question?.full_mark < e) {
-        this.$notify.error({
-          title: "خطأ",
-          message: "الدرجة أكبر من الدرجة القًصوي لهذا السؤال",
-        });
+        this.$awn.alert("الدرجة أكبر من الدرجة القًصوي لهذا السؤال");
+
         this.$emit(`removeFromSolution`, this.question?.id);
         this.question.questionMark = null;
         return;

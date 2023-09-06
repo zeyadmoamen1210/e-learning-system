@@ -67,7 +67,7 @@
                     @click.native="$router.push(`/dashboard/subscription-codes/${item.course_id}`)"
                     padding="0"
                     type="text-primary"
-                    text="تفاصيل الأسئلة">
+                    text="عرض الأكواد">
                     <img src="@/assets/imgs/dashboard/eye-linear.svg" alt="">
                   </Button>
                 </div>
@@ -80,7 +80,7 @@
     </div>
 
     <AddSubscriptionCodes v-if="addSubscriptionCodesPopup" :isOpened="addSubscriptionCodesPopup" @close="addSubscriptionCodesPopup = false" @reload="filters = {}, getCodeGroups()" />
-    <FilterSubscriptionCodes @filter="setFilterValues" v-if="filterCodesPopup" :isOpened="filterCodesPopup" @close="filterCodesPopup = false" />
+    <FilterSubscriptionCodes v-if="filterCodesPopup" @filter="setFilterValues" :isOpened="filterCodesPopup" @close="filterCodesPopup = false" />
   </div>
 </template>
 
@@ -110,7 +110,7 @@ export default {
       try {
         const res = await this.$axios.get(`/courses-codes/grouped`, {
           params: {
-            ...this.filters
+            course_id: this.filters.course_id || null
           }
         });
         this.codes = res.data;

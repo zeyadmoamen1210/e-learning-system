@@ -147,26 +147,17 @@ export default {
         const res = await this.$axios.post(`/courses-codes/${this.currCode.id}/sale`);
         this.submitTheCodePopup = false;
         this.getCourseCodes();
-        this.$notify({
-          title: "تم بنجاح",
-          message: "تم تسليم هذا الكود بنجاح",
-          type: "success",
-        });
+        this.$awn.success("تم تسليم هذا الكود بنجاح");
+
       } catch (err) {
-        this.$notify.error({
-          title: "خطأ",
-          message: "هناك خطأ ما",
-        });
+        this.$awn.alert("هناك خطأ ما");
       } finally {
         this.codeLoading = false;
       }
     },
     copyCode(text) {
       navigator.clipboard.writeText(text);
-      this.$message({
-          message: 'تم نسخ الكود بنجاح',
-          center: true,
-      });
+      this.$awn.success('تم نسخ الكود بنجاح');
     },
     async getCourseCodes() {
       this.loading = true;

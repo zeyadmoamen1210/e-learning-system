@@ -13,15 +13,23 @@
                   prop="title"
                   :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
                 >
-                  <el-input v-model="addPdf.title" placeholder="عنوان الملف"></el-input>
+                  <label for="pdf-name" class="text-end d-block font-h6"
+                    >عنوان الملف
+                  </label>
+                  <el-input
+                    id="pdf-name"
+                    v-model="addPdf.title"
+                    placeholder="عنوان الملف"
+                  ></el-input>
                 </el-form-item>
-                <el-form-item
-                  prop="description"
-                  :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
-                >
+                <el-form-item prop="description">
+                  <label for="pdf-description" class="text-end d-block font-h6"
+                    >وصف الملف
+                  </label>
                   <el-input
                     v-model="addPdf.description"
                     placeholder="وصف الملف"
+                    id="pdf-description"
                   ></el-input>
                 </el-form-item>
               </el-form>
@@ -92,10 +100,7 @@ export default {
       this.$refs.addPdfRef.validate(async (valid) => {
         if (valid) {
           if (!this.addPdf.file) {
-            this.$notify.error({
-              title: " خطأ",
-              message: "يجب إرفاق ملف ال PDF",
-            });
+            this.$awn.alert("يجب إرفاق ملف ال PDF");
             return;
           }
           if (this.pdfError) {
@@ -113,16 +118,9 @@ export default {
             this.resetExamform();
             this.$emit("close", false);
             this.$emit("added", false);
-            this.$notify({
-              title: "تم بنجاح",
-              message: "تم إضافة الامتحان بنجاح",
-              type: "success",
-            });
+            this.$awn.success("تم إضافة الملف بنجاح");
           } catch {
-            this.$notify.error({
-              title: " خطأ",
-              message: " هناك خطأ ما",
-            });
+            this.$awn.alert(" هناك خطأ ما");
           } finally {
             this.loading = false;
           }

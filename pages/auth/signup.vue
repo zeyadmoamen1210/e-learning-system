@@ -27,10 +27,7 @@
                 v-model="signupForm.email"
               ></el-input>
             </el-form-item>
-            <el-form-item
-              prop="password"
-              :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
-            >
+            <el-form-item prop="password">
               <el-input
                 type="password"
                 placeholder="كلمة المرور"
@@ -114,23 +111,13 @@ export default {
               role_id: 3,
             });
             this.login();
-            this.$notify({
-              title: "تم بنجاح",
-              message: "تم إنشاء الحساب بنجاح",
-              type: "success",
-            });
+            this.$awn.success("تم إنشاء الحساب بنجاح");
           } catch (err) {
             if (err.response.status == 422) {
-              this.$notify.error({
-                title: " خطأ",
-                message: err.response?.data?.message,
-              });
+              this.$awn.alert(err.response?.data?.message);
               return;
             }
-            this.$notify.error({
-              title: " خطأ",
-              message: "حدث خطأ ما",
-            });
+            this.$awn.alert("حدث خطأ ما");
           } finally {
             this.loading = false;
           }
@@ -176,9 +163,21 @@ export default {
           { required: true, message: "هذا الحقل مطلوب" },
           { type: "email", message: "يجب ان يكون بريد إلكتروني صالح" },
         ],
-        password: [{ required: true, message: "هذا الحقل مطلوب" }],
+        password: [
+          { required: true, message: "هذا الحقل مطلوب" },
+          {
+            min: 6,
+            message: "كلمة المرور يجب ان تكون علي الأقل 6 حروف",
+            trigger: "blur",
+          },
+        ],
         passwordConfirm: [
           { required: true, message: "هذا الحقل مطلوب" },
+          {
+            min: 6,
+            message: "كلمة المرور يجب ان تكون علي الأقل 6 حروف",
+            trigger: "blur",
+          },
           { validator: validateConfirmPass, trigger: "blur" },
         ],
         phone: [{ validator: validatePhone, trigger: "blur" }],

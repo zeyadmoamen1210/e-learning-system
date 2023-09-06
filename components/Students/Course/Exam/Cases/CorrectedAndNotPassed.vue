@@ -12,10 +12,12 @@
         </h6>
       </div>
 
+      <div class="mt-2">
+        <h6 class="font-h5 text-center">الدرجة التي حصلت عليها : {{ points }}</h6>
+        <h6 class="font-h5 text-center">درجة النجاح : {{ passFrom }}</h6>
+      </div>
+
       <div class="d-flex gap-2 align-item-center flex-wrap justify-content-center">
-        <button @click="$emit('showModelAnswer')" class="button button--primary mt-3">
-          عرض إجاباتي
-        </button>
         <button
           v-if="canSolveAgain"
           @click="$emit('solveAgain')"
@@ -35,6 +37,9 @@ export default {
       required: true,
     },
     totalMarks: {
+      required: true,
+    },
+    passFrom: {
       required: true,
     },
     canSolveAgain: {

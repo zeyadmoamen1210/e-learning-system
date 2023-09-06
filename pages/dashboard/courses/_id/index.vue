@@ -106,10 +106,7 @@
                 </div>
               </div>
               <div class="col-md-12">
-                <el-form-item
-                  prop="description"
-                  :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
-                >
+                <el-form-item prop="description">
                   <el-input
                     placeholder="تفاصيل الكورس"
                     type="textarea"
@@ -119,10 +116,7 @@
                 </el-form-item>
               </div>
               <div class="col-md-6">
-                <el-form-item
-                  prop="telegram"
-                  :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
-                >
+                <el-form-item prop="telegram">
                   <el-input
                     placeholder="رابط جروب التليجرام"
                     v-model="editCourse.telegram"
@@ -130,10 +124,7 @@
                 </el-form-item>
               </div>
               <div class="col-md-6">
-                <el-form-item
-                  prop="whatsapp"
-                  :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
-                >
+                <el-form-item prop="whatsapp">
                   <el-input
                     placeholder="رابط جروب الواتساب"
                     v-model="editCourse.whatsapp"
@@ -208,6 +199,11 @@ export default {
       try {
         const res = await this.$axios.get(`/admin/courses/${this.$route.params.id}`);
         this.editCourse = { ...this.editCourse, ...res.data };
+        if (+this.editCourse.discount > 0) {
+          this.editCourse.ifHasDiscount = true;
+        } else {
+          this.editCourse.ifHasDiscount = false;
+        }
       } finally {
         this.loading = false;
       }
@@ -219,22 +215,31 @@ export default {
       this.$refs.editCourseRef.validate(async (valid) => {
         if (valid) {
           if (!this.editCourse.image) {
-            this.$notify.error({
-              title: " صورة الكورس مطلوبة",
-              message: " قم بإرفاق صورة للكورس",
-            });
+            this.$awn.alert(" قم بإرفاق صورة للكورس صورة الكورس مطلوبة");
+
             return;
           }
           this.loading = true;
           try {
+            if (!this.editCourse.ifHasDiscount) {
+              this.editCourse.discount = 0;
+            }
             const formData = new FormData();
             formData.append("name", this.editCourse.name);
             formData.append("price", this.editCourse.price);
             formData.append("discount", this.editCourse.discount);
-            formData.append("description", this.editCourse.description);
+
+            if (this.editCourse.description) {
+              formData.append("description", this.editCourse.description);
+            }
+            if (this.editCourse.telegram) {
+              formData.append("telegram", this.editCourse.telegram);
+            }
+            if (this.editCourse.whatsapp) {
+              formData.append("whatsapp", this.editCourse.whatsapp);
+            }
+
             formData.append("promo", this.editCourse.promo);
-            formData.append("telegram", this.editCourse.telegram);
-            formData.append("whatsapp", this.editCourse.whatsapp);
             formData.append("_method", "put");
             if (typeof this.editCourse.image !== "string") {
               formData.append("image", this.editCourse.image);
@@ -244,17 +249,10 @@ export default {
               `/courses/${this.editCourse.id}`,
               formData
             );
-            this.$notify({
-              title: "تم بنجاح",
-              message: "تم تعديل الكورس بنجاح",
-              type: "success",
-            });
+            this.$awn.success("تم تعديل الكورس بنجاح");
             this.$router.push(`/dashboard/courses/${res.data.id}`);
           } catch {
-            this.$notify.error({
-              title: " خطأ",
-              message: " هناك خطأ ما",
-            });
+            this.$awn.alert(" هناك خطأ ما");
           } finally {
             this.loading = false;
           }

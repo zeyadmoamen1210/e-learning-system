@@ -3,23 +3,25 @@
     <Popup :contentCentered="true" :open="isOpened" @close="$emit('close', false)">
       <template #header> الإشتراك بالكورس </template>
       <template #body>
-        <h6 class="font font--light mb-4 font-h5">
-          قم بكتابة كود الإشتراك الخاص بك لتفعيل الإشتراك والبدأ بالكورس
-        </h6>
+        <div v-loading="loading">
+          <h6 class="font font--light mb-4 font-h5">
+            قم بكتابة كود الإشتراك الخاص بك لتفعيل الإشتراك والبدأ بالكورس
+          </h6>
 
-        <div>
-          <el-form ref="addCodeRef" class="mb-4" :model="codeForm">
-            <el-form-item
-              prop="code"
-              :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
-            >
-              <el-input v-model="codeForm.code" placeholder="أدخل الكود"></el-input>
-            </el-form-item>
-          </el-form>
+          <div>
+            <el-form ref="addCodeRef" class="mb-4" :model="codeForm">
+              <el-form-item
+                prop="code"
+                :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
+              >
+                <el-input v-model="codeForm.code" placeholder="أدخل الكود"></el-input>
+              </el-form-item>
+            </el-form>
 
-          <button @click="submitCode" class="button button--primary w-100 mb-4">
-            تأكيد الإشتراك
-          </button>
+            <button @click="submitCode" class="button button--primary w-100 mb-4">
+              تأكيد الإشتراك
+            </button>
+          </div>
         </div>
       </template>
     </Popup>
@@ -45,6 +47,7 @@ export default {
   data() {
     return {
       codeForm: {},
+      loading: false,
     };
   },
   methods: {
@@ -57,25 +60,16 @@ export default {
               `/courses/${this.course_id}/subscribe`,
               this.codeForm
             );
-            this.$notify({
-              title: "تم بنجاح",
-              message: "تم الأشتراك في الكورس بنجاح",
-              type: "success",
-            });
+            this.$awn.success("تم الأشتراك في الكورس بنجاح");
+
             this.$emit("close", false);
             this.$emit("reload");
           } catch (err) {
             if (err.response.status == 422) {
-              this.$notify.error({
-                title: "خطأ",
-                message: err.response?.data?.message,
-              });
+              this.$awn.alert(err.response?.data?.message);
               return;
             }
-            this.$notify.error({
-              title: "خطأ",
-              message: "حدث خطأ ما!",
-            });
+            this.$awn.alert("حدث خطأ ما!");
           } finally {
             this.loading = false;
           }

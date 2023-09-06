@@ -14,10 +14,14 @@
               prop="course"
               :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
             >
+              <label for="select-course" class="text-end d-block font-h6"
+                >اختر الكورس
+              </label>
               <el-select
                 class="w-100"
                 v-model="addCodes.course"
                 placeholder="اختر الكورس"
+                id="select-course"
               >
                 <el-option
                   v-for="(item, index) in courses"
@@ -31,10 +35,14 @@
               prop="count"
               :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
             >
+              <label for="course-count" class="text-end d-block font-h6">
+                عدد الأكواد
+              </label>
               <el-input
                 class="w-100"
                 v-model="addCodes.count"
                 placeholder="عدد الأكواد"
+                id="course-count"
               ></el-input>
             </el-form-item>
           </el-form>
@@ -92,16 +100,9 @@ export default {
             });
             this.$emit("close");
             this.$emit("reload");
-            this.$notify({
-              title: "تم بنجاح",
-              message: "تم إضافة الاكواد بنجاح",
-              type: "success",
-            });
+            this.$awn.success("تم إضافة الاكواد بنجاح");
           } catch (err) {
-            this.$notify.error({
-              title: " خطأ",
-              message: " حدث خطأ ما",
-            });
+            this.$awn.alert(" حدث خطأ ما");
           } finally {
             this.loading = false;
           }

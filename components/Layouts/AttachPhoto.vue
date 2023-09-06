@@ -11,8 +11,8 @@
     </div>
     <div>
       <h6 class="font-h5 font--regular">{{ title }}</h6>
-      <span class="d-block font-h6 font--light">قم بالنقر علي الصورة</span>
-      <span class="d-block font-h6 font--light">هنا تكتب ملاحظات للصور</span>
+      <span class="d-block font-h6 font--light">قم بالنقر للإضافة </span>
+      <span class="d-block font-h6 font--light">هنا يتم إضافة صورة او ملف</span>
       <span class="d-block font-h6 font--light"> الذي سيتم إرفاقه </span>
     </div>
   </div>

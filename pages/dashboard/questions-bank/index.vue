@@ -145,24 +145,16 @@ export default {
       try {
         await this.$axios.delete(`/questions/${this.currQuestion.id}`);
         this.deleteQuestionPopup = false;
-        this.$notify({
-          title: "تم بنجاح",
-          message: "تم حذف السؤال بنجاح",
-          type: "success",
-        });
+        this.$awn.success("تم حذف السؤال بنجاح");
+
         this.getBankQuestions();
       } catch (err) {
         if (err.response.status === 403) {
-          this.$notify.error({
-            title: "خطأ",
-            message: "هذا السؤال موجود بالفعل في امتحان",
-          });
+          this.$awn.alert("هذا السؤال موجود بالفعل في امتحان");
+
           return;
         }
-        this.$notify.error({
-          title: "خطأ",
-          message: "حدث خطأ ما",
-        });
+        this.$awn.alert("حدث خطأ ما");
       } finally {
         this.deleteLoading = false;
       }
