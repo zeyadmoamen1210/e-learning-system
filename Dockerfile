@@ -1,23 +1,15 @@
-# Base image
-FROM node:14.17.0-alpine
-
-# Set the working directory
+# build stage
+FROM node:lts-alpine as build-stage
 WORKDIR /app
-
-# Copy package.json and package-lock.json
 COPY package*.json ./
-
-# Install dependencies
-RUN npm ci --only=production
-
-# Copy the rest of the application code
+RUN npm install
 COPY . .
-
-# Build the Nuxt.js application
 RUN npm run build
 
-# Expose the application port
-EXPOSE 3000
-
-# Start the application
-CMD [ "npm", "start" ]
+# production stage
+FROM nginx:stable-alpine as production-stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
