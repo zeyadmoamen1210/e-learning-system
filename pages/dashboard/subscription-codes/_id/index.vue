@@ -1,6 +1,6 @@
 <template>
   <div v-loading.fullscreen="loading">
-    <div v-if="!loading">
+    <div v-show="!loading">
     <div class="d-flex gap-4 mb-3 flex-wrap justify-content-between align-items-center">
       <div>
         <h6 class="font-h4 font--regular">أكواد الإشتراك</h6>

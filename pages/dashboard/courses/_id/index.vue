@@ -1,6 +1,6 @@
 <template>
   <div v-loading.fullscreen="loading">
-    <div v-if="!loading" class="container">
+    <div v-show="!loading" class="container">
       <div class="d-flex gap-2 mb-4">
         <Button
           padding="1.4rem 2rem"

@@ -1,6 +1,6 @@
 <template>
   <div class="login" v-loading.fullscreen="loading">
-    <div v-if="!loading" class="container">
+    <div v-show="!loading" class="container">
       <div class="login__inner">
         <h6
           class="login__title font-h4 mb-4 d-flex gap-2 align-items-center justify-content-center"

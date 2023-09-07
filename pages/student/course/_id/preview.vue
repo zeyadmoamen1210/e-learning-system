@@ -1,6 +1,6 @@
 <template>
   <div v-loading.fullscreen="loading">
-    <div v-if="!loading" class="d-flex flex-column">
+    <div v-show="!loading" class="d-flex flex-column">
       <CourseHeader
         @reload="getOneCourse"
         :course="course"

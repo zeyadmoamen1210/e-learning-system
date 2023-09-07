@@ -1,6 +1,6 @@
 <template>
   <div v-loading.fullscreen="loading">
-    <div  v-if="!loading">
+    <div  v-show="!loading">
     <div class="text-center mt-5" v-if="examCorrection.length === 0">
       <div>
         <img src="@/assets/imgs/dashboard/vuesax-linear-task.png" alt="" />

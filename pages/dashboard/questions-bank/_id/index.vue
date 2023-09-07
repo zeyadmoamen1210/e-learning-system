@@ -1,6 +1,6 @@
 <template>
   <div v-loading.fullscreen="loading">
-    <div v-if="!loading">
+    <div v-show="!loading">
       <div class="d-flex gap-2 mb-3 flex-wrap justify-content-between">
         <div>
           <h6 class="font-h4 font--regular">تعديل السؤال</h6>
