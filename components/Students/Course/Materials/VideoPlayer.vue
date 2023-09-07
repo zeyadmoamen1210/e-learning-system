@@ -10,6 +10,10 @@
 
       <div class="selected-content__video-title">
         <div class="selected-content__click-here">
+          <font-awesome-icon
+            class="d-block text-center m-auto mb-2 font-h3"
+            :icon="['fas', 'circle-play']"
+          />
           <h6 class="font-h5">اضغط لعرض الفيديو</h6>
         </div>
         <div

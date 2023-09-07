@@ -112,7 +112,9 @@
         />
       </div>
       <div v-else>
-        <h6 class="text-danger font-h6 text-center">لا يوجد أسئلة في هذا الإمتحان</h6>
+        <h6 class="text-danger font-h5 text-center mt-5 mb-5">
+          لا يوجد أسئلة في هذا الإمتحان
+        </h6>
       </div>
 
       <div>

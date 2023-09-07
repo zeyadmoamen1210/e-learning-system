@@ -4,7 +4,7 @@
       {{ question.title }}
     </p>
     <div v-if="question.image" class="question-main-img">
-      <img :src="question.image" alt="" />
+      <img @click="$emit('clickToImg')" :src="question.image" alt="" />
     </div>
 
     <div class="row mt-5 mb-5" v-if="!showAnswers">

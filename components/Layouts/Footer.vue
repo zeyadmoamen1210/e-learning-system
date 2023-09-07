@@ -82,12 +82,17 @@
 export default {
   methods: {
     open(type) {
-      if (type === "facebook") {
-        window.open("https://www.facebook.com/mr.madkour.salama", "_blank");
-      } else if (type === "youtube") {
-        window.open("https://youtube.com/@madkour_salama?si=8hivc-kgRYMkpyVk", "_blank");
-      } else if (type == "whatsapp") {
-        window.open("https://wa.link/1ojqy7", "_blank");
+      if (process.client) {
+        if (type === "facebook") {
+          window.open("https://www.facebook.com/mr.madkour.salama", "_blank");
+        } else if (type === "youtube") {
+          window.open(
+            "https://youtube.com/@madkour_salama?si=8hivc-kgRYMkpyVk",
+            "_blank"
+          );
+        } else if (type == "whatsapp") {
+          window.open("https://wa.link/1ojqy7", "_blank");
+        }
       }
     },
   },

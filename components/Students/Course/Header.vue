@@ -143,10 +143,14 @@ export default {
   },
   methods: {
     join(link) {
-      window.open(link, "_blank");
+      if (process.client) {
+        window.open(link, "_blank");
+      }
     },
     courseLink() {
-      return `${window.location.origin}/student/course/${this.course.id}/preview`;
+      if (process.client) {
+        return `${window?.location?.origin}/student/course/${this.course.id}/preview`;
+      }
     },
     generateWhatsAppLink(phoneNumber) {
       let message = `السلام عليكم و رحمة اللٌه و بركاته

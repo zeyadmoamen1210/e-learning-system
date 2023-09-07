@@ -87,7 +87,9 @@ import NoData from "~/components/NoData.vue";
 export default {
   methods: {
     async getCourses() {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (process.client) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
       this.loading = true;
       try {
         const res = await this.$axios.get(`/courses`, {
