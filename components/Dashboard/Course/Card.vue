@@ -45,16 +45,6 @@
       >
         <img src="@/assets/imgs/dashboard/vuesax-bulk-edit-2.svg" alt="" />
       </Button>
-      <Button
-        class="flex-grow-1"
-        padding="1rem"
-        :center="true"
-        :type="'danger-plain'"
-        text="حذف"
-        text-classes="font-h5 font--regular"
-      >
-        <img src="@/assets/imgs/dashboard/trash-bulk.svg" alt="" />
-      </Button>
     </div>
   </div>
 </template>

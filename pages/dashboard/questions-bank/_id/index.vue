@@ -231,7 +231,7 @@ export default {
         lesson_id: "",
         type: "choose",
         level: "",
-        answers: ["", "", "", ""],
+        answers: null,
         correct_answer: 0,
       },
     };
