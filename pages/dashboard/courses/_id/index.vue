@@ -1,6 +1,6 @@
 <template>
-  <div v-loading="loading">
-    <div class="container">
+  <div v-loading.fullscreen="loading">
+    <div v-if="!loading" class="container">
       <div class="d-flex gap-2 mb-4">
         <Button
           padding="1.4rem 2rem"
@@ -183,7 +183,7 @@ export default {
   },
   data() {
     return {
-      loading: false,
+      loading: true,
       currTab: 1,
       editCourse: {
         ifHasDiscount: true,

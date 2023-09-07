@@ -25,6 +25,18 @@
         </Button>
       </div>
     </div>
+    <div class="mb-3" v-if="course.lessons?.length > 0">
+      <Button
+        @click.native="updateLessonPopup = true"
+        padding="1rem 0rem"
+        :type="'text-primary'"
+        :text="'تعديل الدرس '"
+      >
+        <template>
+          <img src="@/assets/imgs/dashboard/vuesax-bulk-edit-2.svg" alt="" />
+        </template>
+      </Button>
+    </div>
     <div v-if="course?.lessons?.length > 0" class="mb-4 d-flex gap-4 flex-wrap">
       <Button
         padding="1.3rem 2.5rem"
@@ -131,6 +143,15 @@
       @finished="(addLessonPopup = false), $emit('reloadCourse')"
       @close="addLessonPopup = false"
     />
+
+    <UpdateLessonPopup
+      v-if="updateLessonPopup"
+      :lesson="course.lessons?.[activeLesson]"
+      :course="course"
+      :isOpened="updateLessonPopup"
+      @finished="(updateLessonPopup = false), $emit('reloadCourse')"
+      @close="updateLessonPopup = false"
+    />
   </div>
 </template>
 
@@ -140,6 +161,7 @@ import NoVideosExist from "@/components/Dashboard/Course/NoVideos.vue";
 import NoExamsExist from "@/components/Dashboard/Course/NoExams.vue";
 import NoPdfsExist from "@/components/Dashboard/Course/NoPdfs.vue";
 import AddLessonPopup from "@/components/Dashboard/Popups/AddLesson.vue";
+import UpdateLessonPopup from "@/components/Dashboard/Popups/UpdateLesson.vue";
 
 import VideoCards from "@/components/Dashboard/Course/VideoCards.vue";
 import PdfCards from "@/components/Dashboard/Course/PdfCards.vue";
@@ -152,6 +174,7 @@ export default {
     NoExamsExist,
     NoPdfsExist,
     AddLessonPopup,
+    UpdateLessonPopup,
 
     ExamCards,
     VideoCards,
@@ -185,6 +208,7 @@ export default {
       activeLessonTab: 0,
       activeLesson: 0,
       addLessonPopup: false,
+      updateLessonPopup: false,
     };
   },
   methods: {

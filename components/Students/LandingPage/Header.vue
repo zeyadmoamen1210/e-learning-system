@@ -10,7 +10,7 @@
             :smartBackspace="true"
             :strings="['المنصة التعليمية', 'للأستاذ مدكور سلامة', 'في علوم الفيزياء']"
           >
-            <h4 class="font--primary font-h1 font--regular mb-3 typing"></h4>
+            <h4 class="font--primary font-h2 font--regular mb-3 typing"></h4>
           </vue-typed-js>
         </div>
 
@@ -19,15 +19,15 @@
         </span>
 
         <p class="mt-5 font--light home-page__desc">
-          هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن
-          التركيز على الشكل الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها. ولذلك
-          يتم استخدام طريقة لوريم إيبسوم لأنها تعطي
+          معلم خبير الفيزياء ، خبرة 25 عامًا، معد كتاب الصفوة فى الفيزياء ، أسعى لتوصيل
+          المعلومات بطريقة سهلة ومفهومة للطلاب. هدفنا هو تحقيق النجاح الأكاديمي للطلاب في
+          مادة الفيزياء وتطوير قدراتهم في هذا المجال.
         </p>
       </div>
     </div>
     <div class="col-md-6">
       <div class="home-page__img">
-        <img src="@/assets/imgs/landing-page/illustration.png" alt="" />
+        <img draggable="false" src="@/assets/imgs/landing-page/illustration.png" alt="" />
       </div>
     </div>
   </div>

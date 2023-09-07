@@ -80,6 +80,7 @@
               <el-input
                 type="password"
                 placeholder="كلمة المرور"
+                @keydown.native.enter="submitLogin"
                 v-model="loginForm.password"
               ></el-input>
             </el-form-item>

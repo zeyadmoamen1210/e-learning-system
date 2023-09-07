@@ -91,8 +91,31 @@ export default {
   },
 
   router: {
-    middleware: ['auth']
-  },
+    middleware: ['auth'],
+    scrollBehavior: (to, from, savedPosition) => {
+      // Check if there is a saved position
+      if (savedPosition) {
+        // Return the saved position
+        return savedPosition;
+      } else if (to.hash) {
+        // Scroll to the element with the anchor ID
+        return { selector: to.hash };
+      } else {
+        // Scroll to the top of the page
+        return { x: 0, y: 0 };
+      }
+    },
+    beforeEach: ((to, from, next) => {
+      // Check if the current route has a hash
+      if (from.hash) {
+        // Remove the hash from the URL
+        next({ path: to.path, query: to.query });
+      } else {
+        next();
+      }
+    })
+},
+
 
   auth: {
     redirect: {

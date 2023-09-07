@@ -1,5 +1,6 @@
 <template>
-  <div v-loading="loading">
+  <div v-loading.fullscreen="loading">
+    <div v-if="!loading">
     <div class="text-center mt-5" v-if="codes.length === 0">
       <div>
         <img src="@/assets/imgs/dashboard/tag-linear-222.svg" alt="" />
@@ -82,6 +83,7 @@
     <AddSubscriptionCodes v-if="addSubscriptionCodesPopup" :isOpened="addSubscriptionCodesPopup" @close="addSubscriptionCodesPopup = false" @reload="filters = {}, getCodeGroups()" />
     <FilterSubscriptionCodes v-if="filterCodesPopup" @filter="setFilterValues" :isOpened="filterCodesPopup" @close="filterCodesPopup = false" />
   </div>
+  </div>
 </template>
 
 <script>
@@ -127,7 +129,7 @@ export default {
       addSubscriptionCodesPopup: false,
       filterCodesPopup: false,
 
-      loading: false,
+      loading: true,
     };
   },
 };

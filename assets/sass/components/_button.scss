@@ -81,6 +81,9 @@
 .app-button {
   border: none;
   border-radius: 0.8rem;
+  &__text {
+    position: relative;
+  }
   &__primary {
     background-color: var(--primary);
     span {

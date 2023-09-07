@@ -192,6 +192,7 @@ export default {
         ) {
           this.showModelAnswer();
         }
+        window.scrollTo({ top: 0, behavior: "smooth" });
       } catch (err) {
         console.log(err);
       } finally {

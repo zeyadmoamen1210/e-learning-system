@@ -15,11 +15,11 @@ let options = {
   labels: {
     success: 'تم بنجاح',
     alert: 'خطأ',
+  },
+  durations: {
+    alert: 2000,
+    success: 2000,
+    info: 2000,
   }
-  // durations: {
-  //   alert: 80000,
-  //   success: 80000,
-  //   info: 80000,
-  // }
 }
 Vue.use(VueAWN, options)

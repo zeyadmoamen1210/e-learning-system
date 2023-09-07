@@ -1,120 +1,122 @@
 <template>
-  <div v-loading="loading">
-    <div>
-      <div class="d-flex gap-2 mb-3 flex-wrap justify-content-between">
-        <div>
-          <h6 class="font-h4 font--regular">بنك الأسئلة</h6>
-          <p class="font--light font-h5">
-            يمكنك فلترة الأسئلة من أجل الوصول للأسئلة بشكل أسرع
-          </p>
-        </div>
-        <div>
-          <Button
-            @click.native="$router.push('/dashboard/questions-bank/add')"
-            padding="1.2rem 1.5rem"
-            textClasses="font-h5 font--regular"
-            type="success"
-            text="إضافة  سؤال جديد"
-          >
-            <template>
-              <img src="@/assets/imgs/dashboard/add-circle-bulk.svg" alt="" />
-            </template>
-          </Button>
-        </div>
-      </div>
-
-      <div class="d-flex gap-2 flex-wrap">
-        <el-select
-          @change="getBankQuestions"
-          clearable
-          v-model="lesson"
-          placeholder="أختر الدرس"
-        >
-          <el-option
-            v-for="item in lessons"
-            :key="item.id"
-            :label="item.name"
-            :value="item.id"
-          >
-          </el-option>
-        </el-select>
-
-        <el-select
-          @change="getBankQuestions"
-          clearable
-          v-model="type"
-          placeholder="نوع السؤال"
-        >
-          <el-option
-            v-for="item in types"
-            :key="item.val"
-            :label="item.title"
-            :value="item.val"
-          >
-          </el-option>
-        </el-select>
-
-        <el-select
-          @change="getBankQuestions"
-          clearable
-          v-model="difficulty"
-          placeholder="درجة الصعوبة"
-        >
-          <el-option
-            v-for="item in difficultyDegrees"
-            :key="item.val"
-            :label="item.title"
-            :value="item.val"
-          >
-          </el-option>
-        </el-select>
-      </div>
-    </div>
-
-    <div class="mt-5">
-      <div class="container">
-        <div v-if="questions.length === 0">
-          <NoData :text="'لا توجد بيانات متوفرة'" />
-        </div>
-        <div class="row" v-else>
-          <div class="col-md-4" v-for="(question, index) in questions" :key="index">
-            <QuestionCard
-              @openDetails="(currQuestion = question), (questionDetailsPopup = true)"
-              :question="question"
-              @openDelete="(currQuestion = question), (deleteQuestionPopup = true)"
-              :text="` هل انت متأكد من حذف هذا السؤال   `"
-              :title="`حذف السؤال  `"
-            />
+  <div v-loading.fullscreen="loading">
+    <div v-if="!loading">
+      <div>
+        <div class="d-flex gap-2 mb-3 flex-wrap justify-content-between">
+          <div>
+            <h6 class="font-h4 font--regular">بنك الأسئلة</h6>
+            <p class="font--light font-h5">
+              يمكنك فلترة الأسئلة من أجل الوصول للأسئلة بشكل أسرع
+            </p>
+          </div>
+          <div>
+            <Button
+              @click.native="$router.push('/dashboard/questions-bank/add')"
+              padding="1.2rem 1.5rem"
+              textClasses="font-h5 font--regular"
+              type="success"
+              text="إضافة  سؤال جديد"
+            >
+              <template>
+                <img src="@/assets/imgs/dashboard/add-circle-bulk.svg" alt="" />
+              </template>
+            </Button>
           </div>
         </div>
 
-        <div class="d-flex flex-row-reverse" v-if="total > 1">
-          <el-pagination
-            :current-page.sync="currPage"
-            background
-            layout="prev, pager, next"
-            :total="total * 10"
-            @current-change="getBankQuestions"
+        <div class="d-flex gap-2 flex-wrap">
+          <el-select
+            @change="getBankQuestions"
+            clearable
+            v-model="lesson"
+            placeholder="أختر الدرس"
           >
-          </el-pagination>
+            <el-option
+              v-for="item in lessons"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+
+          <el-select
+            @change="getBankQuestions"
+            clearable
+            v-model="type"
+            placeholder="نوع السؤال"
+          >
+            <el-option
+              v-for="item in types"
+              :key="item.val"
+              :label="item.title"
+              :value="item.val"
+            >
+            </el-option>
+          </el-select>
+
+          <el-select
+            @change="getBankQuestions"
+            clearable
+            v-model="difficulty"
+            placeholder="درجة الصعوبة"
+          >
+            <el-option
+              v-for="item in difficultyDegrees"
+              :key="item.val"
+              :label="item.title"
+              :value="item.val"
+            >
+            </el-option>
+          </el-select>
         </div>
       </div>
+
+      <div class="mt-5">
+        <div class="container">
+          <div v-if="questions.length === 0">
+            <NoData :text="'لا توجد بيانات متوفرة'" />
+          </div>
+          <div class="row" v-else>
+            <div class="col-md-4" v-for="(question, index) in questions" :key="index">
+              <QuestionCard
+                @openDetails="(currQuestion = question), (questionDetailsPopup = true)"
+                :question="question"
+                @openDelete="(currQuestion = question), (deleteQuestionPopup = true)"
+                :text="` هل انت متأكد من حذف هذا السؤال   `"
+                :title="`حذف السؤال  `"
+              />
+            </div>
+          </div>
+
+          <div class="d-flex flex-row-reverse" v-if="total > 1">
+            <el-pagination
+              :current-page.sync="currPage"
+              background
+              layout="prev, pager, next"
+              :total="total * 10"
+              @current-change="getBankQuestions"
+            >
+            </el-pagination>
+          </div>
+        </div>
+      </div>
+
+      <QuestionDetails
+        @close="questionDetailsPopup = false"
+        :isOpened="questionDetailsPopup"
+        :question="currQuestion"
+      />
+
+      <DeleteQuestion
+        @delete="deleteCurrQuestion()"
+        :isOpened="deleteQuestionPopup"
+        @close="deleteQuestionPopup = false"
+        :loading="deleteLoading"
+        :text="` هل انت متأكد من حذف هذا السؤال   `"
+        :title="`حذف السؤال  `"
+      />
     </div>
-
-    <QuestionDetails
-      @close="questionDetailsPopup = false"
-      :isOpened="questionDetailsPopup"
-      :question="currQuestion"
-    />
-
-    <DeleteQuestion
-      @delete="deleteCurrQuestion()"
-      :isOpened="deleteQuestionPopup"
-      @close="deleteQuestionPopup = false"
-      :loading="deleteLoading"
-      :text="` هل انت متأكد من حذف هذا السؤال   `"
-      :title="`حذف السؤال  `"
-    />
   </div>
 </template>
 
@@ -194,7 +196,7 @@ export default {
   },
   data() {
     return {
-      loading: false,
+      loading: true,
       lesson: null,
       type: null,
       difficulty: null,

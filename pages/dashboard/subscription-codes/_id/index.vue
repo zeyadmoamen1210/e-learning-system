@@ -1,5 +1,6 @@
 <template>
-  <div v-loading="loading">
+  <div v-loading.fullscreen="loading">
+    <div v-if="!loading">
     <div class="d-flex gap-4 mb-3 flex-wrap justify-content-between align-items-center">
       <div>
         <h6 class="font-h4 font--regular">أكواد الإشتراك</h6>
@@ -108,6 +109,7 @@
 
       <SubmitSubscriptionCodePopup :loading="codeLoading" v-if="submitTheCodePopup" :code="currCode" @submit="submitSaleCode" :isOpened="submitTheCodePopup" @close="submitTheCodePopup = false" />
   </div>
+  </div>
 </template>
 
 <script>
@@ -124,7 +126,7 @@ export default {
       codeFilter: 0,
       submitTheCodePopup: false,
       codes: [],
-      loading: false,
+      loading: true,
       page: 1,
       total: 1,
       currCode: {},

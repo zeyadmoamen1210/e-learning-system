@@ -1,198 +1,200 @@
 <template>
-  <div v-loading="loading">
-    <div class="d-flex gap-2 mb-3 flex-wrap justify-content-between">
-      <div>
-        <h6 class="font-h4 font--regular">تعديل السؤال</h6>
-        <p class="font--light font-h5">قم بتعديل بيانات السؤال</p>
+  <div v-loading.fullscreen="loading">
+    <div v-if="!loading">
+      <div class="d-flex gap-2 mb-3 flex-wrap justify-content-between">
+        <div>
+          <h6 class="font-h4 font--regular">تعديل السؤال</h6>
+          <p class="font--light font-h5">قم بتعديل بيانات السؤال</p>
+        </div>
+        <div>
+          <Button
+            @click.native="submitUpdate"
+            padding="1.2rem 1.5rem"
+            textClasses="font-h5 font--regular"
+            type="success"
+            text="تعديل"
+          >
+            <template>
+              <img src="@/assets/imgs/dashboard/add-circle-bulk.svg" alt="" />
+            </template>
+          </Button>
+        </div>
       </div>
-      <div>
-        <Button
-          @click.native="submitUpdate"
-          padding="1.2rem 1.5rem"
-          textClasses="font-h5 font--regular"
-          type="success"
-          text="تعديل"
-        >
-          <template>
-            <img src="@/assets/imgs/dashboard/add-circle-bulk.svg" alt="" />
-          </template>
-        </Button>
-      </div>
-    </div>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-10">
-          <div>
-            <el-form ref="updateQuestionRef" :model="updateQuestion">
-              <div class="d-flex gap-2 mb-3 flex-wrap">
-                <el-form-item
-                  class="flex-grow-1"
-                  prop="lesson_id"
-                  :rules="[{ required: true, message: 'this field is required' }]"
-                >
-                  <el-select
-                    class="w-100"
-                    v-model="updateQuestion.lesson_id"
-                    placeholder="أختر الدرس"
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10">
+            <div>
+              <el-form ref="updateQuestionRef" :model="updateQuestion">
+                <div class="d-flex gap-2 mb-3 flex-wrap">
+                  <el-form-item
+                    class="flex-grow-1"
+                    prop="lesson_id"
+                    :rules="[{ required: true, message: 'this field is required' }]"
                   >
-                    <el-option
-                      v-for="item in lessons"
-                      :key="item.id"
-                      :label="item.name"
-                      :value="item.id"
+                    <el-select
+                      class="w-100"
+                      v-model="updateQuestion.lesson_id"
+                      placeholder="أختر الدرس"
                     >
-                    </el-option>
-                  </el-select>
-                </el-form-item>
+                      <el-option
+                        v-for="item in lessons"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="item.id"
+                      >
+                      </el-option>
+                    </el-select>
+                  </el-form-item>
 
-                <el-form-item
-                  class="flex-grow-1"
-                  prop="level"
-                  :rules="[{ required: true, message: 'this field is required' }]"
-                >
-                  <el-select
-                    class="w-100"
-                    v-model="updateQuestion.level"
-                    placeholder="درجة الصعوبة"
+                  <el-form-item
+                    class="flex-grow-1"
+                    prop="level"
+                    :rules="[{ required: true, message: 'this field is required' }]"
                   >
-                    <el-option
-                      v-for="item in difficultyDegrees"
-                      :key="item.value"
-                      :label="item.name"
-                      :value="item.value"
+                    <el-select
+                      class="w-100"
+                      v-model="updateQuestion.level"
+                      placeholder="درجة الصعوبة"
                     >
-                    </el-option>
-                  </el-select>
-                </el-form-item>
+                      <el-option
+                        v-for="item in difficultyDegrees"
+                        :key="item.value"
+                        :label="item.name"
+                        :value="item.value"
+                      >
+                      </el-option>
+                    </el-select>
+                  </el-form-item>
 
-                <el-form-item
-                  :rules="[{ required: true, message: 'this field is required' }]"
-                  class="flex-grow-1"
-                  prop="type"
-                >
-                  <el-select
-                    class="w-100"
-                    v-model="updateQuestion.type"
-                    placeholder="نوع السؤال"
+                  <el-form-item
+                    :rules="[{ required: true, message: 'this field is required' }]"
+                    class="flex-grow-1"
+                    prop="type"
                   >
-                    <el-option
-                      v-for="item in types"
-                      :key="item.value"
-                      :label="item.name"
-                      :value="item.value"
+                    <el-select
+                      class="w-100"
+                      v-model="updateQuestion.type"
+                      placeholder="نوع السؤال"
                     >
-                    </el-option>
-                  </el-select>
-                </el-form-item>
-              </div>
-
-              <div>
-                <el-form-item
-                  prop="title"
-                  :rules="[{ required: true, message: 'This field is required' }]"
-                >
-                  <el-input
-                    placeholder="قم بكتابة نص السؤال ؟"
-                    v-model="updateQuestion.title"
-                  ></el-input>
-                </el-form-item>
-
-                <div>
-                  <AttachPhoto
-                    :image="updateQuestion.image"
-                    @getPhoto="getQuestionPhoto"
-                    title="صورة السؤال"
-                  />
+                      <el-option
+                        v-for="item in types"
+                        :key="item.value"
+                        :label="item.name"
+                        :value="item.value"
+                      >
+                      </el-option>
+                    </el-select>
+                  </el-form-item>
                 </div>
 
-                <template
-                  v-if="
-                    updateQuestion.type !== 'choose_image' &&
-                    updateQuestion.type !== 'paragraph'
-                  "
-                >
-                  <div class="add-choose" v-for="(item, i) in updateQuestion.answers">
-                    <div>
-                      <span class="d-block mt-3 answer-index"> {{ i + 1 }} </span>
-                    </div>
-                    <div class="flex-fill">
-                      <el-form-item
-                        :prop="`answers[${i}]`"
-                        :rules="[{ required: true, message: 'This field is required' }]"
-                      >
-                        <el-input
-                          :placeholder="getPlaceholder(i)"
-                          v-model="updateQuestion.answers[i]"
-                        ></el-input>
-                      </el-form-item>
-                    </div>
-                    <div class="d-block mt-4">
-                      <el-radio
-                        name="correct_answer"
-                        v-model="updateQuestion.correct_answer"
-                        :label="i"
-                        >تحديد كإجابة صحيحة</el-radio
-                      >
-                    </div>
-                  </div>
-                </template>
+                <div>
+                  <el-form-item
+                    prop="title"
+                    :rules="[{ required: true, message: 'This field is required' }]"
+                  >
+                    <el-input
+                      placeholder="قم بكتابة نص السؤال ؟"
+                      v-model="updateQuestion.title"
+                    ></el-input>
+                  </el-form-item>
 
-                <template v-if="updateQuestion.type === 'choose_image'">
-                  <div class="row">
-                    <div class="col-md-6" v-for="(item, i) in updateQuestion.answers">
+                  <div>
+                    <AttachPhoto
+                      :image="updateQuestion.image"
+                      @getPhoto="getQuestionPhoto"
+                      title="صورة السؤال"
+                    />
+                  </div>
+
+                  <template
+                    v-if="
+                      updateQuestion.type !== 'choose_image' &&
+                      updateQuestion.type !== 'paragraph'
+                    "
+                  >
+                    <div class="add-choose" v-for="(item, i) in updateQuestion.answers">
                       <div>
-                        <div class="d-flex gap-3 mb-4">
-                          <div>
-                            <span class="d-block mt-3 answer-index"> {{ i + 1 }} </span>
-                          </div>
-                          <div class="d-block mt-4">
-                            <el-radio
-                              name="correct_answer"
-                              v-model="updateQuestion.correct_answer"
-                              :label="i"
-                              >تحديد كإجابة صحيحة</el-radio
-                            >
-                          </div>
-                        </div>
+                        <span class="d-block mt-3 answer-index"> {{ i + 1 }} </span>
+                      </div>
+                      <div class="flex-fill">
+                        <el-form-item
+                          :prop="`answers[${i}]`"
+                          :rules="[{ required: true, message: 'This field is required' }]"
+                        >
+                          <el-input
+                            :placeholder="getPlaceholder(i)"
+                            v-model="updateQuestion.answers[i]"
+                          ></el-input>
+                        </el-form-item>
+                      </div>
+                      <div class="d-block mt-4">
+                        <el-radio
+                          name="correct_answer"
+                          v-model="updateQuestion.correct_answer"
+                          :label="i"
+                          >تحديد كإجابة صحيحة</el-radio
+                        >
+                      </div>
+                    </div>
+                  </template>
+
+                  <template v-if="updateQuestion.type === 'choose_image'">
+                    <div class="row">
+                      <div class="col-md-6" v-for="(item, i) in updateQuestion.answers">
                         <div>
-                          <AttachPhoto
-                            @getPhoto="getAnswerPhoto(i, $event)"
-                            title="صورة السؤال"
-                            :image="updateQuestion.answers[i]"
-                          />
+                          <div class="d-flex gap-3 mb-4">
+                            <div>
+                              <span class="d-block mt-3 answer-index"> {{ i + 1 }} </span>
+                            </div>
+                            <div class="d-block mt-4">
+                              <el-radio
+                                name="correct_answer"
+                                v-model="updateQuestion.correct_answer"
+                                :label="i"
+                                >تحديد كإجابة صحيحة</el-radio
+                              >
+                            </div>
+                          </div>
+                          <div>
+                            <AttachPhoto
+                              @getPhoto="getAnswerPhoto(i, $event)"
+                              title="صورة السؤال"
+                              :image="updateQuestion.answers[i]"
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </template>
+                  </template>
 
-                <template v-if="updateQuestion.type === 'paragraph'">
-                  <div>
-                    <el-form-item
-                      :prop="`correct_answer`"
-                      :rules="[{ required: true, message: 'This field is required' }]"
-                    >
-                      <el-input
-                        type="textarea"
-                        :rows="5"
-                        placeholder="قم بكتابة الإجابة النموذجية"
-                        v-model="updateQuestion.correct_answer"
-                      ></el-input>
-                    </el-form-item>
-                  </div>
-                </template>
-              </div>
-            </el-form>
+                  <template v-if="updateQuestion.type === 'paragraph'">
+                    <div>
+                      <el-form-item
+                        :prop="`correct_answer`"
+                        :rules="[{ required: true, message: 'This field is required' }]"
+                      >
+                        <el-input
+                          type="textarea"
+                          :rows="5"
+                          placeholder="قم بكتابة الإجابة النموذجية"
+                          v-model="updateQuestion.correct_answer"
+                        ></el-input>
+                      </el-form-item>
+                    </div>
+                  </template>
+                </div>
+              </el-form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <QuestionAddedSuccessfully
-      :isOpened="questionAddedPopup"
-      @close="questionAddedPopup = false"
-    />
+      <QuestionAddedSuccessfully
+        :isOpened="questionAddedPopup"
+        @close="questionAddedPopup = false"
+      />
+    </div>
   </div>
 </template>
 
@@ -211,7 +213,8 @@ export default {
   data() {
     return {
       lessons: [],
-      loading: false,
+      loading: true,
+
       types: [
         { name: "إختياري", value: "choose" },
         { name: "سؤال صور إختيارية", value: "choose_image" },

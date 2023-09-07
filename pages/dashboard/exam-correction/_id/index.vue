@@ -1,51 +1,55 @@
 <template>
-  <div v-loading="loading">
-    <div class="d-flex gap-2 justify-content-between flex-wrap">
-      <div>
-        <h6 class="font-h4 font--regular">تفاصيل الأسئلة</h6>
-        <p class="font--light font-h5">عرض لتفاصيل الأسئلة التي يجب تصحيحها</p>
+  <div v-loading.fullscreen="loading">
+    <div v-if="!loading">
+      <div class="d-flex gap-2 justify-content-between flex-wrap">
+        <div>
+          <h6 class="font-h4 font--regular">تفاصيل الأسئلة</h6>
+          <p class="font--light font-h5">عرض لتفاصيل الأسئلة التي يجب تصحيحها</p>
 
-        <div class="mt-5 d-flex gap-5 flex-wrap">
-          <div v-if="$route.query.user_name">
-            <span class="d-block font-h6 font--light mb-2">اسم الطالب</span>
-            <h6 class="font-h5 font--regular">{{ $route.query.user_name }}</h6>
-          </div>
-          <div v-if="$route.query.course_name">
-            <span class="d-block font-h6 font--light mb-2">اسم الكورس</span>
-            <h6 class="font-h5 font--regular">{{ $route.query.course_name }}</h6>
-          </div>
-          <div v-if="$route.query.exam_name">
-            <span class="d-block font-h6 font--light mb-2">اسم الاختبار</span>
-            <h6 class="font-h5 font--regular">{{ $route.query.exam_name }}</h6>
+          <div class="mt-5 d-flex gap-5 flex-wrap">
+            <div v-if="$route.query.user_name">
+              <span class="d-block font-h6 font--light mb-2">اسم الطالب</span>
+              <h6 class="font-h5 font--regular">{{ $route.query.user_name }}</h6>
+            </div>
+            <div v-if="$route.query.course_name">
+              <span class="d-block font-h6 font--light mb-2">اسم الكورس</span>
+              <h6 class="font-h5 font--regular">{{ $route.query.course_name }}</h6>
+            </div>
+            <div v-if="$route.query.exam_name">
+              <span class="d-block font-h6 font--light mb-2">اسم الاختبار</span>
+              <h6 class="font-h5 font--regular">{{ $route.query.exam_name }}</h6>
+            </div>
           </div>
         </div>
+        <div>
+          <Button
+            @click.native="submitCorrection"
+            padding="1.2rem 1.5rem"
+            textClasses="font-h5 font--regular"
+            type="primary"
+            text="إنهاء التصحيح"
+          >
+          </Button>
+        </div>
       </div>
-      <div>
-        <Button
-          @click.native="submitCorrection"
-          padding="1.2rem 1.5rem"
-          textClasses="font-h5 font--regular"
-          type="primary"
-          text="إنهاء التصحيح"
-        >
-        </Button>
-      </div>
-    </div>
 
-    <div class="mt-5">
-      <div class="mb-4" v-for="(question, index) in questions" :key="index">
-        <QuestionToCorrect
-          :question="question"
-          @removeFromSolution="removeFromSolution"
-          @setQuestionMark="setQuestionMark"
-        />
+      <div class="mt-5">
+        <div class="mb-4" v-for="(question, index) in questions" :key="index">
+          <QuestionToCorrect
+            :question="question"
+            @removeFromSolution="removeFromSolution"
+            @setQuestionMark="setQuestionMark"
+          />
+        </div>
       </div>
-    </div>
 
-    <ExamCorrectedSuccessfully
-      :isOpened="submitCorrectionPopup"
-      @close="$router.push('/dashboard/exam-correction'), (submitCorrectionPopup = false)"
-    />
+      <ExamCorrectedSuccessfully
+        :isOpened="submitCorrectionPopup"
+        @close="
+          $router.push('/dashboard/exam-correction'), (submitCorrectionPopup = false)
+        "
+      />
+    </div>
   </div>
 </template>
 
@@ -116,7 +120,7 @@ export default {
     return {
       solutions: [],
       submitCorrectionPopup: false,
-      loading: false,
+      loading: true,
       questions: [],
     };
   },
