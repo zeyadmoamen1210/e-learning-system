@@ -80,7 +80,10 @@ export default {
       this.selectedContent = content;
       await this.$nextTick();
       this.refreshSelectedContent = true;
-      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      if (process.client) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
     },
     async showPreview() {
       this.refreshSelectedContent = false;

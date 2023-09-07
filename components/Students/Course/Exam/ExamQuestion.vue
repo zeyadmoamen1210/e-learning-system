@@ -13,6 +13,7 @@
     />
     <ParagraphQuestion
       @answer="setAnswer"
+      @clickToImg="$emit('clickToImg')"
       :showAnswers="showAnswers"
       v-if="question.type == 'paragraph'"
       :question="question"

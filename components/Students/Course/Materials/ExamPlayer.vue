@@ -192,7 +192,9 @@ export default {
         ) {
           this.showModelAnswer();
         }
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        if (process.client) {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
       } catch (err) {
         console.log(err);
       } finally {
