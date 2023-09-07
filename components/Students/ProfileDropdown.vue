@@ -29,13 +29,9 @@
         </div>
         <div class="profile-dropdown__list" v-if="isDropdownActive">
           <ul>
-            <li>
+            <li @click="$router.push('/student/profile/edit')">
               <img src="@/assets/imgs/navbar-imgs/vuesax-linear-edit.svg" alt="" />
-              <span
-                @click="$router.push('/student/profile/edit')"
-                class="font-h6 font--bold"
-                >تعديل بياناتى
-              </span>
+              <span class="font-h6 font--bold">تعديل بياناتى </span>
             </li>
             <li role="button" @click="logout()">
               <img src="@/assets/imgs/navbar-imgs/vuesax-linear-logout.svg" alt="" />

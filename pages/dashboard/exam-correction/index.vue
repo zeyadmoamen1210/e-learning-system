@@ -1,5 +1,6 @@
 <template>
-  <div v-loading="loading">
+  <div v-loading.fullscreen="loading">
+    <div  v-if="!loading">
     <div class="text-center mt-5" v-if="examCorrection.length === 0">
       <div>
         <img src="@/assets/imgs/dashboard/vuesax-linear-task.png" alt="" />
@@ -86,6 +87,7 @@
 
     <ExamCorrectionFilter :data="{course_id, exam_id}" v-if="examCorrectionFilterPopup" @filter="setFilterSolutions"  :isOpened="examCorrectionFilterPopup" @close="examCorrectionFilterPopup = false" />
   </div>
+  </div>
 </template>
 
 <script>
@@ -127,7 +129,7 @@ export default {
   },
   data() {
     return {
-      loading: false,
+      loading: true,
       solutions: [],
       page: 1,
       total: 1,

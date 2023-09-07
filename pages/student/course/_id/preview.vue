@@ -1,40 +1,42 @@
 <template>
-  <div v-loading="loading" class="d-flex flex-column">
-    <CourseHeader
-      @reload="getOneCourse"
-      :course="course"
-      :isSubscribedIn="course.is_subscribed"
-      :class="course.is_subscribed && 'order-2'"
-    />
+  <div v-loading.fullscreen="loading">
+    <div v-if="!loading" class="d-flex flex-column">
+      <CourseHeader
+        @reload="getOneCourse"
+        :course="course"
+        :isSubscribedIn="course.is_subscribed"
+        :class="course.is_subscribed && 'order-2'"
+      />
 
-    <div class="container mt-5 mb-5" :class="course.is_subscribed && 'order-1'">
-      <div class="d-flex flex-row-reverse mb-3 d-none d-lg-flex">
-        <Button
-          padding="1rem 2rem"
-          :type="'null'"
-          :center="true"
-          :text="showMenu ? 'إخفاء القائمة' : 'إظهار القائمة'"
-          text-classes="font-h5 font--regular"
-          @click.native="showMenu = !showMenu"
-        >
-          <img src="@/assets/imgs/dashboard/vuesax-bulk-frame.svg" alt="" />
-        </Button>
-      </div>
-      <div class="row">
-        <div :class="showMenu ? 'col-lg-8' : 'col-lg-12'">
-          <SelectedContent
-            ref="selectedContent"
-            :selectedContent="selectedContent"
-            :course="course"
-            v-if="refreshSelectedContent"
-          />
+      <div class="container mt-5 mb-5" :class="course.is_subscribed && 'order-1'">
+        <div class="d-flex flex-row-reverse mb-3 d-none d-lg-flex">
+          <Button
+            padding="1rem 2rem"
+            :type="'null'"
+            :center="true"
+            :text="showMenu ? 'إخفاء القائمة' : 'إظهار القائمة'"
+            text-classes="font-h5 font--regular"
+            @click.native="showMenu = !showMenu"
+          >
+            <img src="@/assets/imgs/dashboard/vuesax-bulk-frame.svg" alt="" />
+          </Button>
         </div>
-        <div class="col-lg-4" v-if="showMenu">
-          <ContentList
-            :course="course"
-            @selectContent="selectContent"
-            @showPreview="showPreview"
-          />
+        <div class="row">
+          <div :class="showMenu ? 'col-lg-8' : 'col-lg-12'">
+            <SelectedContent
+              ref="selectedContent"
+              :selectedContent="selectedContent"
+              :course="course"
+              v-if="refreshSelectedContent"
+            />
+          </div>
+          <div class="col-lg-4" v-if="showMenu">
+            <ContentList
+              :course="course"
+              @selectContent="selectContent"
+              @showPreview="showPreview"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -78,6 +80,7 @@ export default {
       this.selectedContent = content;
       await this.$nextTick();
       this.refreshSelectedContent = true;
+      window.scrollTo({ top: 0, behavior: "smooth" });
     },
     async showPreview() {
       this.refreshSelectedContent = false;
@@ -101,7 +104,7 @@ export default {
         type: "VIDEO",
         link: this.course?.promo,
       },
-      loading: false,
+      loading: true,
       refreshSelectedContent: true,
       showMenu: true,
     };

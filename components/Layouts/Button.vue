@@ -22,7 +22,11 @@
       :class="center ? 'justify-content-center' : ''"
     >
       <slot></slot>
-      <span :class="textClasses">{{ text }}</span>
+      <i v-if="isForShowAllCourses" class="el-icon-back"></i>
+      <span class="app-button__text" :class="textClasses">
+        <span>{{ text }}</span>
+      </span>
+      <i v-if="isForShowAllCourses" class="el-icon-right"></i>
     </div>
   </button>
 </template>
@@ -34,6 +38,9 @@ export default {
       required: true,
       // 'primary', 'primary-plain', 'text-primary', 'text-danger', 'success', 'danger-plain', 'success-plain', 'text-orange', 'dark', 'dark-reverse', 'btn-orange'
       type: String,
+    },
+    isForShowAllCourses: {
+      default: false,
     },
     text: {
       required: true,

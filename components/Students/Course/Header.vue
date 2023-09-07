@@ -61,7 +61,7 @@
               <div>
                 <a
                   class="button button--icon button--whatsapp"
-                  :href="generateWhatsAppLink('+201278313765')"
+                  :href="generateWhatsAppLink('+201092225757')"
                   target="_blank"
                 >
                   <img src="@/assets/imgs/course-imgs/whatsapp.png" alt="" />
@@ -145,9 +145,14 @@ export default {
     join(link) {
       window.open(link, "_blank");
     },
+    courseLink() {
+      return `${window.location.origin}/student/course/${this.course.id}/preview`;
+    },
     generateWhatsAppLink(phoneNumber) {
       let message = `السلام عليكم و رحمة اللٌه و بركاته
-      \n ** أريد الإشتراك في هذا الكورس \n ** المُعلم/  مدكور سلامة \n ** المادة/  الفيزياء \n ** اسم الكورس/ ${this.course.name} \n ** كود الكورس/ ${this.course.id} \n ** رابط الكورس/  \n  https://poe.com/student/course/${this.course.id}/preview
+      \n ** أريد الإشتراك في هذا الكورس \n ** المُعلم/  مدكور سلامة \n ** المادة/  الفيزياء \n ** اسم الكورس/ ${
+        this.course.name
+      } \n ** كود الكورس/ ${this.course.id} \n ** رابط الكورس/  \n  ${this.courseLink()}
       `;
       // Encode the message and replace line breaks with %0A
       const encodedMessage = encodeURIComponent(message)

@@ -4,7 +4,8 @@
       <cursor-fx ref="cursor" disabled />
     </div>
     <div
-      class="home-page"
+      class="home-page home-section"
+      id="header"
       @mouseenter="activeTheCursor()"
       @mouseleave="deactiveTheCursor()"
     >
@@ -15,17 +16,17 @@
         <Header />
       </div>
     </div>
-    <div class="about-us" id="about-us">
+    <div class="about-us home-section" id="about-us">
       <div class="container">
         <AboutUs />
       </div>
     </div>
-    <div class="about-physics" id="about-physics">
+    <div class="about-physics home-section" id="about-physics">
       <div class="container">
         <AboutPhysics />
       </div>
     </div>
-    <div class="courses-list" id="courses-list">
+    <div class="courses-list home-section" id="courses-list">
       <div class="container">
         <CoursesList />
       </div>
@@ -56,6 +57,11 @@ export default {
     deactiveTheCursor() {
       this.$refs.cursor.destroy();
     },
+  },
+  data() {
+    return {
+      scrollTimeout: null,
+    };
   },
 };
 </script>

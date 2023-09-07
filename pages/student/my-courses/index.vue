@@ -1,6 +1,6 @@
 <template>
-  <div class="my-courses">
-    <div class="container" v-loading="loading">
+  <div class="my-courses" v-loading.fullscreen="loading">
+    <div class="container" v-if="!loading">
       <div class="my-courses__title-icon">
         <img src="@/assets/imgs/vuesax-linear-note.svg" alt="" />
         <h6 class="my-courses__title">كورساتي</h6>
@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       courses: [],
-      loading: false,
+      loading: true,
     };
   },
 };

@@ -7,7 +7,13 @@
         src="@/assets/imgs/dashboard/gallery-add-linear.png"
         alt=""
       />
-      <img v-else :src="url || image" alt="" />
+      <img v-if="!(!url && !image) && type != 'pdf'" :src="url || image" alt="" />
+      <img
+        v-if="!(!url && !image) && type == 'pdf'"
+        src="@/assets/imgs/dashboard/folder-open-bulk4.svg"
+        alt=""
+        style="max-width: 10rem"
+      />
     </div>
     <div>
       <h6 class="font-h5 font--regular">{{ title }}</h6>

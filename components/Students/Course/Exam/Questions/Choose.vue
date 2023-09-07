@@ -8,15 +8,12 @@
     </div>
     <div class="row mt-5">
       <div
-        @click="(selectedAnswerVar = index), $emit('answer', index)"
+        @click="setAnswer(index)"
         class="col-md-6 mb-4"
         v-for="(item, index) in question.answers"
         :key="index"
       >
-        <div
-          class="choose-item"
-          :class="selectedAnswerVar == index ? 'selected-item' : ''"
-        >
+        <div class="choose-item" :class="chooseItemClass(index)">
           <div class="choose-item__header">
             <span> {{ index + 1 }} </span>
             <h6
@@ -30,7 +27,7 @@
             </h6>
           </div>
           <div v-if="question.type == 'choose_image'" class="choose-item__img">
-            <img :src="item" alt="" />
+            <img :src="item" alt="" @click="$emit('clickToImg')" />
           </div>
         </div>
       </div>
@@ -47,19 +44,46 @@ export default {
     selectedAnswer: {
       required: true,
     },
+    showAnswers: {
+      default: false,
+    },
+    solutionAnswers: {
+      required: false,
+    },
   },
   data() {
     return {
       selectedAnswerVar: this.selectedAnswer != null ? +this.selectedAnswer : null,
     };
   },
-  created() {
-    console.log(
-      this.selectedAnswer != null ? +this.selectedAnswer : null,
-      this.selectedAnswer
-    );
+
+  methods: {
+    chooseItemClass(index) {
+      if (!this.showAnswers) {
+        return this.selectedAnswerVar == index ? "selected-item" : "";
+      }
+      return [
+        this.selectedAnswerVar == index ? "selected-item" : "",
+        this.question.correct_answer == index
+          ? "correct-item"
+          : this.getMyAnswer(this.question) == index
+          ? "wrong-item"
+          : "",
+      ];
+    },
+    getMyAnswer(item) {
+      return this.solutionAnswers.find((ele) => {
+        return ele.question_id === item?.pivot?.question_id;
+      })?.selected_answer;
+    },
+    setAnswer(index) {
+      if (this.showAnswers) {
+        return;
+      }
+      this.selectedAnswerVar = index;
+      this.$emit("answer", index);
+    },
   },
-  methods: {},
   destroyed() {
     this.selectedAnswerVar = null;
   },

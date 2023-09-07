@@ -17,7 +17,80 @@
       </div>
     </div>
 
-    <div class="model-answer-container mt-4">
+    <div>
+      <div
+        v-for="(item, index) in answers?.exam?.exam_questions_with_answer"
+        :key="index"
+        style="border-bottom: 1px solid #ddd"
+        class="mb-3 pb-3"
+      >
+        <ExamQuestion
+          :questionIndex="index"
+          :question="item"
+          :openedSolution="answers?.userLastSolution?.id"
+          :solutionAnswers="answers?.solutionAnswer"
+          :showAnswers="true"
+        />
+
+        <div>
+          <div>
+            <div v-if="item.type === 'choose_image'">
+              <span class="answer-box__your-ans" v-if="isNaN(+getMyAnswer(item) + 1)">
+                لم يتم الإجابة علي السؤال
+              </span>
+            </div>
+
+            <div v-else-if="item.type === 'choose'">
+              <span class="answer-box__your-ans" v-if="isNaN(+getMyAnswer(item) + 1)">
+                لم يتم الإجابة علي السؤال
+              </span>
+            </div>
+
+            <div v-else>
+              <span class="answer-box__your-ans" v-if="!getMyAnswer(item)">
+                لم يتم الإجابة علي السؤال
+              </span>
+            </div>
+          </div>
+
+          <div v-if="item.type != 'paragraph'">
+            <h6
+              class="font-h5 mb-0 text-success font--bold"
+              v-if="getMyAnswer(item) == item?.correct_answer"
+            >
+              <img src="@/assets/imgs/course-imgs/success.svg" alt="" />
+              صحيحة
+            </h6>
+            <h6
+              class="font-h5 mb-0 text-danger font--bold"
+              v-if="getMyAnswer(item) != item?.correct_answer"
+            >
+              <img src="@/assets/imgs/course-imgs/danger.svg" alt="" />
+              خاطئة
+            </h6>
+          </div>
+          <div v-else>
+            <h6
+              class="font-h5 mb-0 text-success font--bold"
+              v-if="+getQuestionMark(item) > 0"
+            >
+              <img src="@/assets/imgs/course-imgs/success.svg" alt="" />
+              صحيحة
+            </h6>
+            <h6 class="font-h5 mb-0 text-danger font--bold" v-else>
+              <img src="@/assets/imgs/course-imgs/danger.svg" alt="" />
+              خاطئة
+            </h6>
+          </div>
+          <div>
+            <h6 class="font-h5 mt-3 mb-3">
+              درجتك في السؤال : {{ +getQuestionMark(item) || 0 }} من {{ item.mark }}
+            </h6>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="model-answer-container mt-4">
       <div
         v-for="(item, index) in answers?.exam?.exam_questions_with_answer"
         :key="index"
@@ -158,12 +231,17 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
+import ExamQuestion from "../ExamQuestion.vue";
+
 export default {
+  components: {
+    ExamQuestion,
+  },
   props: {
     answers: {
       required: true,

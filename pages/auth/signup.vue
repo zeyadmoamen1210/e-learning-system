@@ -23,9 +23,17 @@
             </el-form-item>
             <el-form-item prop="email">
               <el-input
+                :class="{ 'is-error': emailError?.length > 0 }"
                 placeholder="البريد الإلكتروني"
                 v-model="signupForm.email"
               ></el-input>
+              <h6
+                v-if="emailError?.length > 0"
+                style="color: #f56c6c; font-size: 12px"
+                class="font-h6 d-flex flex-row-reverse mt-2"
+              >
+                {{ emailError?.[0] }}
+              </h6>
             </el-form-item>
             <el-form-item prop="password">
               <el-input
@@ -43,7 +51,18 @@
             </el-form-item>
 
             <el-form-item prop="phone">
-              <el-input placeholder="رقم الموبايل" v-model="signupForm.phone"></el-input>
+              <el-input
+                :class="{ 'is-error': phoneError?.length > 0 }"
+                placeholder="رقم الموبايل"
+                v-model="signupForm.phone"
+              ></el-input>
+              <h6
+                v-if="phoneError?.length > 0"
+                style="color: #f56c6c; font-size: 12px"
+                class="font-h6 d-flex flex-row-reverse mt-2"
+              >
+                {{ phoneError?.[0] }}
+              </h6>
             </el-form-item>
 
             <!-- <el-form-item prop="role_id">
@@ -113,8 +132,17 @@ export default {
             this.login();
             this.$awn.success("تم إنشاء الحساب بنجاح");
           } catch (err) {
-            if (err.response.status == 422) {
-              this.$awn.alert(err.response?.data?.message);
+            if (Object.keys(err.response?.data?.errors).length > 0) {
+              if (err.response?.data?.errors?.email) {
+                this.emailError = err.response?.data?.errors?.email;
+              } else {
+                this.emailError = [];
+              }
+              if (err.response?.data?.errors?.phone) {
+                this.phoneError = err.response?.data?.errors?.phone;
+              } else {
+                this.phoneError = [];
+              }
               return;
             }
             this.$awn.alert("حدث خطأ ما");
@@ -151,6 +179,8 @@ export default {
 
     return {
       loading: false,
+      emailError: [],
+      phoneError: [],
       signupForm: {},
       roles: [
         { title: "أدمن", val: 1 },

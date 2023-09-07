@@ -61,10 +61,11 @@
         </div>
       </div>
 
-      <div class="d-flex flex-row-reverse">
+      <div class="d-flex flex-row-reverse justify-content-center">
         <Button
           padding="1rem"
           :type="'primary-plain'"
+          :isForShowAllCourses="true"
           :center="true"
           text="عرض المزيد من الكورسات"
           text-classes="font-h5 font--regular"

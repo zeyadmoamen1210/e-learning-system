@@ -1,6 +1,6 @@
 <template>
-  <div class="login" v-loading="loading">
-    <div class="container">
+  <div class="login" v-loading.fullscreen="loading">
+    <div v-if="!loading" class="container">
       <div class="login__inner">
         <h6
           class="login__title font-h4 mb-4 d-flex gap-2 align-items-center justify-content-center"
@@ -68,7 +68,7 @@ export default {
     };
     return {
       loginForm: {},
-      loading: false,
+      loading: true,
       loginFormRules: {
         name: [{ required: true, message: "هذا الحقل مطلوب" }],
         phone: [{ validator: validatePhone, trigger: "blur" }],

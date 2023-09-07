@@ -1,4 +1,54 @@
 .exam-template {
+  .exit-fullscreen-btn {
+    display: none;
+  }
+  &:fullscreen {
+    background-color: #FFF;
+    padding: 2rem;
+    overflow-y: scroll;
+    .fullscreen-btn {
+      display: none;
+    }
+    .exit-fullscreen-btn {
+      display: block;
+    }
+  }
+  &:-webkit-full-screen {
+    background-color: #FFF;
+    padding: 2rem;
+    overflow-y: scroll;
+
+    .fullscreen-btn {
+      display: none;
+    }
+    .exit-fullscreen-btn {
+      display: block;
+    }
+  }
+  &:-moz-full-screen {
+    background-color: #FFF;
+    padding: 2rem;
+    overflow-y: scroll;
+
+    .fullscreen-btn {
+      display: none;
+    }
+    .exit-fullscreen-btn {
+      display: block;
+    }
+  }
+  &:-ms-fullscreen {
+    background-color: #FFF;
+    padding: 2rem;
+    overflow-y: scroll;
+
+    .fullscreen-btn {
+      display: none;
+    }
+    .exit-fullscreen-btn {
+      display: block;
+    }
+  }
   &__timer {
     color: #FF1D1D;
     padding: 1rem 1.5rem;
@@ -112,7 +162,7 @@
         left: 0;
         height: 100%;
         content: "";
-        border-width: 20px 14px 25px 14px;
+        border-width: 22px 14px 25px 14px;
         border-style: solid;
         border-color: transparent transparent rgb(255 255 255 / 52%) rgb(255 255 255 / 52%);
       }
@@ -146,6 +196,45 @@
     }
     .choose-item__img {
       border: .2rem solid rgba(234, 127, 12, 0.94); ;
+    }
+  }
+
+
+
+  &.wrong-item {
+    .choose-item__header {
+      background-color: rgba(238, 13, 13, 0.22);
+
+      span {
+          color: #FFF;
+        background-color: rgba(234, 12, 12, 0.94);
+
+        &::after {
+          border-color:transparent transparent rgb(255 206 206) rgb(255 206 206)
+        }
+      }
+    }
+    .choose-item__img {
+      border: .2rem solid rgba(234, 12, 12, 0.94);
+    }
+  }
+
+
+  &.correct-item {
+    .choose-item__header {
+      background-color: rgba(13, 238, 27, 0.22);
+
+      span {
+          color: #FFF;
+        background-color: rgba(53, 234, 12, 0.94);
+
+        &::after {
+          border-color:transparent transparent rgb(199, 255, 202) rgb(199, 255, 202)
+        }
+      }
+    }
+    .choose-item__img {
+      border: .2rem solid rgba(53, 234, 12, 0.94);
     }
   }
 }

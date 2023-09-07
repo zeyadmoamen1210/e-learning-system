@@ -82,8 +82,6 @@ export default {
   },
   methods: {
     selectContent(item) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-
       if (!this.$auth.loggedIn) {
         this.$awn.alert("قم بتسجيل الدخول اولاً");
         return;

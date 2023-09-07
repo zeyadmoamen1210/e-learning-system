@@ -10,8 +10,9 @@
                   <img src="@/assets/imgs/navbar-imgs/logo.png" alt="" />
                 </div>
                 <p class="font-h6">
-                  هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي
-                  القارئ عن التركيز على الشكل الخارجي للنص أو شكل توضع
+                  معلم خبير الفيزياء ، خبرة 25 عامًا، معد كتاب الصفوة فى الفيزياء ، أسعى
+                  لتوصيل المعلومات بطريقة سهلة ومفهومة للطلاب. هدفنا هو تحقيق النجاح
+                  الأكاديمي للطلاب في مادة الفيزياء.
                 </p>
               </div>
             </div>
@@ -25,9 +26,9 @@
                   <li>
                     <nuxt-link to="/student#about-us">نبذة بسيطة</nuxt-link>
                   </li>
-                  <li>
+                  <!-- <li>
                     <nuxt-link to="/auth/login">التسجيل بالموقع</nuxt-link>
-                  </li>
+                  </li> -->
                 </ul>
 
                 <ul class="app-footer__list">
@@ -35,11 +36,11 @@
                     <nuxt-link to="/student#courses-list">قائمة الكورسات</nuxt-link>
                   </li>
                   <li>
-                    <nuxt-link to="/student#courses-list">العروض</nuxt-link>
+                    <nuxt-link to="/student/my-courses">كورساتي</nuxt-link>
                   </li>
-                  <li>
+                  <!-- <li>
                     <nuxt-link to="/student#courses-list">الشروط والأحكام</nuxt-link>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
             </div>
@@ -48,21 +49,21 @@
               <div class="app-footer__follow mt-4">
                 <h6>أو تابعنا على</h6>
                 <div class="app-footer__follow-btns">
-                  <button>
+                  <button @click="open('facebook')">
                     <font-awesome-icon :icon="['fab', 'facebook-f']" />
                   </button>
 
-                  <button>
-                    <font-awesome-icon :icon="['fab', 'instagram']" />
+                  <button @click="open('youtube')">
+                    <font-awesome-icon :icon="['fab', 'youtube']" />
                   </button>
 
-                  <button>
-                    <font-awesome-icon :icon="['fab', 'twitter']" />
+                  <button @click="open('whatsapp')">
+                    <font-awesome-icon :icon="['fab', 'whatsapp']" />
                   </button>
 
-                  <button>
+                  <!-- <button>
                     <font-awesome-icon :icon="['fab', 'linkedin-in']" />
-                  </button>
+                  </button> -->
                 </div>
               </div>
             </div>
@@ -78,5 +79,17 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    open(type) {
+      if (type === "facebook") {
+        window.open("https://www.facebook.com/mr.madkour.salama", "_blank");
+      } else if (type === "youtube") {
+        window.open("https://youtube.com/@madkour_salama?si=8hivc-kgRYMkpyVk", "_blank");
+      } else if (type == "whatsapp") {
+        window.open("https://wa.link/1ojqy7", "_blank");
+      }
+    },
+  },
+};
 </script>

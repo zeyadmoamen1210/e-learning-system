@@ -1,14 +1,19 @@
 <template>
-  <div>
-    <h6 class="font-h4 mb-3">السؤال رقم {{ questionIndex + 1 }}</h6>
+  <div class="mb-3">
+    <span v-if="showAnswers" class="answer-box__num"> {{ questionIndex + 1 }} </span>
+    <h6 v-else class="font-h4 mb-3">السؤال رقم {{ questionIndex + 1 }}</h6>
     <ChooseQuestion
       @answer="setAnswer"
+      @clickToImg="$emit('clickToImg')"
+      :showAnswers="showAnswers"
       v-if="question.type?.includes('choose')"
       :question="question"
+      :solutionAnswers="solutionAnswers"
       :selectedAnswer="getQuestionSelectedAnswer()"
     />
     <ParagraphQuestion
       @answer="setAnswer"
+      :showAnswers="showAnswers"
       v-if="question.type == 'paragraph'"
       :question="question"
       :selectedAnswer="getQuestionSelectedAnswer()"
@@ -25,6 +30,9 @@ export default {
     ParagraphQuestion,
   },
   props: {
+    showAnswers: {
+      default: false,
+    },
     questionIndex: {
       required: true,
     },
@@ -68,6 +76,9 @@ export default {
       }
     },
     async setAnswer(e) {
+      if (this.showAnswers) {
+        return;
+      }
       this.setTheAnswerLocally(e);
 
       this.loading = true;

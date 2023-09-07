@@ -7,7 +7,7 @@
       <img :src="question.image" alt="" />
     </div>
 
-    <div class="row mt-5 mb-5">
+    <div class="row mt-5 mb-5" v-if="!showAnswers">
       <el-input
         type="textarea"
         :rows="5"
@@ -15,6 +15,20 @@
         @blur="onBlur"
         placeholder="الإجابة"
       ></el-input>
+    </div>
+    <div class="row mt-5 mb-5" v-else>
+      <div>
+        <span class="answer-box__your-ans-title d-block">إجابتك : </span>
+        <p class="mb-0">
+          {{ selectedAnswerVar }}
+        </p>
+      </div>
+      <div>
+        <span class="answer-box__your-ans-title d-block">الإجابة النموذجية : </span>
+        <p class="mb-0">
+          {{ question.correct_answer }}
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -27,6 +41,9 @@ export default {
     },
     selectedAnswer: {
       required: true,
+    },
+    showAnswers: {
+      default: false,
     },
   },
   data() {

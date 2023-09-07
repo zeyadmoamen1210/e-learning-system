@@ -65,7 +65,7 @@ export default {
             this.$emit("close", false);
             this.$emit("reload");
           } catch (err) {
-            if (err.response.status == 422) {
+            if (err.response?.data?.message) {
               this.$awn.alert(err.response?.data?.message);
               return;
             }
