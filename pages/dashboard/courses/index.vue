@@ -1,6 +1,6 @@
 <template>
   <div v-loading.fullscreen="fullScreenLoading">
-    <div v-if="!fullScreenLoading">
+    <div v-show="!fullScreenLoading">
       <div class="text-center" v-if="allCourses.length === 0">
         <div>
           <img src="@/assets/imgs/dashboard/note-linear-courses.svg" alt="" />

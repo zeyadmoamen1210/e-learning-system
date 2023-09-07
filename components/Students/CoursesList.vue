@@ -1,6 +1,6 @@
 <template>
   <div v-loading.fullscreen="loading">
-    <div v-if="!loading">
+    <div v-show="!loading">
       <h6 class="courses-list__title">قائمة الكورسات</h6>
       <template v-if="courses.length > 0">
         <div class="row">

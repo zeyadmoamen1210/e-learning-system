@@ -1,6 +1,6 @@
 <template>
   <div v-loading.fullscreen="loading">
-    <div v-if="!loading">
+    <div v-show="!loading">
     <div class="mb-5">
       <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
         <div class="d-flex gap-3 flex-wrap">
