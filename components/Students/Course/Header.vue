@@ -97,19 +97,19 @@
         </div>
 
         <div class="col-md-12">
-          <div class="d-flex gap-5 align-items-center flex-wrap">
+          <div class="d-flex gap-5 align-items-center flex-wrap mb-4 mt-4">
             <div class="course-material-counts-item">
-              <div class="course-material-counts-item__number font-h5 font--bold"> +  {{course.video_count}}</div>
+              <div class="course-material-counts-item__number font-h5 font--bold"> +  {{course.video_count}}   <font-awesome-icon style="font-size: 13px" :icon="['fas', 'video']" /> </div>
               <div class="course-material-counts-item__title font-h6">فيديوهات</div>
             </div>
 
-            <div class="course-material-counts-item" style="background: #b3b3b354">
-              <div class="course-material-counts-item__number font-h5 font--bold"> + {{course.pdf_count}} </div>
+            <div class="course-material-counts-item" >
+              <div class="course-material-counts-item__number font-h5 font--bold"> + {{course.pdf_count}} <font-awesome-icon style="font-size: 13px" :icon="['fas', 'file']" /> </div>
               <div class="course-material-counts-item__title font-h6">ملفات</div>
             </div>
 
-            <div class="course-material-counts-item" style="background: #ff005f21">
-              <div class="course-material-counts-item__number font-h5 font--bold"> +  {{course.exam_count}}</div>
+            <div class="course-material-counts-item" >
+              <div class="course-material-counts-item__number font-h5 font--bold"> +  {{course.exam_count}} <font-awesome-icon style="font-size: 13px" :icon="['fas', 'pen']" /> </div>
               <div class="course-material-counts-item__title font-h6">إمتحانات</div>
             </div>
           </div>

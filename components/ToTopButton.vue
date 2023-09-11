@@ -35,7 +35,7 @@ export default {
 .top-top {
   position: fixed;
   bottom: 15px;
-  right: 15px;
+  left: 15px;
   button {
     width: 53px;
     height: 39px;
@@ -44,7 +44,7 @@ export default {
     border: none;
     text-align: center;
     color: #FFF;
-    background: #008DD2;
+    background: #1a6a91;
     border-radius: 5px;
   }
 }

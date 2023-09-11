@@ -58,12 +58,14 @@
             color: #FFF;
         }
         button {
-            padding: .7rem 1.5rem;
             font-size: 2rem;
             border-radius: 0.5rem;
             border: none;
             color: var(--white);
             background: #4dc9e67a;
+          width: 40px;
+          height: 40px;
+          line-height: 40px;
         }
     }
 

@@ -14,7 +14,7 @@
     </div>
 
     <ToTopButton />
-    <OurWhatsapp />
+    <OurWhatsapp v-if="!$route.fullPath.includes('/dashboard')" />
   </div>
 </template>
 

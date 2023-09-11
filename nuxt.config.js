@@ -102,7 +102,11 @@ export default {
         return savedPosition;
       } else if (to.hash) {
         // Scroll to the element with the anchor ID
-        return { selector: to.hash };
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve({ selector: to.hash });
+          }, 100); // Adjust the delay if needed
+        });
       } else {
         // Scroll to the top of the page
         return { x: 0, y: 0 };

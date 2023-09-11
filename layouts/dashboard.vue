@@ -27,6 +27,8 @@
     <div>
       <Footer />
     </div>
+    <ToTopButton />
+
   </div>
 </template>
 
@@ -36,9 +38,11 @@ import Footer from "@/components/Layouts/Footer";
 import Loading from "~/components/Layouts/Loading.vue";
 
 import Sidebar from "@/components/Dashboard/Sidebar";
+import ToTopButton from "~/components/ToTopButton.vue";
 
 export default {
   components: {
+    ToTopButton,
     Navbar,
     Footer,
     Sidebar,
