@@ -2,8 +2,7 @@
   <div class="question-correct">
     <div class="d-flex flex-wrap justify-content-between">
       <div>
-        <h6 class="font-h4 font--regular">
-          {{ question?.question?.title }}
+        <h6 class="font-h4 font--regular" v-html="question?.question?.title">
         </h6>
         <span class="d-block font-h5 font--light">
           {{ question?.question?.lesson?.name }}
