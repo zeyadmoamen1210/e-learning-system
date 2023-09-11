@@ -110,7 +110,9 @@ export default {
           try {
             const formData = new FormData();
             formData.append("title", this.addPdf.title);
-            formData.append("description", this.addPdf.description);
+            if (this.addPdf.description) {
+              formData.append("description", this.addPdf.description);
+            }
             formData.append("type", "PDF");
             formData.append("file", this.addPdf.file);
             formData.append("lesson_id", this.lessonId);

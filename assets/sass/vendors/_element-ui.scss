@@ -50,3 +50,28 @@
     margin-bottom: 1rem !important;
   }
 }
+
+
+div[contenteditable="true"] {
+  border: 1px solid #DDD;
+  border-radius: 5px;
+  min-height: 55px;
+  //line-height: 55px;
+  padding: 0 1rem;
+  *{
+    font-family: "fontRegular" !important;
+  }
+  &:focus {
+    outline: none;
+    border-color: #409EFF;
+  }
+  &:empty:not(:focus):before{
+    content: attr(data-ph);
+    color: #80808061;
+    font-style: italic;
+    font-size: 17px;
+  }
+  .MsoNormal {
+    margin: 0;
+  }
+}

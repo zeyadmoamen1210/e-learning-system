@@ -93,10 +93,12 @@
                     prop="title"
                     :rules="[{ required: true, message: 'This field is required' }]"
                   >
-                    <el-input
-                      placeholder="قم بكتابة نص السؤال ؟"
-                      v-model="updateQuestion.title"
-                    ></el-input>
+<!--                    <el-input-->
+<!--                      placeholder="قم بكتابة نص السؤال ؟"-->
+<!--                      v-model="updateQuestion.title"-->
+<!--                    ></el-input>-->
+                    <CustomEditor placeholder="قم بكتابة نص السؤال ؟" :value="title" @setText="setTitle" />
+
                   </el-form-item>
 
                   <div>
@@ -122,10 +124,12 @@
                           :prop="`answers[${i}]`"
                           :rules="[{ required: true, message: 'This field is required' }]"
                         >
-                          <el-input
-                            :placeholder="getPlaceholder(i)"
-                            v-model="updateQuestion.answers[i]"
-                          ></el-input>
+                          <CustomEditor :placeholder="getPlaceholder(i)" :value="answers[i]" @setText="setQuestion(i, $event)" />
+
+<!--                          <el-input-->
+<!--                            :placeholder="getPlaceholder(i)"-->
+<!--                            v-model="updateQuestion.answers[i]"-->
+<!--                          ></el-input>-->
                         </el-form-item>
                       </div>
                       <div class="d-block mt-4">
@@ -174,12 +178,8 @@
                         :prop="`correct_answer`"
                         :rules="[{ required: true, message: 'This field is required' }]"
                       >
-                        <el-input
-                          type="textarea"
-                          :rows="5"
-                          placeholder="قم بكتابة الإجابة النموذجية"
-                          v-model="updateQuestion.correct_answer"
-                        ></el-input>
+                        <CustomEditor placeholder="قم بكتابة الإجابة النموذجية" :value="correct_answer" @setText="setModelAnswer" />
+
                       </el-form-item>
                     </div>
                   </template>
@@ -202,6 +202,9 @@
 import Button from "@/components/Layouts/Button.vue";
 import AttachPhoto from "@/components/Layouts/AttachPhoto.vue";
 import QuestionAddedSuccessfully from "@/components/Dashboard/Popups/QuestionAdded.vue";
+import CustomEditor from '@/components/CustomEditor.vue';
+import Vue from "vue";
+
 export default {
   layout: "dashboard",
   middleware: ["prevent-student"],
@@ -209,9 +212,13 @@ export default {
     Button,
     AttachPhoto,
     QuestionAddedSuccessfully,
+    CustomEditor
   },
   data() {
     return {
+      title: '',
+      correct_answer: '',
+      answers: ['', '', '', ''],
       lessons: [],
       loading: true,
 
@@ -236,11 +243,25 @@ export default {
       },
     };
   },
-  mounted() {
+  async mounted() {
     this.getLessons();
-    this.getQuestion();
+    await this.getQuestion();
+    this.title = this.updateQuestion.title;
+    this.correct_answer = this.updateQuestion.correct_answer;
+    this.answers = [...this.updateQuestion.answers];
   },
   methods: {
+    setQuestion(index, e) {
+      // this.addNewQuestion.answers[index] = e.html;
+      Vue.set(this.updateQuestion.answers, index, e.html)
+
+    },
+    setModelAnswer(e) {
+      this.updateQuestion.correct_answer = e.html;
+    },
+    setTitle(e) {
+      this.updateQuestion.title = e.html;
+    },
     getQuestionPhoto(e) {
       this.updateQuestion.image = e;
     },
@@ -346,8 +367,9 @@ export default {
               ...this.updateQuestion,
               _method: "put",
             });
-            this.$router.push("/dashboard/questions-bank");
             this.$awn.success("تم تعديل السؤال بنجاح");
+            this.$router.push("/dashboard/questions-bank");
+
           } catch (err) {
             this.loading = false;
             console.log(err);

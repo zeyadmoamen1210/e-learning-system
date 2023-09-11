@@ -17,15 +17,16 @@
             <el-form-item prop="name">
               <el-input placeholder="الاسم" v-model="loginForm.name"></el-input>
             </el-form-item>
+            <el-form-item prop="phone">
+              <el-input placeholder="رقم الموبايل" v-model="loginForm.phone"></el-input>
+            </el-form-item>
             <el-form-item prop="email">
               <el-input
                 placeholder="البريد الإلكتروني"
                 v-model="loginForm.email"
               ></el-input>
             </el-form-item>
-            <el-form-item prop="phone">
-              <el-input placeholder="رقم الموبايل" v-model="loginForm.phone"></el-input>
-            </el-form-item>
+
           </el-form>
 
           <button
@@ -73,7 +74,6 @@ export default {
         name: [{ required: true, message: "هذا الحقل مطلوب" }],
         phone: [{ validator: validatePhone, trigger: "blur" }],
         email: [
-          { required: true, message: "هذا الحقل مطلوب" },
           { type: "email", message: "يجب ان يكون بريد إلكتروني صالح" },
         ],
       },

@@ -9,6 +9,7 @@
       'app-button__text-primary': type === 'text-primary',
       'app-button__text-danger': type === 'text-danger',
       'app-button__text-orange': type === 'text-orange',
+      'app-button__text-success': type === 'text-success',
       'app-button__success-plain': type === 'success-plain',
       'app-button__dark': type === 'dark',
       'app-button__dark-reverse': type === 'dark-reverse',

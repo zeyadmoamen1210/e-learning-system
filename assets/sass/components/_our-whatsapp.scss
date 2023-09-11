@@ -1,0 +1,53 @@
+
+.our-whatsapp-container {
+  position: fixed;
+  bottom: 60px;
+  right: 15px;
+
+  .our-whatsapp-inner {
+    position: relative;
+  }
+
+  .our-whatsapp-tooltip {
+    position: absolute;
+    top: -300%;
+    right: 0;
+    padding: 2rem;
+    background: #FFF;
+    border: 3px solid #1269eb;
+    border-radius: 10px;
+    width: 37rem;
+    @media screen and (max-width: 360px) {
+      display: none;
+    }
+    &::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 15px 0px 0 9px;
+      border-color: #1269eb transparent transparent transparent;
+      position: absolute;
+      top: 98%;
+      right: 23px;
+      margin-top: 3px;
+    }
+
+    h6 {
+      margin-bottom: 1rem;
+      color: #1269eb;
+      font-size: 2.5rem;
+    }
+  }
+
+  .our-whatsapp {
+    width: 55px;
+    height: 55px;
+    background: #25d366;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 30px;
+  }
+}
+

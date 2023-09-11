@@ -86,16 +86,12 @@
                   </el-select>
                 </el-form-item>
               </div>
-
               <div>
                 <el-form-item
                   prop="title"
                   :rules="[{ required: true, message: 'This field is required' }]"
                 >
-                  <el-input
-                    placeholder="قم بكتابة نص السؤال ؟"
-                    v-model="addNewQuestion.title"
-                  ></el-input>
+                  <CustomEditor placeholder="قم بكتابة نص السؤال ؟" :value="title" @setText="setTitle" />
                 </el-form-item>
 
                 <div>
@@ -117,10 +113,8 @@
                         :prop="`answers[${i}]`"
                         :rules="[{ required: true, message: 'This field is required' }]"
                       >
-                        <el-input
-                          :placeholder="getPlaceholder(i)"
-                          v-model="addNewQuestion.answers[i]"
-                        ></el-input>
+                        <CustomEditor :placeholder="getPlaceholder(i)" :value="answers[i]" @setText="setQuestion(i, $event)" />
+
                       </el-form-item>
                     </div>
                     <div class="d-block mt-4">
@@ -168,12 +162,8 @@
                       :prop="`correct_answer`"
                       :rules="[{ required: true, message: 'This field is required' }]"
                     >
-                      <el-input
-                        type="textarea"
-                        :rows="5"
-                        placeholder="قم بكتابة الإجابة النموذجية"
-                        v-model="addNewQuestion.correct_answer"
-                      ></el-input>
+                      <CustomEditor placeholder="قم بكتابة الإجابة النموذجية" :value="correct_answer" @setText="setModelAnswer" />
+
                     </el-form-item>
                   </div>
                 </template>
@@ -195,6 +185,9 @@
 import Button from "@/components/Layouts/Button.vue";
 import AttachPhoto from "@/components/Layouts/AttachPhoto.vue";
 import QuestionAddedSuccessfully from "@/components/Dashboard/Popups/QuestionAdded.vue";
+import CustomEditor from '@/components/CustomEditor.vue';
+import Vue from 'vue';
+
 export default {
   layout: "dashboard",
   middleware: ["prevent-student"],
@@ -202,9 +195,16 @@ export default {
     Button,
     AttachPhoto,
     QuestionAddedSuccessfully,
+    CustomEditor
+  },
+  mounted() {
+    this.getLessons();
   },
   data() {
     return {
+      title: '',
+      answers: ['','','',''],
+      correct_answer: '',
       lessons: [],
       loading: false,
       types: [
@@ -225,13 +225,22 @@ export default {
         level: "",
         answers: ["", "", "", ""],
         correct_answer: 0,
+        title: ''
       },
     };
   },
-  mounted() {
-    this.getLessons();
-  },
   methods: {
+    setQuestion(index, e) {
+      // this.addNewQuestion.answers[index] = e.html;
+      Vue.set(this.addNewQuestion.answers, index, e.html)
+
+    },
+    setModelAnswer(e) {
+      this.addNewQuestion.correct_answer = e.html;
+    },
+    setTitle(e) {
+      this.addNewQuestion.title = e.html;
+    },
     getQuestionPhoto(e) {
       this.addNewQuestion.image = e;
     },

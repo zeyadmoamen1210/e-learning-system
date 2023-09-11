@@ -7,7 +7,7 @@
           <div class="col-md-6 col-lg-4" v-for="(course, index) in courses" :key="index">
             <div class="course-card">
               <div class="course-card__discount" v-if="+course.discount > 0">
-                {{ course.discount + " %" }}
+                خصم {{ +course.discount }} جنية
               </div>
               <img
                 class="course-card__img"
@@ -37,11 +37,9 @@
                       <span>{{ course.duration }}</span>
                     </div>
                     <div>
-                      <img
-                        src="@/assets/imgs/landing-page/vuesax-broken-timer.svg"
-                        alt=""
-                      />
-                      <span>{{ formatPrice(course.price) }}</span>
+                      <font-awesome-icon :icon="['fas', 'money-bill']" />
+                      <span v-if="course.price - +course.discount > 0">{{ formatPrice(course.price - +course.discount) }}</span>
+                      <span v-else>مجاناً</span>
                     </div>
                   </div>
 

@@ -152,7 +152,7 @@
     margin-bottom: 1rem;
     background-color: rgb(203 203 203 / 22%);
 
-    span {
+    > span {
       background-color: rgb(226 226 226 / 94%);
       padding: 1rem 2.5rem 1rem 4rem;
       position: relative;
@@ -185,7 +185,7 @@
     .choose-item__header {
       background-color: rgba(238, 156, 13, 0.22);
 
-      span {
+      > span {
           color: #FFF;
         background-color: rgba(234, 127, 12, 0.94);
 
@@ -205,7 +205,7 @@
     .choose-item__header {
       background-color: rgba(238, 13, 13, 0.22);
 
-      span {
+      > span {
           color: #FFF;
         background-color: rgba(234, 12, 12, 0.94);
 
@@ -224,7 +224,7 @@
     .choose-item__header {
       background-color: rgba(13, 238, 27, 0.22);
 
-      span {
+      > span {
           color: #FFF;
         background-color: rgba(53, 234, 12, 0.94);
 

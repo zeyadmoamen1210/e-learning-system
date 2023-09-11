@@ -33,10 +33,13 @@ export default {
     { src: "@/plugins/custom-cursor.js", mode: "client" },
     { src: "@/plugins/social-sharing.js" },
     { src: "@/plugins/v-viwer.js" },
+    { src: "@/plugins/quail-editor.js" , mode: "client"},
     { src: "@/plugins/awsome-notifications.js" , mode: "client"},
     '@/plugins/vue-awesome-swiper.js',
     '@/plugins/mixins.js',
   ],
+
+
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -160,5 +163,9 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [/^element-ui/],
+    modules: ['mathlive'],
+    extend(config, ctx) {
+      config.resolve.alias.vue = 'vue/dist/vue.common'
+    }
   }
 }

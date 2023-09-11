@@ -21,6 +21,20 @@
             <el-form-item prop="name">
               <el-input placeholder="الاسم " v-model="signupForm.name"></el-input>
             </el-form-item>
+            <el-form-item prop="phone">
+              <el-input
+                :class="{ 'is-error': phoneError?.length > 0 }"
+                placeholder="رقم الموبايل"
+                v-model="signupForm.phone"
+              ></el-input>
+              <h6
+                v-if="phoneError?.length > 0"
+                style="color: #f56c6c; font-size: 12px"
+                class="font-h6 d-flex flex-row-reverse mt-2"
+              >
+                {{ phoneError?.[0] }}
+              </h6>
+            </el-form-item>
             <el-form-item prop="email">
               <el-input
                 :class="{ 'is-error': emailError?.length > 0 }"
@@ -50,20 +64,7 @@
               ></el-input>
             </el-form-item>
 
-            <el-form-item prop="phone">
-              <el-input
-                :class="{ 'is-error': phoneError?.length > 0 }"
-                placeholder="رقم الموبايل"
-                v-model="signupForm.phone"
-              ></el-input>
-              <h6
-                v-if="phoneError?.length > 0"
-                style="color: #f56c6c; font-size: 12px"
-                class="font-h6 d-flex flex-row-reverse mt-2"
-              >
-                {{ phoneError?.[0] }}
-              </h6>
-            </el-form-item>
+
 
             <!-- <el-form-item prop="role_id">
               <el-select
@@ -108,7 +109,7 @@ export default {
       this.loading = true;
       try {
         const res = await this.$auth.loginWith("local", {
-          data: { email: this.signupForm.email, password: this.signupForm.password },
+          data: { phone: this.signupForm.phone, password: this.signupForm.password },
         });
         await this.$auth.setUser(res.data.user);
         if (res.data.user.role_id != 1) {
@@ -190,7 +191,6 @@ export default {
       rules: {
         name: [{ required: true, message: "هذا الحقل مطلوب" }],
         email: [
-          { required: true, message: "هذا الحقل مطلوب" },
           { type: "email", message: "يجب ان يكون بريد إلكتروني صالح" },
         ],
         password: [

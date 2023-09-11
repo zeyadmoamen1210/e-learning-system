@@ -20,22 +20,6 @@
           <Button
             class="flex-grow-1"
             padding="1rem"
-            :type="loginType === 1 ? 'primary' : 'primary-plain'"
-            @click.native="loginType = 1"
-            :center="true"
-            text=""
-            text-classes="font-h5 font--regular"
-          >
-            <template>
-              <i
-                :style="{ color: loginType === 1 ? '#fff' : null }"
-                class="el-icon-message"
-              ></i>
-            </template>
-          </Button>
-          <Button
-            class="flex-grow-1"
-            padding="1rem"
             :type="loginType === 2 ? 'primary' : 'primary-plain'"
             @click.native="loginType = 2"
             :center="true"
@@ -49,6 +33,24 @@
               ></i>
             </template>
           </Button>
+
+          <Button
+            class="flex-grow-1"
+            padding="1rem"
+            :type="loginType === 1 ? 'primary' : 'primary-plain'"
+            @click.native="loginType = 1"
+            :center="true"
+            text=""
+            text-classes="font-h5 font--regular"
+          >
+            <template>
+              <i
+                :style="{ color: loginType === 1 ? '#fff' : null }"
+                class="el-icon-message"
+              ></i>
+            </template>
+          </Button>
+
         </div>
 
         <div>
@@ -123,7 +125,7 @@ export default {
     return {
       loginForm: {},
       fullScreenLoading: false,
-      loginType: 1,
+      loginType: 2,
     };
   },
   methods: {

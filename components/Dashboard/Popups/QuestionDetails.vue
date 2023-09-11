@@ -4,8 +4,7 @@
       <template #header> </template>
       <template #body>
         <div class="mt-5 question-details-popup" v-viewer>
-          <h6 class="font-h4 font--regular">
-            {{ question.title }}
+          <h6 class="font-h4 font--regular" v-html="question.title">
           </h6>
           <span class="d-block font-h5 font--light" v-if="question.lesson">
             {{ question.lesson.name }}
@@ -40,8 +39,7 @@
             <h6 class="font-h5 font--semibold mt-4 text-plain-success">
               الإجابة النموذجية
             </h6>
-            <p class="font-h5 font--light">
-              {{ question.correct_answer }}
+            <p class="font-h5 font--light" v-html="question.correct_answer">
             </p>
           </div>
 
@@ -52,7 +50,7 @@
               :key="index"
             >
               <span class="answer-index"> {{ index + 1 }} </span>
-              <span class="font-h5 answer-name"> {{ item }} </span>
+              <span class="font-h5 answer-name" v-html="item"></span>
             </div>
           </div>
 

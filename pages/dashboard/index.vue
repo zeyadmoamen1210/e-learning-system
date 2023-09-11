@@ -75,23 +75,53 @@
             </td>
             <td>
               <div class="d-flex gap-5">
-                <Button
-                  v-if="user.active == 0"
-                  @click.native="currUser = {...user}, enableUserPopup = true"
-                  padding="0"
-                  type="text-primary"
-                  text="تفعيل الحساب">
-                  <img src="@/assets/imgs/dashboard/tick-circle-linear.svg" alt="">
-                </Button>
 
-                <Button
-                v-if="user.active == 1"
-                  @click.native="currUser = {...user}, disableUserPopup = true"
-                  padding="0"
-                  type="text-danger"
-                  text="تعطيل الحساب">
-                  <img src="@/assets/imgs/dashboard/close-circle-linear.svg" alt="">
-                </Button>
+                <el-dropdown>
+                  <span class="el-dropdown-link">
+                    إعداد الحساب <i class="el-icon-arrow-down el-icon--right"></i>
+                  </span>
+                  <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item v-if="user.active == 0">
+                      <Button
+                        @click.native="currUser = {...user}, enableUserPopup = true"
+                        padding="0"
+                        type="text-primary"
+                        text="تفعيل الحساب">
+                      </Button>
+                    </el-dropdown-item>
+                    <el-dropdown-item v-if="user.active == 1">
+                      <Button
+                        @click.native="currUser = {...user}, disableUserPopup = true"
+                        padding="0"
+                        type="text-danger"
+                        textClasses="font-h6"
+                        text="تعطيل الحساب">
+                      </Button>
+                    </el-dropdown-item>
+                    <el-dropdown-item>
+                      <Button
+                        @click.native="currUser = {...user}, resetPasswordPopup = true"
+                        padding="0"
+                        textClasses="font-h6"
+                        type="text-orange"
+                        text=" إعادة تعيين كلمة المرور">
+                      </Button>
+                    </el-dropdown-item>
+                    <el-dropdown-item>
+                      <Button
+                        @click.native="currUser = {...user}, updateUserPopup = true"
+                        padding="0"
+                        textClasses="font-h6"
+                        type="text-success"
+                        text="تعديل ">
+                      </Button>
+                    </el-dropdown-item>
+                  </el-dropdown-menu>
+                </el-dropdown>
+
+
+
+
               </div>
             </td>
           </tr>
@@ -116,6 +146,11 @@
     <DisableUserPopup :loading="popupLoading" @disable="updateUserStatus(false)" @close="disableUserPopup = false" :isOpened="disableUserPopup" />
 
     <AddUserPopup  @done="addUserPopup = false,getUsers()" @close="addUserPopup = false" :isOpened="addUserPopup" />
+    <UpdateUserPopup v-if="updateUserPopup" :user="currUser" @done="updateUserPopup = false,getUsers()" @close="updateUserPopup = false" :isOpened="updateUserPopup" />
+
+    <ResetPasswordPopup :loading="popupLoading" @submit="resetPassword" @close="resetPasswordPopup = false" :isOpened="resetPasswordPopup" />
+
+
   </div>
   </div>
 </template>
@@ -126,23 +161,44 @@ import Status from "@/components/Layouts/Status.vue";
 import EnableUserPopup from '@/components/Dashboard/Popups/EnableUser';
 import DisableUserPopup from '@/components/Dashboard/Popups/DisableUser';
 import AddUserPopup from '@/components/Dashboard/Popups/AddUser';
-import NoData from "~/components/NoData.vue";
+import UpdateUserPopup from '@/components/Dashboard/Popups/UpdateUser';
 
+import NoData from "~/components/NoData.vue";
+import ResetPasswordPopup from '@/components/Dashboard/Popups/ResetPasswordPopup.vue';
 export default {
   middleware: ['prevent-student'],
   components: {
+    UpdateUserPopup,
     Button,
     Status,
     EnableUserPopup,
     DisableUserPopup,
     AddUserPopup,
-    NoData
+    NoData,
+    ResetPasswordPopup,
 },
   layout: "dashboard",
   mounted() {
     this.getUsers();
   },
   methods: {
+    async resetPassword() {
+      this.popupLoading= true;
+      try {
+        await this.$axios.post(`/reset-password`, {
+          user_id: this.currUser.id,
+        });
+        this.resetPasswordPopup = false;
+        this.$awn.success("تم تعديل كلمة المرور بنجاح");
+
+        this.getUsers();
+      } catch(err) {
+        this.$awn.alert(" هناك خطأ ما");
+
+      } finally {
+        this.popupLoading= false;
+      }
+    },
     async updateUserStatus(enable) {
       this.popupLoading= true;
       try {
@@ -199,7 +255,9 @@ export default {
       enableUserPopup: false,
       disableUserPopup: false,
       addUserPopup: false,
+      updateUserPopup: false,
       loading: true,
+      resetPasswordPopup: false,
       filter: {
         name: null,
         email: null,

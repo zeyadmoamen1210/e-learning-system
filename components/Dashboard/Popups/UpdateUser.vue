@@ -1,30 +1,30 @@
 <template>
   <div>
     <Popup :contentCentered="true" :open="isOpened" @close="$emit('close', false)">
-      <template #header> إضافة مستخدم جديد </template>
+      <template #header> تعديل المستخدم </template>
       <template #body>
         <div v-loading="loading">
           <h6 class="font font--light mb-4 font-h5">
-            قم بإضافة بيانات مستخدم جديد للمنصة
+            قم بتعديل بيانات المستخدم للمنصة
           </h6>
 
           <div class="mt-5">
             <el-form
-              ref="addUserPopup"
+              ref="updateUserPopup"
               class="mb-4"
-              :model="addUser"
-              :rules="addUserRules"
+              :model="updateUser"
+              :rules="updateUserRules"
             >
               <el-form-item prop="name">
                 <label for="name" class="text-end d-block font-h6"> الاسم </label>
-                <el-input id="name" v-model="addUser.name" placeholder="الاسم"></el-input>
+                <el-input id="name" v-model="updateUser.name" placeholder="الاسم"></el-input>
               </el-form-item>
 
               <el-form-item prop="phone">
                 <label for="phone" class="text-end d-block font-h6"> رقم الموبايل </label>
                 <el-input
                   id="phone"
-                  v-model="addUser.phone"
+                  v-model="updateUser.phone"
                   placeholder="رقم الموبايل"
                 ></el-input>
               </el-form-item>
@@ -34,35 +34,9 @@
                   البريد الإلكترونى
                 </label>
                 <el-input
-                  v-model="addUser.email"
+                  v-model="updateUser.email"
                   placeholder="البريد الإلكترونى"
                   id="email"
-                ></el-input>
-              </el-form-item>
-
-
-
-              <el-form-item prop="password">
-                <label for="password" class="text-end d-block font-h6">
-                  كلمة المرور
-                </label>
-                <el-input
-                  type="password"
-                  v-model="addUser.password"
-                  placeholder="كلمة المرور"
-                  id="password"
-                ></el-input>
-              </el-form-item>
-
-              <el-form-item prop="passwordConfirm">
-                <label for="password-confirm" class="text-end d-block font-h6">
-                  تأكيد كلمة المرور
-                </label>
-                <el-input
-                  v-model="addUser.passwordConfirm"
-                  type="password"
-                  placeholder="تأكيد كلمة المرور"
-                  id="password-confirm"
                 ></el-input>
               </el-form-item>
 
@@ -70,7 +44,7 @@
                 <label for="role_id" class="text-end d-block font-h6"> الصلاحية </label>
                 <el-select
                   style="width: 100%"
-                  v-model="addUser.role_id"
+                  v-model="updateUser.role_id"
                   placeholder="الصلاحية"
                   id="role_id"
                 >
@@ -84,7 +58,7 @@
               </el-form-item>
             </el-form>
 
-            <button @click="submitAddUser" class="button button--primary w-100 mb-4">
+            <button @click="submitUpdateUser" class="button button--primary w-100 mb-4">
               إنشاء
             </button>
           </div>
@@ -106,6 +80,9 @@ export default {
       default: false,
       type: Boolean,
     },
+    user: {
+      required: true
+    }
   },
   data() {
     let validatePhone = (rule, value, callback) => {
@@ -133,7 +110,7 @@ export default {
 
     return {
       loading: false,
-      addUserRules: {
+      updateUserRules: {
         name: [{ required: true, message: "هذا الحقل مطلوب" }],
         email: [
           { type: "email", message: "يجب ان يكون بريد إلكتروني صالح" },
@@ -156,7 +133,7 @@ export default {
         role_id: [{ required: true, message: "هذا الحقل مطلوب" }],
       },
       codeForm: {},
-      addUser: {},
+      updateUser: this.user,
       roles: [
         { title: "أدمن", val: 1 },
         { title: "مُساعد", val: 2 },
@@ -165,16 +142,17 @@ export default {
     };
   },
   methods: {
-    submitAddUser() {
-      this.$refs.addUserPopup.validate(async (valid) => {
+    submitUpdateUser() {
+      this.$refs.updateUserPopup.validate(async (valid) => {
         if (valid) {
           this.loading = true;
           try {
-            await this.$axios.post("/auth/register", {
-              ...this.addUser,
+            await this.$axios.post("/users", {
+              ...this.updateUser,
+              user_id: this.updateUser.id
             });
-            this.addUser = {};
-            this.$awn.success("تم إضافة المُستخدم بنجاح");
+            this.updateUser = {};
+            this.$awn.success("تم تعديل المُستخدم بنجاح");
             this.$emit("done");
           } catch (err) {
             if (err.response.status === 422) {

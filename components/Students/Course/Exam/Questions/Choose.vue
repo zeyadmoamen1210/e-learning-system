@@ -1,7 +1,6 @@
 <template>
   <div class="choose" v-viewer>
-    <p class="font--light">
-      {{ question.title }}
+    <p class="font--light" v-html="question.title">
     </p>
     <div v-if="question.image" class="question-main-img">
       <img @click="$emit('clickToImg')" :src="question.image" alt="" />
@@ -19,8 +18,8 @@
             <h6
               v-if="question.type === 'choose'"
               class="font-h5 mb-0 font--light font--regular"
+              v-html="item"
             >
-              {{ item }}
             </h6>
             <h6 v-else class="font-h5 mb-0 font--light font--regular">
               الإجابة رقم {{ index + 1 }}
@@ -53,7 +52,7 @@ export default {
   },
   data() {
     return {
-      selectedAnswerVar: this.selectedAnswer != null ? +this.selectedAnswer : null,
+      selectedAnswerVar: this.selectedAnswer != null ? +this.selectedAnswer?.selected_answer : null,
     };
   },
 
@@ -81,7 +80,10 @@ export default {
         return;
       }
       this.selectedAnswerVar = index;
-      this.$emit("answer", index);
+      this.$emit("answer", {
+        selected_answer: index,
+        answer_image: null
+      });
     },
   },
   destroyed() {

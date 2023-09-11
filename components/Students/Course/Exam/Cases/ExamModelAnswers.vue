@@ -82,6 +82,7 @@
               خاطئة
             </h6>
           </div>
+
           <div>
             <h6 class="font-h5 mt-3 mb-3">
               درجتك في السؤال : {{ +getQuestionMark(item) || 0 }} من {{ item.mark }}

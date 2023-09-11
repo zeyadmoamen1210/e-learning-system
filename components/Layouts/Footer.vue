@@ -10,9 +10,11 @@
                   <img src="@/assets/imgs/navbar-imgs/logo.png" alt="" />
                 </div>
                 <p class="font-h6">
-                  معلم خبير الفيزياء ، خبرة 25 عامًا، معد كتاب الصفوة فى الفيزياء ، أسعى
-                  لتوصيل المعلومات بطريقة سهلة ومفهومة للطلاب. هدفنا هو تحقيق النجاح
-                  الأكاديمي للطلاب في مادة الفيزياء.
+                  معلم خبير الفيزياء
+                  <br>
+                  خبرة 25 عامًا من الخبرة
+                  <br>
+                  معد كتاب الصفوة فى الفيزياء
                 </p>
               </div>
             </div>
@@ -49,15 +51,15 @@
               <div class="app-footer__follow mt-4">
                 <h6>أو تابعنا على</h6>
                 <div class="app-footer__follow-btns">
-                  <button @click="open('facebook')">
+                  <button style="background: #0066c8" @click="open('facebook')">
                     <font-awesome-icon :icon="['fab', 'facebook-f']" />
                   </button>
 
-                  <button @click="open('youtube')">
+                  <button style="background: #FF0000" @click="open('youtube')">
                     <font-awesome-icon :icon="['fab', 'youtube']" />
                   </button>
 
-                  <button @click="open('whatsapp')">
+                  <button style="background: #25d366" @click="open('whatsapp')">
                     <font-awesome-icon :icon="['fab', 'whatsapp']" />
                   </button>
 

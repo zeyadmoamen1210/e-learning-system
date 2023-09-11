@@ -28,8 +28,25 @@
     flex-wrap: wrap;
     align-items: center;
   }
-}
 
+
+}
+.course-material-counts-item {
+  display: flex;
+  align-items: center;
+  background: #daebff;
+  padding: 0 0 0 1.5rem;
+  border-radius: 4rem;
+  &__number {
+    background: #0047ac;
+    color: #fff;
+    padding: 0.5rem 2rem;
+    border-radius: 5rem;
+  }
+  &__title {
+    padding: 0 1rem 0 0;
+  }
+}
 .content-list {
   background: var(--light-grey);
   padding: 2.2rem 1rem;

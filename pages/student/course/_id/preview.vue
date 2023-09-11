@@ -8,7 +8,7 @@
         :class="course.is_subscribed && 'order-2'"
       />
 
-      <div class="container mt-5 mb-5" :class="course.is_subscribed && 'order-1'">
+      <div class="container mt-2 mb-5" :class="course.is_subscribed && 'order-1'">
         <div class="d-flex flex-row-reverse mb-3 d-none d-lg-flex">
           <Button
             padding="1rem 2rem"

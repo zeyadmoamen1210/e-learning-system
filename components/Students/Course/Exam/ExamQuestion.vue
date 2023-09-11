@@ -59,7 +59,7 @@ export default {
         (ele) => ele.question_id === this.question?.pivot?.question_id
       );
       return solutionIndex != -1
-        ? this.solutionAnswers[solutionIndex]?.selected_answer
+        ? this.solutionAnswers[solutionIndex]
         : null;
     },
     setTheAnswerLocally(e) {
@@ -68,12 +68,25 @@ export default {
         (ele) => ele.question_id === this.question?.pivot?.question_id
       );
       if (index != -1) {
-        this.solutionAnswers[index].selected_answer = e;
+        this.solutionAnswers[index].selected_answer = e.selected_answer;
+        this.solutionAnswers[index].answer_image = e.answer_image ? URL.createObjectURL(e.answer_image) : null;
       } else {
         this.solutionAnswers.push({
           question_id: this.question?.pivot?.question_id,
-          selected_answer: e,
+          selected_answer: e.selected_answer,
+          answer_image: e.answer_image ? URL.createObjectURL(e.answer_image) : null
         });
+      }
+    },
+    async uploadImage(img) {
+      const formData = new FormData();
+      formData.append("files[]", img);
+
+      try {
+        const res = await this.$axios.post("/upload", formData);
+        return res.data?.files?.[0];
+      } catch (err) {
+        return null;
       }
     },
     async setAnswer(e) {
@@ -81,12 +94,16 @@ export default {
         return;
       }
       this.setTheAnswerLocally(e);
-
+      let imgUrl = null;
+      if(e.answer_image) {
+        imgUrl = await this.uploadImage(e.answer_image);
+      }
       this.loading = true;
       try {
         const res = this.$axios.post(`/answers/${this.openedSolution}/submit`, {
           question_id: this.question?.pivot?.question_id,
-          selected_answer: e,
+          selected_answer: e.selected_answer,
+          answer_image: imgUrl
         });
       } catch (err) {
         console.log(err);

@@ -25,6 +25,13 @@
   }
 }
 
+.ML__keyboard {
+  direction: ltr !important;
+  *{
+  direction: ltr !important;
+  }
+}
+
 html {
   // This defines what 1rem is
   font-size: 59.5%;

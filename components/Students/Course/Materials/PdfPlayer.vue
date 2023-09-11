@@ -3,11 +3,11 @@
     <div class="selected-content__pdf" v-if="!selectedContentStarted">
       <div class="selected-content__pdf-inner">
         <img src="@/assets/imgs/course-imgs/pdf-icon.svg" alt="" />
-        <h6 class="font-h4 text-center">عنوان الملف .PDF</h6>
-        <span class="d-block font--light font-h5 text-center">حجم الملف : 3ميجا</span>
+        <h6 class="font-h4 text-center"> {{selectedContent.title}} </h6>
+<!--        <span class="d-block font&#45;&#45;light font-h5 text-center">حجم الملف : 3ميجا</span>-->
         <button
           @click="selectedContentStarted = true"
-          class="button button--primary mt-3"
+          class="button button--primary mt-4"
         >
           عرض الملف
         </button>

@@ -12,6 +12,9 @@
     <div>
       <Footer />
     </div>
+
+    <ToTopButton />
+    <OurWhatsapp />
   </div>
 </template>
 
@@ -19,12 +22,16 @@
 import Navbar from "@/components/Layouts/Navbar";
 import Footer from "@/components/Layouts/Footer";
 import Loading from "~/components/Layouts/Loading.vue";
+import ToTopButton from '@/components/ToTopButton.vue';
+import OurWhatsapp from '@/components/OurWhatsapp.vue';
 
 export default {
   components: {
     Navbar,
     Footer,
     Loading,
+    ToTopButton,
+    OurWhatsapp
   },
   data() {
     return {

@@ -50,6 +50,9 @@
       <p class="font-h5 font--light">
         {{ question?.selected_answer }}
       </p>
+      <div v-if="question.answer_image" v-viewer>
+        <img class="question-img" :src="question.answer_image" alt="">
+      </div>
       <div class="row">
         <div class="col-md-3">
           <div>
