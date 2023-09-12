@@ -228,6 +228,7 @@ export default {
             formData.append("name", this.editCourse.name);
             formData.append("price", this.editCourse.price);
             formData.append("discount", this.editCourse.discount);
+            formData.append("year", 3);
 
             if (this.editCourse.description) {
               formData.append("description", this.editCourse.description);

@@ -180,6 +180,7 @@ export default {
             formData.append("name", this.addCourse.name);
             formData.append("price", this.addCourse.price);
             formData.append("discount", this.addCourse.discount);
+            formData.append("year", 3);
             if (this.addCourse.description) {
               formData.append("description", this.addCourse.description);
             }
