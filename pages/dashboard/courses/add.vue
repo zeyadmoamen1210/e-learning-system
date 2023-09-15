@@ -96,7 +96,7 @@
                   ></el-input>
                 </el-form-item>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <el-form-item prop="telegram">
                   <el-input
                     placeholder="رابط جروب التليجرام"
@@ -104,12 +104,30 @@
                   ></el-input>
                 </el-form-item>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <el-form-item prop="whatsapp">
                   <el-input
                     placeholder="رابط جروب الواتساب"
                     v-model="addCourse.whatsapp"
                   ></el-input>
+                </el-form-item>
+              </div>
+              <div class="col-md-4">
+                <el-form-item prop="year" :rules="[{required: true, message: 'هذا الحقل مطلوب'}]">
+                  <el-select
+                    style="width: 100%"
+                    clearable
+                    v-model="addCourse.year"
+                    placeholder="الصف الدراسي"
+                  >
+                    <el-option
+                      v-for="item in levels"
+                      :key="item.val"
+                      :label="item.name"
+                      :value="item.val"
+                    >
+                    </el-option>
+                  </el-select>
                 </el-form-item>
               </div>
               <div class="col-md-12">
@@ -154,6 +172,11 @@ export default {
   data() {
     return {
       loading: false,
+      levels: [
+        { name: "الصف الأول", val: 1 },
+        { name: "الصف الثاني", val: 2 },
+        { name: "الصف الثالث", val: 3 },
+      ],
       addCourse: {
         ifHasDiscount: false,
       },
@@ -180,7 +203,7 @@ export default {
             formData.append("name", this.addCourse.name);
             formData.append("price", this.addCourse.price);
             formData.append("discount", this.addCourse.discount);
-            formData.append("year", 3);
+            formData.append("year", this.addCourse.year);
             if (this.addCourse.description) {
               formData.append("description", this.addCourse.description);
             }

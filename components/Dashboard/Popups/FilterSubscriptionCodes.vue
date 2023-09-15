@@ -13,6 +13,7 @@
 
           <div class="mt-5">
             <el-form ref="codesFilterRef" class="mb-4" :model="codesFilter">
+
               <el-form-item prop="course_id">
                 <label for="course_id" class="text-end d-block font-h6">
                   اختر الكورس
@@ -28,7 +29,7 @@
                   <el-option
                     v-for="(item, index) in courses"
                     :key="index"
-                    :label="item.name"
+                    :label="getCourseLabel(item)"
                     :value="item.id"
                   ></el-option>
                 </el-select>
@@ -80,10 +81,21 @@ export default {
     this.getAllCourses();
   },
   methods: {
+    getCourseLabel(item) {
+      let courseLabel = item.name;
+      if(item.year == 1) {
+        courseLabel += ' - الصف الأول';
+      }else if (item.year == 2) {
+        courseLabel += ' - الصف الثاني';
+      } else if (item.year == 3) {
+        courseLabel += ' - الصف الثالث';
+      }
+      return courseLabel;
+    },
     async getAllCourses() {
       this.loading = true;
       try {
-        const res = await this.$axios.get(`/courses-all`);
+        const res = await this.$axios.get(`/courses-all`, {params: {year: this.codesFilter.year}});
         this.courses = res.data;
       } catch (err) {
       } finally {

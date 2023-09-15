@@ -1,25 +1,8 @@
 <template>
   <div v-loading.fullscreen="fullScreenLoading">
     <div v-show="!fullScreenLoading">
-      <div class="text-center" v-if="allCourses.length === 0">
-        <div>
-          <img src="@/assets/imgs/dashboard/note-linear-courses.svg" alt="" />
-        </div>
-        <h6 class="text-center font-h4 mt-3">الكورسات</h6>
-        <p class="font--light mb-4 mt-3">لم يتم إضافة أي كورسات</p>
 
-        <Button
-          @click.native="$router.push('/dashboard/courses/add')"
-          type="success"
-          text="إضافة كورس"
-          padding="1rem 2.5rem"
-        >
-          <template>
-            <img src="@/assets/imgs/dashboard/add-circle-bulk.svg" alt="" />
-          </template>
-        </Button>
-      </div>
-      <div v-else>
+      <div>
         <div class="d-flex justify-content-between mb-3 align-items-center flex-wrap">
           <h6 class="font-h4 font--regular mb-0">الكورسات</h6>
           <div>
@@ -37,7 +20,24 @@
           </div>
         </div>
 
-        <div class="container">
+        <div class="mb-4">
+          <el-select
+            @change="getAllCourses"
+            clearable
+            v-model="level"
+            placeholder="الصف الدراسي"
+          >
+            <el-option
+              v-for="item in levels"
+              :key="item.val"
+              :label="item.name"
+              :value="item.val"
+            >
+            </el-option>
+          </el-select>
+        </div>
+
+        <div class="container" v-if="allCourses.length > 0">
           <div class="row">
             <div class="col-md-6" v-for="(item, index) in allCourses" :key="index">
               <div>
@@ -57,6 +57,17 @@
             </el-pagination>
           </div>
         </div>
+
+
+        <div class="text-center" v-if="allCourses.length === 0">
+          <div>
+            <img src="@/assets/imgs/dashboard/note-linear-courses.svg" alt="" />
+          </div>
+          <h6 class="text-center font-h4 mt-3">الكورسات</h6>
+          <p class="font--light mb-4 mt-3">لم يتم إضافة أي كورسات</p>
+        </div>
+
+
       </div>
     </div>
   </div>
@@ -75,6 +86,12 @@ export default {
   middleware: ["prevent-student"],
   data() {
     return {
+      levels: [
+        { name: "الصف الأول", val: 1 },
+        { name: "الصف الثاني", val: 2 },
+        { name: "الصف الثالث", val: 3 },
+      ],
+      level: null,
       allCourses: [],
       currPage: 1,
       total: 1,
@@ -92,6 +109,7 @@ export default {
         const res = await this.$axios.get("/admin/courses", {
           params: {
             page: this.currPage,
+            year: this.level
           },
         });
         this.allCourses = res.data.data;

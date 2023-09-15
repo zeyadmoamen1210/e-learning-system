@@ -30,7 +30,7 @@
                     v-for="(examAndCourse, index) in coursesAndExams"
                     :key="index"
                     :value="examAndCourse.course_id"
-                    :label="examAndCourse.course_name"
+                    :label="getCourseLabel(examAndCourse)"
                   ></el-option>
                 </el-select>
               </el-form-item>
@@ -97,6 +97,17 @@ export default {
     };
   },
   methods: {
+    getCourseLabel(examAndCourse) {
+      let courseLabel = examAndCourse.course_name;
+      if(examAndCourse.year == 1) {
+        courseLabel += ' - الصف الأول';
+      }else if (examAndCourse.year == 2) {
+        courseLabel += ' - الصف الثاني';
+      } else if (examAndCourse.year == 3) {
+        courseLabel += ' - الصف الثالث';
+      }
+      return courseLabel;
+    },
     async getCoursesAndExams() {
       this.loading = true;
       try {

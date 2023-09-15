@@ -26,6 +26,21 @@
 
         <div class="d-flex gap-2 flex-wrap">
           <el-select
+            @change="getLessons"
+            clearable
+            v-model="level"
+            placeholder="الصف الدراسي"
+          >
+            <el-option
+              v-for="item in levels"
+              :key="item.val"
+              :label="item.name"
+              :value="item.val"
+            >
+            </el-option>
+          </el-select>
+
+          <el-select
             @change="getBankQuestions"
             clearable
             v-model="lesson"
@@ -139,7 +154,6 @@ export default {
   },
   mounted() {
     this.getBankQuestions();
-    this.getLessons();
   },
   methods: {
     async deleteCurrQuestion() {
@@ -162,9 +176,15 @@ export default {
       }
     },
     async getLessons() {
+      if(!this.level) {
+        this.lesson = null;
+        this.lessons = [];
+        this.getBankQuestions();
+        return;
+      }
       this.loading = true;
       try {
-        const res = await this.$axios.get("/lessons");
+        const res = await this.$axios.get("/lessons", {params: {year: this.level}});
         this.lessons = res.data;
       } catch (err) {
         console.log(err);
@@ -204,8 +224,13 @@ export default {
       total: 1,
       deleteQuestionPopup: false,
       deleteLoading: false,
-
+      level: null,
       lessons: [],
+      levels: [
+        { name: "الصف الأول", val: 1 },
+        { name: "الصف الثاني", val: 2 },
+        { name: "الصف الثالث", val: 3 },
+      ],
       types: [
         { title: "اختياري", val: "choose" },
         { title: "اختياري بصور", val: "choose_image" },

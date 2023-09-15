@@ -1,19 +1,8 @@
 <template>
   <div v-loading.fullscreen="loading">
     <div v-show="!loading">
-    <div class="text-center mt-5" v-if="codes.length === 0">
-      <div>
-        <img src="@/assets/imgs/dashboard/tag-linear-222.svg" alt="" />
-      </div>
-      <h6 class="text-center font-h4 mt-3">أكواد الإشتراك</h6>
-      <p class="font--light mb-4 mt-3">لا يوجد لديك أي أكواد اشتراك</p>
-      <Button @click.native="addSubscriptionCodesPopup = true" type="success" text="إضافة أكواد جديدة" padding="1rem 2.5rem">
-        <template>
-          <img src="@/assets/imgs/dashboard/add-circle-bulk.svg" alt="" />
-        </template>
-      </Button>
-    </div>
-    <div v-else>
+
+    <div>
       <div class="d-flex gap-2 mb-3 flex-wrap justify-content-between">
         <div>
           <h6 class="font-h4 font--regular">أكواد الإشتراك</h6>
@@ -39,7 +28,7 @@
         </div>
       </div>
 
-      <div class="app-table-container">
+      <div class="app-table-container" v-if="codes.length > 0">
         <table class="app-table">
           <thead>
             <th>
@@ -78,10 +67,18 @@
         </table>
       </div>
 
+      <div class="text-center mt-5" v-if="codes.length === 0">
+        <div>
+          <img src="@/assets/imgs/dashboard/tag-linear-222.svg" alt="" />
+        </div>
+        <h6 class="text-center font-h4 mt-3">أكواد الإشتراك</h6>
+        <p class="font--light mb-4 mt-3">لا يوجد لديك أي أكواد اشتراك</p>
+      </div>
+
     </div>
 
     <AddSubscriptionCodes v-if="addSubscriptionCodesPopup" :isOpened="addSubscriptionCodesPopup" @close="addSubscriptionCodesPopup = false" @reload="filters = {}, getCodeGroups()" />
-    <FilterSubscriptionCodes v-if="filterCodesPopup" @filter="setFilterValues" :isOpened="filterCodesPopup" @close="filterCodesPopup = false" />
+    <FilterSubscriptionCodes  @filter="setFilterValues" :isOpened="filterCodesPopup" @close="filterCodesPopup = false" />
   </div>
   </div>
 </template>

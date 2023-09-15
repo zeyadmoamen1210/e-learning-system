@@ -3,53 +3,76 @@
     <Popup :contentCentered="true" :open="isOpened" @close="$emit('close', false)">
       <template #header></template>
       <template #body>
-        <h6 class="font font--semibold mb-4 font-h4">إضافة أكواد جديدة</h6>
-        <p class="font-h5 font--light">
-          قم بتحديد بيانات أكواد الإشتراك التي تريد إنشائها
-        </p>
+        <div v-loading="loading">
+          <h6 class="font font--semibold mb-4 font-h4">إضافة أكواد جديدة</h6>
+          <p class="font-h5 font--light">
+            قم بتحديد بيانات أكواد الإشتراك التي تريد إنشائها
+          </p>
 
-        <div class="mt-5">
-          <el-form ref="addCodesRef" class="mb-4" :model="addCodes">
-            <el-form-item
-              prop="course"
-              :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
-            >
-              <label for="select-course" class="text-end d-block font-h6"
-                >اختر الكورس
-              </label>
-              <el-select
-                class="w-100"
-                v-model="addCodes.course"
-                placeholder="اختر الكورس"
-                id="select-course"
+          <div class="mt-5">
+            <el-form ref="addCodesRef" class="mb-4" :model="addCodes">
+              <el-form-item prop="year">
+                <label for="year" class="text-end d-block font-h6">
+                  الصف الدراسي
+                </label>
+                <el-select
+                  style="width: 100%"
+                  clearable
+                  @change="getAllCourses"
+                  v-model="addCodes.year"
+                  placeholder="الصف الدراسي"
+                >
+                  <el-option
+                    v-for="item in levels"
+                    :key="item.val"
+                    :label="item.name"
+                    :value="item.val"
+                  >
+                  </el-option>
+                </el-select>
+              </el-form-item>
+
+              <el-form-item
+                prop="course"
+                :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
               >
-                <el-option
-                  v-for="(item, index) in courses"
-                  :key="index"
-                  :label="item.name"
-                  :value="item.id"
-                ></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item
-              prop="count"
-              :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
-            >
-              <label for="course-count" class="text-end d-block font-h6">
-                عدد الأكواد
-              </label>
-              <el-input
-                class="w-100"
-                v-model="addCodes.count"
-                placeholder="عدد الأكواد"
-                id="course-count"
-              ></el-input>
-            </el-form-item>
-          </el-form>
+                <label for="select-course" class="text-end d-block font-h6"
+                >اختر الكورس
+                </label>
+                <el-select
+                  class="w-100"
+                  v-model="addCodes.course"
+                  placeholder="اختر الكورس"
+                  id="select-course"
+                >
+                  <el-option
+                    v-for="(item, index) in courses"
+                    :key="index"
+                    :label="item.name"
+                    :value="item.id"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item
+                prop="count"
+                :rules="[{ required: true, message: 'هذا الحقل مطلوب' }]"
+              >
+                <label for="course-count" class="text-end d-block font-h6">
+                  عدد الأكواد
+                </label>
+                <el-input
+                  class="w-100"
+                  v-model="addCodes.count"
+                  placeholder="عدد الأكواد"
+                  id="course-count"
+                ></el-input>
+              </el-form-item>
+            </el-form>
 
-          <button @click="submitFilter" class="button button--primary w-100 mb-4 py-3">
-            إضافة
-          </button>
+            <button @click="submitFilter" class="button button--primary w-100 mb-4 py-3">
+              إضافة
+            </button>
+          </div>
         </div>
       </template>
     </Popup>
@@ -71,19 +94,29 @@ export default {
   },
   data() {
     return {
-      addCodes: {},
+      levels: [
+        { name: "الصف الأول", val: 1 },
+        { name: "الصف الثاني", val: 2 },
+        { name: "الصف الثالث", val: 3 },
+      ],
+      addCodes: {
+        course: null,
+        year: null
+      },
       loading: false,
       courses: [],
     };
   },
-  mounted() {
-    this.getAllCourses();
-  },
   methods: {
     async getAllCourses() {
+      if(!this.addCodes.year) {
+        this.addCodes.course = null;
+        this.courses = [];
+        return;
+      }
       this.loading = true;
       try {
-        const res = await this.$axios.get(`/courses-all`);
+        const res = await this.$axios.get(`/courses-all`, {params: {year: this.addCodes.year}});
         this.courses = res.data;
       } catch (err) {
       } finally {
