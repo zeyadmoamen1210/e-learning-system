@@ -7,7 +7,8 @@
             <div>
               <img
                 @click="$router.push('/')"
-                src="@/assets/imgs/navbar-imgs/logo.png"
+                src="@/assets/imgs/logo.png"
+                style="width: 70px"
                 alt=""
               />
             </div>
@@ -24,19 +25,19 @@
                       >الرئيسية</nuxt-link
                     >
                   </li>
-                  <li>
-                    <nuxt-link enter-active-class="active-link" to="/student#about-us"
-                      >نبذة بسيطة</nuxt-link
-                    >
-                  </li>
-                  <li>
-                    <nuxt-link
-                      enter-active-class="active-link"
-                      to="/student#about-physics"
-                    >
-                      عن الفيزياء</nuxt-link
-                    >
-                  </li>
+<!--                  <li>-->
+<!--                    <nuxt-link enter-active-class="active-link" to="/student#about-us"-->
+<!--                      >نبذة بسيطة</nuxt-link-->
+<!--                    >-->
+<!--                  </li>-->
+<!--                  <li>-->
+<!--                    <nuxt-link-->
+<!--                      enter-active-class="active-link"-->
+<!--                      to="/student#about-physics"-->
+<!--                    >-->
+<!--                      عن الفيزياء</nuxt-link-->
+<!--                    >-->
+<!--                  </li>-->
                   <li>
                     <nuxt-link enter-active-class="active-link" to="/student#courses-list"
                       >قائمة الكورسات</nuxt-link

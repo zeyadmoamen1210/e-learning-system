@@ -2,7 +2,7 @@
   <div class="full-loading">
     <div>
       <div>
-        <img src="@/assets/imgs/landing-page/logo.svg" alt="" />
+        <img src="@/assets/imgs/logo.png" alt="" style="width: 120px"/>
         <div class="text-center mt-5">
           <div class="lds-spinner">
             <div></div>

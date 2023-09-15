@@ -9,9 +9,9 @@
       <nuxt />
     </main>
 
-    <div>
-      <Footer />
-    </div>
+<!--    <div>-->
+<!--      <Footer />-->
+<!--    </div>-->
 
     <ToTopButton />
     <OurWhatsapp v-if="!$route.fullPath.includes('/dashboard')" />

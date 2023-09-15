@@ -2,7 +2,7 @@
   <div class="mobile-menu">
     <div class="d-flex gap-2 justify-content-between mobile-menu__header">
       <div>
-        <img src="@/assets/imgs/landing-page/logo.svg" alt="" />
+        <img src="@/assets/imgs/logo.png" alt="" style="width: 80px" />
       </div>
       <div>
         <font-awesome-icon
@@ -19,16 +19,16 @@
           <li>
             <nuxt-link to="/student" @click.native="$emit('close')">الرئيسية</nuxt-link>
           </li>
-          <li>
-            <nuxt-link @click.native="$emit('close')" to="/student#about-us"
-              >نبذة بسيطة</nuxt-link
-            >
-          </li>
-          <li>
-            <nuxt-link @click.native="$emit('close')" to="/student#about-physics"
-              >عن الفيزياء</nuxt-link
-            >
-          </li>
+<!--          <li>-->
+<!--            <nuxt-link @click.native="$emit('close')" to="/student#about-us"-->
+<!--              >نبذة بسيطة</nuxt-link-->
+<!--            >-->
+<!--          </li>-->
+<!--          <li>-->
+<!--            <nuxt-link @click.native="$emit('close')" to="/student#about-physics"-->
+<!--              >عن الفيزياء</nuxt-link-->
+<!--            >-->
+<!--          </li>-->
           <li>
             <nuxt-link @click.native="$emit('close')" to="/student#courses-list"
               >قائمة الكورسات</nuxt-link

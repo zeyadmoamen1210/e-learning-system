@@ -35,5 +35,9 @@
 html {
   // This defines what 1rem is
   font-size: 59.5%;
+
+  @media (min-width: 900px) and (max-width: 1500px) {
+    font-size: 50%;
+  }
 }
 

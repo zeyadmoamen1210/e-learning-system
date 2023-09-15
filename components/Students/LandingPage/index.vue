@@ -1,26 +1,26 @@
 <template>
   <div>
-    <div>
-      <cursor-fx ref="cursor" disabled />
-    </div>
-    <div
-      class="home-page home-section"
-      id="header"
-      @mouseenter="activeTheCursor()"
-      @mouseleave="deactiveTheCursor()"
-    >
-      <div class="container">
-        <div class="snowflake-container">
-          <div class="snowflake" v-for="x in 50" :key="x"></div>
-        </div>
-        <Header />
-      </div>
-    </div>
-    <div class="about-us home-section" id="about-us">
-      <div class="container">
-        <AboutUs />
-      </div>
-    </div>
+<!--    <div>-->
+<!--      <cursor-fx ref="cursor" disabled />-->
+<!--    </div>-->
+<!--    <div-->
+<!--      class="home-page home-section"-->
+<!--      id="header"-->
+<!--      @mouseenter="activeTheCursor()"-->
+<!--      @mouseleave="deactiveTheCursor()"-->
+<!--    >-->
+<!--      <div class="container">-->
+<!--        <div class="snowflake-container">-->
+<!--          <div class="snowflake" v-for="x in 50" :key="x"></div>-->
+<!--        </div>-->
+<!--        <Header />-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="about-us home-section" id="about-us">-->
+<!--      <div class="container">-->
+<!--        <AboutUs />-->
+<!--      </div>-->
+<!--    </div>-->
     <div class="about-physics home-section" id="about-physics">
       <div class="container">
         <AboutPhysics />

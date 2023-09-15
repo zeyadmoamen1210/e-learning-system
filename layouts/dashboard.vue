@@ -24,9 +24,9 @@
       </div>
     </main>
 
-    <div>
-      <Footer />
-    </div>
+<!--    <div>-->
+<!--      <Footer />-->
+<!--    </div>-->
     <ToTopButton />
 
   </div>
