@@ -77,6 +77,10 @@ export default {
     course: {
       required: true,
     },
+    solution: {
+      required: false,
+      default: null
+    }
   },
   data() {
     return {
@@ -97,14 +101,18 @@ export default {
     };
   },
   mounted() {
-    this.getTheExam();
+    if(this.solution) {
+      this.showModelAnswer();
+    }else {
+      this.getTheExam();
+    }
   },
   methods: {
     async showModelAnswer() {
       this.examLoading = true;
       try {
         const res = await this.$axios.post(
-          `/answers/${this.checkExamData?.userLastSolution?.id}/show`
+          `/answers/${this.solution || this.checkExamData?.userLastSolution?.id}/show`
         );
         this.resetExamCases();
         this.examModelAnswers = res.data;

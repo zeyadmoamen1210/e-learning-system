@@ -1,10 +1,21 @@
 <template>
   <div class="sidebar">
     <ul>
+
       <li>
-        <nuxt-link to="/dashboard">
+        <nuxt-link class="align-items-center" to="/dashboard">
+
+          <font-awesome-icon style="color: #404040" :icon="['fas', 'chart-simple']" />
+
+
+          <span> الإحصائيات </span>
+        </nuxt-link>
+      </li>
+
+      <li>
+        <nuxt-link to="/dashboard/users">
           <img
-            v-if="$route.path !== '/dashboard'"
+            v-if="$route.path !== '/dashboard/users'"
             src="@/assets/imgs/dashboard/profile-2user-linear.svg"
             alt=""
           />
@@ -18,6 +29,8 @@
           <span> المستخدمين </span>
         </nuxt-link>
       </li>
+
+
 
       <li>
         <nuxt-link to="/dashboard/courses">

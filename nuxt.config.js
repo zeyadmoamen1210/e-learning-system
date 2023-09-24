@@ -35,6 +35,7 @@ export default {
     { src: "@/plugins/v-viwer.js" },
     { src: "@/plugins/quail-editor.js" , mode: "client"},
     { src: "@/plugins/awsome-notifications.js" , mode: "client"},
+    { src: "@/plugins/apexchart.js" , mode: "client"},
     '@/plugins/vue-awesome-swiper.js',
     '@/plugins/mixins.js',
   ],

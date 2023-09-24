@@ -32,5 +32,9 @@ Vue.mixin({
 
       return formattedPrice;
     },
+    formatNumber(num) {
+      if(isNaN(+num)) return;
+      return +num.toLocaleString('en-US');
+    }
   }
 })

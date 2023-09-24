@@ -111,7 +111,7 @@ export default {
             });
             this.loginForm = {};
             this.$awn.success("تم تغيير كلمة المرور");
-            this.$router.push("/student/profile/edit");
+            this.$router.push("/student/profile");
           } catch (err) {
             console.log(err);
             if (err.response.status === 403) {

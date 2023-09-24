@@ -28,6 +28,11 @@
   }
 
   .nuxt-link-exact-active {
+    svg{
+      path {
+        fill: var(--primary) !important;
+      }
+    }
     span {
       color: var(--primary) !important;
     }

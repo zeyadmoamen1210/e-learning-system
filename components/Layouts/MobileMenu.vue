@@ -42,8 +42,8 @@
             >
           </li>
           <li>
-            <nuxt-link @click.native="$emit('close')" to="/student/profile/edit"
-              >تعديل بياناتي</nuxt-link
+            <nuxt-link @click.native="$emit('close')" to="/student/profile"
+              > حسابي</nuxt-link
             >
           </li>
         </template>

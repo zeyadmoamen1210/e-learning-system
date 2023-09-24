@@ -29,7 +29,9 @@
                 <el-form-item
                   class="flex-grow-1"
                   prop="lesson_id"
-                  :rules="[{ required: true, message: 'this field is required' }]"
+                  :rules="[
+                    { required: true, message: 'this field is required' },
+                  ]"
                 >
                   <el-select
                     class="w-100"
@@ -49,7 +51,9 @@
                 <el-form-item
                   class="flex-grow-1"
                   prop="level"
-                  :rules="[{ required: true, message: 'this field is required' }]"
+                  :rules="[
+                    { required: true, message: 'this field is required' },
+                  ]"
                 >
                   <el-select
                     class="w-100"
@@ -67,7 +71,9 @@
                 </el-form-item>
 
                 <el-form-item
-                  :rules="[{ required: true, message: 'this field is required' }]"
+                  :rules="[
+                    { required: true, message: 'this field is required' },
+                  ]"
                   class="flex-grow-1"
                   prop="type"
                 >
@@ -89,13 +95,22 @@
               <div>
                 <el-form-item
                   prop="title"
-                  :rules="[{ required: true, message: 'This field is required' }]"
+                  :rules="[
+                    { required: true, message: 'This field is required' },
+                  ]"
                 >
-                  <CustomEditor placeholder="قم بكتابة نص السؤال ؟" :value="title" @setText="setTitle" />
+                  <CustomEditor
+                    placeholder="قم بكتابة نص السؤال ؟"
+                    :value="title"
+                    @setText="setTitle"
+                  />
                 </el-form-item>
 
                 <div>
-                  <AttachPhoto @getPhoto="getQuestionPhoto" title="صورة السؤال" />
+                  <AttachPhoto
+                    @getPhoto="getQuestionPhoto"
+                    title="صورة السؤال"
+                  />
                 </div>
 
                 <template
@@ -104,17 +119,28 @@
                     addNewQuestion.type !== 'paragraph'
                   "
                 >
-                  <div class="add-choose" v-for="(item, i) in addNewQuestion.answers">
+                  <div
+                    class="add-choose"
+                    v-for="(item, i) in addNewQuestion.answers"
+                    :key="i"
+                  >
                     <div>
-                      <span class="d-block mt-3 answer-index"> {{ i + 1 }} </span>
+                      <span class="d-block mt-3 answer-index">
+                        {{ i + 1 }}
+                      </span>
                     </div>
                     <div class="flex-fill">
                       <el-form-item
                         :prop="`answers[${i}]`"
-                        :rules="[{ required: true, message: 'This field is required' }]"
+                        :rules="[
+                          { required: true, message: 'This field is required' },
+                        ]"
                       >
-                        <CustomEditor :placeholder="getPlaceholder(i)" :value="answers[i]" @setText="setQuestion(i, $event)" />
-
+                        <CustomEditor
+                          :placeholder="getPlaceholder(i)"
+                          :value="answers[i]"
+                          @setText="setQuestion(i, $event)"
+                        />
                       </el-form-item>
                     </div>
                     <div class="d-block mt-4">
@@ -130,11 +156,17 @@
 
                 <template v-if="addNewQuestion.type === 'choose_image'">
                   <div class="row">
-                    <div class="col-md-6" v-for="(item, i) in addNewQuestion.answers">
+                    <div
+                      class="col-md-6"
+                      v-for="(item, i) in addNewQuestion.answers"
+                      :key="i"
+                    >
                       <div>
                         <div class="d-flex gap-3 mb-4">
                           <div>
-                            <span class="d-block mt-3 answer-index"> {{ i + 1 }} </span>
+                            <span class="d-block mt-3 answer-index">
+                              {{ i + 1 }}
+                            </span>
                           </div>
                           <div class="d-block mt-4">
                             <el-radio
@@ -160,10 +192,15 @@
                   <div>
                     <el-form-item
                       :prop="`correct_answer`"
-                      :rules="[{ required: true, message: 'This field is required' }]"
+                      :rules="[
+                        { required: true, message: 'This field is required' },
+                      ]"
                     >
-                      <CustomEditor placeholder="قم بكتابة الإجابة النموذجية" :value="correct_answer" @setText="setModelAnswer" />
-
+                      <CustomEditor
+                        placeholder="قم بكتابة الإجابة النموذجية"
+                        :value="correct_answer"
+                        @setText="setModelAnswer"
+                      />
                     </el-form-item>
                   </div>
                 </template>
@@ -185,8 +222,8 @@
 import Button from "@/components/Layouts/Button.vue";
 import AttachPhoto from "@/components/Layouts/AttachPhoto.vue";
 import QuestionAddedSuccessfully from "@/components/Dashboard/Popups/QuestionAdded.vue";
-import CustomEditor from '@/components/CustomEditor.vue';
-import Vue from 'vue';
+import CustomEditor from "@/components/CustomEditor.vue";
+import Vue from "vue";
 
 export default {
   layout: "dashboard",
@@ -195,16 +232,16 @@ export default {
     Button,
     AttachPhoto,
     QuestionAddedSuccessfully,
-    CustomEditor
+    CustomEditor,
   },
   mounted() {
     this.getLessons();
   },
   data() {
     return {
-      title: '',
-      answers: ['','','',''],
-      correct_answer: '',
+      title: "",
+      answers: ["", "", "", ""],
+      correct_answer: "",
       lessons: [],
       loading: false,
       types: [
@@ -225,15 +262,14 @@ export default {
         level: "",
         answers: ["", "", "", ""],
         correct_answer: 0,
-        title: ''
+        title: "",
       },
     };
   },
   methods: {
     setQuestion(index, e) {
       // this.addNewQuestion.answers[index] = e.html;
-      Vue.set(this.addNewQuestion.answers, index, e.html)
-
+      Vue.set(this.addNewQuestion.answers, index, e.html);
     },
     setModelAnswer(e) {
       this.addNewQuestion.correct_answer = e.html;
@@ -310,10 +346,12 @@ export default {
                 this.addNewQuestion.image = images.shift();
               }
               if (images.length > 0) {
-                this.addNewQuestion.answers = this.addNewQuestion.answers.map((ele) => {
-                  ele = images.shift();
-                  return ele;
-                });
+                this.addNewQuestion.answers = this.addNewQuestion.answers.map(
+                  (ele) => {
+                    ele = images.shift();
+                    return ele;
+                  }
+                );
               }
             }
             await this.$axios.post("/questions", this.addNewQuestion);
