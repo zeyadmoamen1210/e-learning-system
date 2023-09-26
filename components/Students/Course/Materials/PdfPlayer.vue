@@ -6,7 +6,7 @@
         <h6 class="font-h4 text-center"> {{selectedContent.title}} </h6>
 <!--        <span class="d-block font&#45;&#45;light font-h5 text-center">حجم الملف : 3ميجا</span>-->
         <button
-          @click="selectedContentStarted = true"
+          @click="openPDF(selectedContent)"
           class="button button--primary mt-4"
         >
           عرض الملف
@@ -47,6 +47,12 @@ export default {
     course: {
       required: true,
     },
+  },
+  methods: {
+    openPDF(selected) {
+
+      window.open(selected.link || selected.content?.url + '#toolbar=0&navpanes=0&scrollbar=0', '_blank')
+    }
   },
   data() {
     return {
