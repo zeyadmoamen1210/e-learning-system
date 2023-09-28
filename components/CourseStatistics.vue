@@ -15,17 +15,17 @@
         </span>
         </div>
         <div v-if="currExam == index" class="mt-3" @click.stop>
-<!--          <div class="mb-4 d-flex flex-row-reverse" v-if="examSolutions.hasAnswer">-->
-<!--            <Button-->
-<!--              padding=".5rem 1rem"-->
-<!--              :type="'primary-plain'"-->
-<!--              :center="true"-->
-<!--              text="عرض الإجابات"-->
-<!--              @click.native="student ? $router.push(`/dashboard/solutions/116`) : $router.push(`/student/solutions/116`)"-->
-<!--            >-->
-<!--              <img src="@/assets/imgs/dashboard/vuesax-bulk-edit-2.svg" alt="" />-->
-<!--            </Button>-->
-<!--          </div>-->
+          <div class="mb-4 d-flex flex-row-reverse" v-if="examSolutions.hasAnswer">
+            <Button
+              padding=".5rem 1rem"
+              :type="'primary-plain'"
+              :center="true"
+              text="عرض الإجابات"
+              @click.native="student ? $router.push(`/dashboard/solutions/${examSolutions?.solutions[examSolutions?.solutions?.length - 1]?.solution_id}`) : $router.push(`/student/solutions/${examSolutions?.solutions[examSolutions?.solutions?.length - 1]?.solution_id}`)"
+            >
+              <img src="@/assets/imgs/dashboard/vuesax-bulk-edit-2.svg" alt="" />
+            </Button>
+          </div>
           <div class="d-flex gap-4 flex-wrap align-items-center">
             <div class="exam-mark" v-for="(sol, index2) in examSolutions.solutions" :key="index2">
               <font-awesome-icon class="d-block m-auto mb-3" :icon="['fas', 'graduation-cap']" />

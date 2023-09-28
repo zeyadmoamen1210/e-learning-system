@@ -41,7 +41,7 @@ export default {
         },
         {
           title: 'كورساتي',
-          iconClasses: ['fas', 'chart-simple'],
+          iconClasses: ['fas', 'certificate'],
           link: '/student/profile/courses'
         },
       ],

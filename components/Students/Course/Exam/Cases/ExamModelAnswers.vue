@@ -5,16 +5,17 @@
         <h6 class="font-h5">إجاباتك بالاختبار</h6>
         <p class="font-h6 font--light">عرض جميع اجاباتك بالاختبار</p>
       </div>
-      <div>
+      <div v-if="">
         <h6 class="font-h4 text-plain-success">
-          درجتك : {{ examData?.userLastSolution?.mark }} من {{ totalMarks() }}
+          درجتك : {{ answers?.userLastSolution?.mark }} من {{ totalMarks() }}
         </h6>
         <h6 class="font-h4 text-center">
           {{
-            Number((examData?.userLastSolution?.mark * 100) / totalMarks()).toFixed(2)
+            Number((answers?.userLastSolution?.mark * 100) / totalMarks()).toFixed(2)
           }}%
         </h6>
       </div>
+
     </div>
 
     <div>
@@ -254,8 +255,8 @@ export default {
   methods: {
     totalMarks() {
       const examQuestions =
-        this.examData?.exam?.exam_questions_with_answer ||
-        this.examData?.exam?.exam_questions;
+        this.answers?.exam?.exam_questions_with_answer ||
+        this.answers?.exam?.exam_questions;
       return examQuestions?.reduce((prev, curr) => (prev += +curr.mark), 0);
     },
     getMyAnswer(item) {

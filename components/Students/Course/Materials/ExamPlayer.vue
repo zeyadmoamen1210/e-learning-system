@@ -92,6 +92,7 @@ export default {
 
       submitExamLoading: false,
       checkExamData: {},
+      examModelAnswers: {},
       currExam: {},
       firstTimeToOpenTheExam: false,
       showExamResult: false,
