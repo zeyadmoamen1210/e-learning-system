@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     setQuestionMark(e) {
-      if (e <= 0) {
+      if (e < 0) {
         this.$awn.alert("الدرجة يجب ان تكون اكبر من الصفر");
         this.question.questionMark = null;
         this.$emit(`removeFromSolution`, this.question?.id);

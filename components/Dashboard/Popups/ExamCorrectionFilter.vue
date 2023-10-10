@@ -18,6 +18,25 @@
               :model="examCorrectionFilter"
             >
               <el-form-item prop="course">
+                <label for="course" class="text-end d-block font-h6"> اختر الصف الدراسي </label>
+                <el-select
+                  class="w-100"
+                  clearable
+                  @hange="examCorrectionFilter.course = null"
+                  v-model="examCorrectionFilter.level"
+                  placeholder="اختر الصف الدراسي"
+                  id="level"
+                >
+                  <el-option
+                    v-for="(examAndCourse, index) in coursesAndExams"
+                    :key="index"
+                    :value="examAndCourse.year"
+                    :label="getCourseLabel(examAndCourse.year)"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+
+              <el-form-item prop="course">
                 <label for="course" class="text-end d-block font-h6"> اختر الكورس </label>
                 <el-select
                   class="w-100"
@@ -27,10 +46,10 @@
                   id="course"
                 >
                   <el-option
-                    v-for="(examAndCourse, index) in coursesAndExams"
+                    v-for="(examAndCourse, index) in filterdCoursesWithLevel"
                     :key="index"
                     :value="examAndCourse.course_id"
-                    :label="getCourseLabel(examAndCourse)"
+                    :label="examAndCourse.course_name"
                   ></el-option>
                 </el-select>
               </el-form-item>
@@ -44,7 +63,7 @@
                   id="exam"
                 >
                   <el-option
-                    v-for="(examAndCourse, index) in coursesAndExams"
+                    v-for="(examAndCourse, index) in filteredExams"
                     :key="index"
                     :value="examAndCourse.exam_id"
                     :label="examAndCourse.exam_name"
@@ -96,17 +115,36 @@ export default {
       loading: false,
     };
   },
-  methods: {
-    getCourseLabel(examAndCourse) {
-      let courseLabel = examAndCourse.course_name;
-      if(examAndCourse.year == 1) {
-        courseLabel += ' - الصف الأول';
-      }else if (examAndCourse.year == 2) {
-        courseLabel += ' - الصف الثاني';
-      } else if (examAndCourse.year == 3) {
-        courseLabel += ' - الصف الثالث';
+  computed: {
+    filteredExams() {
+      let filterd = [...this.coursesAndExams];
+      if(this.examCorrectionFilter.level) {
+        filterd = this.coursesAndExams
+          .filter((ele) => ele.year === this.examCorrectionFilter.level);
       }
-      return courseLabel;
+      if(this.examCorrectionFilter.course) {
+        filterd = this.coursesAndExams
+          .filter((ele) => ele.course_id === this.examCorrectionFilter.course);
+      }
+      return filterd;
+    },
+    filterdCoursesWithLevel() {
+      if(this.examCorrectionFilter.level) {
+        return this.coursesAndExams.filter((ele) => ele.year === this.examCorrectionFilter.level);
+      }
+      return this.coursesAndExams;
+    },
+  },
+  methods: {
+
+    getCourseLabel(year) {
+      if(year == 1) {
+         return 'الصف الأول';
+      }else if (year == 2) {
+        return 'الصف الثاني';
+      } else if (year == 3) {
+        return 'الصف الثالث';
+      }
     },
     async getCoursesAndExams() {
       this.loading = true;
@@ -122,6 +160,7 @@ export default {
       this.$emit("filter", {
         course_id: this.examCorrectionFilter.course,
         exam_id: this.examCorrectionFilter.exam,
+        year: this.examCorrectionFilter.level,
       });
     },
   },

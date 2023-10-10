@@ -110,13 +110,14 @@ export default {
     setFilterSolutions(e) {
       this.course_id = e.course_id
       this.exam_id = e.exam_id;
+      this.year = e.year;
       this.examCorrectionFilterPopup = false;
       this.getExamSolutions();
     },
     async getExamSolutions() {
       this.loading = true;
       try {
-        const res = await this.$axios.get(`/exam-solutions`, {params: {page: this.page, course_id: this.course_id, exam_id: this.exam_id}});
+        const res = await this.$axios.get(`/exam-solutions`, {params: {page: this.page, course_id: this.course_id, exam_id: this.exam_id, year: this.year}});
         this.solutions = res.data.data;
         this.page = res.data.current_page;
         this.total = res.data.last_page;
@@ -133,6 +134,7 @@ export default {
       solutions: [],
       page: 1,
       total: 1,
+      year: null,
 
       exam_id: null,
       course_id: null,

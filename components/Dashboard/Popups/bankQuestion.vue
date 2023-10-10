@@ -20,8 +20,25 @@
             <div class="mb-3 d-flex flex-wrap gap-2 align-items-center">
               <div>
                 <el-select
+                  @change="getLessons"
+                  clearable
+                  v-model="level"
+                  placeholder="الصف الدراسي"
+                >
+                  <el-option
+                    v-for="item in levels"
+                    :key="item.val"
+                    :label="item.name"
+                    :value="item.val"
+                  >
+                  </el-option>
+                </el-select>
+              </div>
+              <div>
+                <el-select
                   @change="getBankQuestions"
                   v-model="lesson_id"
+                  clearable
                   placeholder="اختر الدرس"
                 >
                   <el-option
@@ -36,6 +53,7 @@
                 <el-select
                   @change="getBankQuestions"
                   v-model="type"
+                  clearable
                   placeholder="نوع السؤال"
                 >
                   <el-option
@@ -49,11 +67,12 @@
               <div>
                 <el-select
                   @change="getBankQuestions"
-                  v-model="level"
+                  v-model="difficultyLevel"
+                  clearable
                   placeholder="درجة الصعوبة"
                 >
                   <el-option
-                    v-for="(item, index) in levels"
+                    v-for="(item, index) in difficulties"
                     :key="index"
                     :value="item.val"
                     :label="item.title"
@@ -312,6 +331,7 @@ export default {
       loading: false,
       lesson_id: null,
       level: null,
+      difficultyLevel: null,
       type: null,
       activeTab: 0,
       lessons: [],
@@ -330,6 +350,11 @@ export default {
         { title: "مقالي", val: "paragraph" },
       ],
       levels: [
+        { name: "الصف الأول", val: 1 },
+        { name: "الصف الثاني", val: 2 },
+        { name: "الصف الثالث", val: 3 },
+      ],
+      difficulties: [
         { title: "سهل", val: "LOW" },
         { title: "متوسط", val: "MID" },
         { title: "صعب", val: "HIGH" },
@@ -425,9 +450,15 @@ export default {
       this.examQuestions.splice(index, 1);
     },
     async getLessons() {
+      if(!this.level) {
+        this.lesson_id = null;
+        this.lessons = [];
+        this.getBankQuestions();
+        return;
+      }
       this.loading = true;
       try {
-        const res = await this.$axios.get("/lessons");
+        const res = await this.$axios.get("/lessons", {params: {year: this.level}});
         this.lessons = res.data;
       } catch (err) {
         console.log(err);
@@ -441,7 +472,7 @@ export default {
         const res = await this.$axios.get(`/questions`, {
           params: {
             page: this.page,
-            level: this.level,
+            level: this.difficultyLevel,
             type: this.type,
             lesson_id: this.lesson_id,
             limit: 6,
