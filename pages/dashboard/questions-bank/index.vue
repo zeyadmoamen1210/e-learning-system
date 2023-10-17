@@ -83,8 +83,8 @@
                 @openDetails="(currQuestion = question), (questionDetailsPopup = true)"
                 :question="question"
                 @openDelete="(currQuestion = question), (deleteQuestionPopup = true)"
-                :text="` هل انت متأكد من حذف هذا السؤال   `"
-                :title="`حذف السؤال  `"
+                :mytext="` هل انت متأكد من حذف هذا السؤال   `"
+                :mytitle="`حذف السؤال  `"
               />
             </div>
           </div>
@@ -113,8 +113,8 @@
         :isOpened="deleteQuestionPopup"
         @close="deleteQuestionPopup = false"
         :loading="deleteLoading"
-        :text="` هل انت متأكد من حذف هذا السؤال   `"
-        :title="`حذف السؤال  `"
+        :mytext="` هل انت متأكد من حذف هذا السؤال   `"
+        :mytitle="`حذف السؤال  `"
       />
     </div>
   </div>

@@ -13,10 +13,10 @@
             <img src="@/assets/imgs/dashboard/trash-bulk.svg" alt="" />
           </div>
 
-          <h6 class="font mb-3 font-h5">{{ title }}</h6>
+          <h6 class="font mb-3 font-h5">{{ mytitle }}</h6>
 
           <span class="font font--semiBold mb-5 font-h6 d-block">
-            {{ text }}
+            {{ mytext }}
           </span>
 
           <button @click="$emit('delete', true)" class="button button--danger mb-4 w-100">
@@ -35,6 +35,12 @@ export default {
     Popup,
   },
   props: {
+    mytitle: {
+      required: true,
+    },
+    mytext: {
+      required: true,
+    },
     isOpened: {
       required: true,
       default: false,
@@ -43,12 +49,7 @@ export default {
     loading: {
       required: false,
     },
-    title: {
-      required: true,
-    },
-    text: {
-      required: true,
-    },
+
   },
   data() {
     return {};

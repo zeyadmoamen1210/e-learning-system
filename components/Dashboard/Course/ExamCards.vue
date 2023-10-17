@@ -186,8 +186,8 @@
       :isOpened="deleteQuestionPopup"
       @close="deleteQuestionPopup = false"
       :loading="deleteLoading"
-      :text="` هل انت متأكد من حذف هذا السؤال من الامتحان `"
-      :title="`حذف السؤال من الامتحان`"
+      :mytext="` هل انت متأكد من حذف هذا السؤال من الامتحان `"
+      :mytitle="`حذف السؤال من الامتحان`"
     />
 
     <bankQuestionPopup
