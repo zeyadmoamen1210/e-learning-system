@@ -23,6 +23,18 @@
                     placeholder="عنوان الدرس"
                   ></el-input>
                 </el-form-item>
+                  <div class="col-md-6 col-lg-2">
+                <div>
+                  <h6 class="font-h6"> متاح او لا </h6>
+                  <div class="d-flex gap-2 justify-content-start mt-2">
+                   <el-switch
+                      v-model="updateLesson.active"
+                      active-color="#13ce66"
+                      inactive-color="#ff4949">
+                    </el-switch>
+                  </div>
+                </div>
+              </div>
               </el-form>
 
               <button
@@ -78,6 +90,7 @@ export default {
           try {
             const res = await this.$axios.put(`/lessons/${this.lesson.id}`, {
               name: this.updateLesson.name,
+              active: this.updateLesson.active,
               course_id: this.course.id,
             });
             this.resetLessonform();

@@ -39,7 +39,7 @@
                 </div>
               </div>
 
-              <div class="col-md-6 col-lg-4">
+              <div class="col-md-6 col-lg-2">
                 <div>
                   <el-form-item
                     prop="price"
@@ -66,6 +66,18 @@
                     <el-radio class="m-0" v-model="addCourse.ifHasDiscount" :label="false"
                       >لا
                     </el-radio>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-2">
+                <div>
+                  <h6 class="font-h6"> متاح او لا </h6>
+                  <div class="d-flex gap-2 justify-content-start mt-2">
+                   <el-switch
+                      v-model="addCourse.active"
+                      active-color="#13ce66"
+                      inactive-color="#ff4949">
+                    </el-switch>
                   </div>
                 </div>
               </div>
@@ -181,6 +193,8 @@ export default {
             formData.append("price", this.addCourse.price);
             formData.append("discount", this.addCourse.discount);
             formData.append("year", 3);
+            formData.append("active", this.addCourse.active);
+            formData.append("level", null);
             if (this.addCourse.description) {
               formData.append("description", this.addCourse.description);
             }

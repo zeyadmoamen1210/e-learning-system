@@ -58,7 +58,7 @@
                 </div>
               </div>
 
-              <div class="col-md-6 col-lg-4">
+              <div class="col-md-6 col-lg-2">
                 <div>
                   <el-form-item
                     prop="price"
@@ -103,6 +103,18 @@
                       v-model="editCourse.discount"
                     ></el-input>
                   </el-form-item>
+                </div>
+              </div>
+               <div class="col-md-6 col-lg-2">
+                <div>
+                  <h6 class="font-h6"> متاح او لا </h6>
+                  <div class="d-flex gap-2 justify-content-start mt-2">
+                   <el-switch
+                      v-model="editCourse.active"
+                      active-color="#13ce66"
+                      inactive-color="#ff4949">
+                    </el-switch>
+                  </div>
                 </div>
               </div>
               <div class="col-md-12">
@@ -228,6 +240,7 @@ export default {
             formData.append("name", this.editCourse.name);
             formData.append("price", this.editCourse.price);
             formData.append("discount", this.editCourse.discount);
+            formData.append("active", this.editCourse.active);
             formData.append("year", 3);
 
             if (this.editCourse.description) {

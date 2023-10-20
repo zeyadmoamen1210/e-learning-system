@@ -75,10 +75,22 @@
                   ></el-input>
                 </el-form-item>
               </el-form>
+                <div class="col-md-6 col-lg-2">
+                <div>
+                  <h6 class="font-h6"> متاح او لا </h6>
+                  <div class="d-flex gap-2 justify-content-start mt-2">
+                   <el-switch
+                      v-model="addExam.active"
+                      active-color="#13ce66"
+                      inactive-color="#ff4949">
+                    </el-switch>
+                  </div>
+                </div>
+              </div>
 
               <button
                 @click="submitAddExam"
-                class="button button--primary w-100 mb-4 py-3"
+                class="button button--primary w-100 mb-4 mt-4 py-3"
               >
                 إضافة
               </button>
