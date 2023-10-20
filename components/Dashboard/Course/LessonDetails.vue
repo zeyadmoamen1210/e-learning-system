@@ -23,7 +23,7 @@
       <h6 class="font-h6 text-primary mb-4">محتوي الكورس</h6>
     </div>
     <div class="d-flex gap-3 mb-4 flex-wrap">
-      <div v-for="(lesson, index) in course.lessons" :key="index">
+      <div v-for="(lesson, index) in course.admin_lessons" :key="index">
         <Button
           padding="1.3rem 2.5rem"
           @click.native="activeLesson = index"
@@ -44,7 +44,7 @@
         </Button>
       </div>
     </div>
-    <div class="mb-3" v-if="course.lessons?.length > 0">
+    <div class="mb-3" v-if="course.admin_lessons?.length > 0">
       <Button
         @click.native="updateLessonPopup = true"
         padding="1rem 0rem"
@@ -56,7 +56,7 @@
         </template>
       </Button>
     </div>
-    <div v-if="course?.lessons?.length > 0" class="mb-4 d-flex gap-4 flex-wrap">
+    <div v-if="course?.admin_lessons?.length > 0" class="mb-4 d-flex gap-4 flex-wrap">
       <Button
         padding="1.3rem 2.5rem"
         @click.native="activeLessonTab = 0"
@@ -105,10 +105,10 @@
       </Button>
     </div>
     <!-- Videos -->
-    <div v-if="course?.lessons?.length > 0 && activeLessonTab == 0">
+    <div v-if="course?.admin_lessons?.length > 0 && activeLessonTab == 0">
       <VideoCards
         :course="course"
-        :lessonId="course?.lessons?.[activeLesson]?.id"
+        :lessonId="course?.admin_lessons?.[activeLesson]?.id"
         v-if="lessonVideos.length > 0"
         @reloadCourse="reloadCourse"
         :videos="lessonVideos"
@@ -117,15 +117,15 @@
         <NoVideosExist
           @reloadCourse="reloadCourse"
           :course="course"
-          :lessonId="course?.lessons?.[activeLesson]?.id"
+          :lessonId="course?.admin_lessons?.[activeLesson]?.id"
         />
       </div>
     </div>
     <!-- PDFs -->
-    <div v-if="course?.lessons?.length > 0 && activeLessonTab == 1">
+    <div v-if="course?.admin_lessons?.length > 0 && activeLessonTab == 1">
       <PdfCards
         :course="course"
-        :lessonId="course?.lessons?.[activeLesson]?.id"
+        :lessonId="course?.admin_lessons?.[activeLesson]?.id"
         v-if="lessonPdfs.length > 0"
         @reloadCourse="reloadCourse"
         :pdfs="lessonPdfs"
@@ -133,16 +133,16 @@
       <div v-else>
         <NoPdfsExist
           :course="course"
-          :lessonId="course?.lessons?.[activeLesson]?.id"
+          :lessonId="course?.admin_lessons?.[activeLesson]?.id"
           @reloadCourse="reloadCourse"
         />
       </div>
     </div>
     <!-- Lesson Exams -->
-    <div v-if="course?.lessons?.length > 0 && activeLessonTab == 2">
+    <div v-if="course?.admin_lessons?.length > 0 && activeLessonTab == 2">
       <ExamCards
         :course="course"
-        :lessonId="course?.lessons?.[activeLesson]?.id"
+        :lessonId="course?.admin_lessons?.[activeLesson]?.id"
         v-if="lessonExams.length > 0"
         @reloadCourse="reloadCourse"
         :exams="lessonExams"
@@ -151,7 +151,7 @@
         <NoExamsExist
           @reloadCourse="reloadCourse"
           :course="course"
-          :lessonId="course?.lessons?.[activeLesson]?.id"
+          :lessonId="course?.admin_lessons?.[activeLesson]?.id"
         />
       </div>
     </div>
@@ -165,7 +165,7 @@
 
     <UpdateLessonPopup
       v-if="updateLessonPopup"
-      :lesson="course.lessons?.[activeLesson]"
+      :lesson="course.admin_lessons?.[activeLesson]"
       :course="course"
       :isOpened="updateLessonPopup"
       @finished="(updateLessonPopup = false), $emit('reloadCourse')"
@@ -207,17 +207,17 @@ export default {
   },
   computed: {
     lessonVideos() {
-      return this.course?.lessons?.[this.activeLesson]?.admin_materials?.filter(
+      return this.course?.admin_lessons?.[this.activeLesson]?.admin_materials?.filter(
         (ele) => ele.type === "VIDEO"
       );
     },
     lessonPdfs() {
-      return this.course?.lessons?.[this.activeLesson]?.admin_materials?.filter(
+      return this.course?.admin_lessons?.[this.activeLesson]?.admin_materials?.filter(
         (ele) => ele.type === "PDF"
       );
     },
     lessonExams() {
-      return this.course?.lessons?.[this.activeLesson]?.admin_materials?.filter(
+      return this.course?.admin_lessons?.[this.activeLesson]?.admin_materials?.filter(
         (ele) => ele.type === "EXAM"
       );
     },

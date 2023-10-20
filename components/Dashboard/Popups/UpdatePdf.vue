@@ -46,10 +46,22 @@
               <span class="font-h6 mb-3 font--danger d-block" v-if="pdfError">
                 {{ pdfError }}
               </span>
+               <div class="col-md-6 col-lg-2">
+                <div>
+                  <h6 class="font-h6"> متاح او لا </h6>
+                  <div class="d-flex gap-2 justify-content-start mt-2">
+                   <el-switch
+                      v-model="pdf.active"
+                      active-color="#13ce66"
+                      inactive-color="#ff4949">
+                    </el-switch>
+                  </div>
+                </div>
+              </div>
 
               <button
                 @click="submitAddPdf"
-                class="button button--primary w-100 mb-4 py-3"
+                class="button button--primary w-100 mb-4 mt-4 py-3"
               >
                 تعديل
               </button>
@@ -116,6 +128,9 @@ export default {
             }
             formData.append("lesson_id", this.lessonId);
             formData.append("_method", "put");
+            if(this.pdf.active){
+              formData.append("active", this.pdf.active);
+            }
             const res = await this.$axios.post(`/materials/pdf/${this.pdf.id}`, formData);
             this.$emit("close", false);
             this.$emit("added", false);
