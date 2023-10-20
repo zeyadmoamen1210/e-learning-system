@@ -1,10 +1,20 @@
 <template>
   <div v-loading.fullscreen="loading">
     <div v-show="!loading">
-    <div class="d-flex gap-4 mb-3 flex-wrap justify-content-between align-items-center">
+    <div class="d-flex gap-4 mb-4 flex-wrap justify-content-between align-items-center">
       <div>
         <h6 class="font-h4 font--regular">أكواد الإشتراك</h6>
         <p class="font--light font-h5">جميع أكواد الاشتراكات الخاصة بالكورسات</p>
+      </div>
+      <div>
+          <export-excel
+            :fetch="getData"
+            class="download-codes"
+            :name="`${$route.query.course_name}-codes.xls`"
+          >
+            <img style="width:20px" src="@/assets/imgs/spreadsheet.svg" alt="" />
+            إستخراج الأكواد
+          </export-excel>
       </div>
     </div>
     <div>
@@ -143,6 +153,9 @@ export default {
     this.getCourseCodes();
   },
   methods: {
+    getData() {
+      return this.getCourseCodes(true);
+    },
     async submitSaleCode() {
       this.codeLoading = true;
       try {
@@ -189,18 +202,31 @@ export default {
         this.$awn.success('المتصفح الحالي لا يدعم ذالك');
       }
     },
-    async getCourseCodes() {
+    async getCourseCodes(noLimit = true) {
       this.loading = true;
       try {
         const res = await this.$axios.get(`/courses/${this.$route.params.id}/codes`, {
           params: {
             status: this.codeFilter,
-            page: this.page,
+            page: !noLimit ? this.page : null,
+            limit: noLimit ? 100000 : null,
           }
         });
         this.codes = res.data.data;
         this.page = res.data.current_page;
         this.total = res.data.last_page;
+        if(noLimit) {
+          return this.codes.map(ele => {
+            return {
+              "الكود": ele.code,
+              "المستخدم": ele.user ? ele.user?.name : '-',
+              "تاريخ الإنشاء": new Date(ele.created_at).toLocaleDateString(),
+              "إنشاء بواسطة": ele.created_by,
+              "تاريخ التسليم": ele.sold_at ? new Date(ele.sold_at).toLocaleDateString() : '-',
+              "الحالة": ele.status == 0 ? 'جديد' : ele.status == 1 ? 'تم التسليم' : 'تم التفعيل',
+            }
+          });
+        }
       } catch (err){
         console.log(err);
       } finally {
@@ -210,3 +236,15 @@ export default {
   }
 };
 </script>
+
+
+<style>
+.download-codes {
+  padding: 1rem;
+  background: #68c257;
+  border-radius: 1rem;
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+</style>

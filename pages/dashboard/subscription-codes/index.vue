@@ -65,7 +65,7 @@
               <td>
                 <div class="d-flex gap-5">
                   <Button
-                    @click.native="$router.push(`/dashboard/subscription-codes/${item.course_id}`)"
+                    @click.native="$router.push(`/dashboard/subscription-codes/${item.course_id}?course_name=${item?.course?.name}`)"
                     padding="0"
                     type="text-primary"
                     text="عرض الأكواد">
