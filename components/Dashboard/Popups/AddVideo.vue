@@ -93,6 +93,27 @@
                     placeholder="وصف الفيديو"
                   ></el-input>
                 </el-form-item>
+
+
+
+                <el-form-item
+                  prop="view_limit"
+                  :rules="[
+                      { required: true, message: 'هذا الحقل مطلوب' },
+                      { type: 'number', message: 'يجب ان يكون رقم صحيح' },
+                  ]"
+                >
+                  <label for="view_limit" class="text-end d-block font-h6">
+                    عدد مرات المشاهدة
+                  </label>
+                  <el-input
+                    v-model.number="addVideo.view_limit"
+                    placeholder="عدد مرات المشاهدة"
+                    id="view_limit"
+                  ></el-input>
+                </el-form-item>
+
+
                  <div class="col-md-6 col-lg-2">
                 <div>
                   <h6 class="font-h6"> متاح او لا </h6>
@@ -144,7 +165,6 @@ export default {
     return {
       loading: false,
       addVideo: {
-        view_limit: 999999999,
       },
     };
   },
@@ -153,7 +173,6 @@ export default {
       this.addVideo = {
         type: "VIDEO",
         lesson_id: this.lessonId,
-        view_limit: 999999999,
       };
     },
     submitAddVideo() {
