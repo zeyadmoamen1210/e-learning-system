@@ -60,6 +60,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
     'vue-social-sharing/nuxt',
+    '@nuxtjs/dotenv',
   ],
 
 

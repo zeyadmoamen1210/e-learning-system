@@ -23,7 +23,7 @@ export default {
   methods: {
     openWhatsapp() {
       if (process.client) {
-          window.open("https://wa.link/1ojqy7", "_blank");
+          window.open(process.env.WHATSAPP_LINK, "_blank");
       }
     },
   },
