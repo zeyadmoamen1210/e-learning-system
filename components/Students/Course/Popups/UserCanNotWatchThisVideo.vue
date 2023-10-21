@@ -8,7 +8,7 @@
             <img style="width:90px" src="@/assets/imgs/video-forbidden.svg" alt="">
           </div>
           <div>
-            <h6 class="font font--bold mb-4 mt-3 font-h4"> لقد أنتهي عدد مرات المشاهدة المسموحة لك </h6>
+            <h6 class="font font--bold mb-4 mt-3 font-h4"> لقد انتهت عدد مرات المشاهدة المسموحة لك </h6>
             <p class="font-h5 font--regular ">
               لقد استهلكت جميع مرات المشاهدة المسموحة لهذا الفيديو و هي <mark>{{videoResponse.viewLimit}} مرات</mark> مشاهدة
             </p>
