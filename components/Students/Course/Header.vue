@@ -61,7 +61,7 @@
               <div>
                 <a
                   class="button button--icon button--whatsapp"
-                  :href="generateWhatsAppLink('+201092225757')"
+                  :href="generateWhatsAppLink()"
                   target="_blank"
                 >
                   <img src="@/assets/imgs/course-imgs/whatsapp.png" alt="" />
@@ -172,7 +172,8 @@ export default {
         return `${window?.location?.origin}/student/course/${this.course.id}/preview`;
       }
     },
-    generateWhatsAppLink(phoneNumber) {
+    generateWhatsAppLink() {
+      let phoneNumber = process.env.WHATSAPP_NUMBER;
       let message = `السلام عليكم و رحمة اللٌه و بركاته
       \n ** أريد الإشتراك في هذا الكورس \n ** المادة/  الفيزياء \n ** اسم الكورس/ ${
         this.course.name
