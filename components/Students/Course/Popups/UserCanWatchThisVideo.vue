@@ -11,14 +11,23 @@
           <div>
             <h6 class="font font--bold mb-4 mt-3 font-h4"> تحذير عدد مرات المشاهدة </h6>
             <p class="font-h5 font--regular ">
-              لقد شاهدت الفيديو {{videoResponse.userViewCount}} مرات يتبقي لك {{videoResponse.viewLimit}} مرة فقط لمشاهدة الفيديو في جالة التأكيد سيتم نقص مشاهدة من إجمالي مشاهداتك المسموحة
+              لقد شاهدت الفيديو <mark>{{videoResponse.userViewCount}} مرات</mark> يتبقي لك <mark>{{videoResponse.viewLimit}} مرة</mark> فقط لمشاهدة الفيديو في حالة التأكيد سيتم نقص مشاهدة من إجمالي مشاهداتك المسموحة
             </p>
           </div>
 
           <div class="mt-5 mb-2">
-            <button @click="$emit('submit')" class="button button--primary w-100">
-              تأكيد
-            </button>
+            <div class="row">
+              <div class="col-md-6">
+                <button @click="$emit('submit')" class="button button--primary w-100">
+                  تأكيد
+                </button>
+              </div>
+              <div class="col-md-6">
+                <button @click="$emit('close')" class="button button--primary-plain w-100">
+                  مشاهدة لاحقاً
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </template>

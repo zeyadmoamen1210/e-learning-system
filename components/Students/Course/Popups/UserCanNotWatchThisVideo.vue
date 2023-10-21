@@ -10,7 +10,7 @@
           <div>
             <h6 class="font font--bold mb-4 mt-3 font-h4"> لقد أنتهي عدد مرات المشاهدة المسموحة لك </h6>
             <p class="font-h5 font--regular ">
-              لقد استهلكت جميع مرات المشاهدة المسموحة لهذا الفيديو و هي {{videoResponse.viewLimit}} مرات مشاهدة
+              لقد استهلكت جميع مرات المشاهدة المسموحة لهذا الفيديو و هي <mark>{{videoResponse.viewLimit}} مرات</mark> مشاهدة
             </p>
 <!--            <p class="font-h5 font&#45;&#45;regular ">-->
 <!--              لقد شاهدت الفيديو {{videoResponse.userViewCount}} مرات يتبقي لك {{videoResponse.viewLimit}} مرة فقط لمشاهدة الفيديو-->
