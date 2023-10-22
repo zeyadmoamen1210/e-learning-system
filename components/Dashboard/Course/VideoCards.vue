@@ -66,6 +66,7 @@
         ...currVideo,
         url: currVideo?.content?.url,
         duration: currVideo?.content?.duration,
+        view_limit: currVideo?.content?.view_limit,
       }"
       @close="updateVideoPopup = false"
       @added="$emit('reloadCourse')"

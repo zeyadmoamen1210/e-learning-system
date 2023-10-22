@@ -52,12 +52,12 @@
                         ]"
                       >
                         <label for="duration" class="text-end d-block font-h6">
-                          مدة الفديو
+                          مدة الفديو بالدقيقة
                         </label>
 
                         <el-input
                           v-model.number="video.duration"
-                          placeholder="مدة الفيديو"
+                          placeholder="مدة الفيديو بالدقيقة"
                           id="duration"
                         ></el-input>
                       </el-form-item>
@@ -94,6 +94,26 @@
                     id="description"
                   ></el-input>
                 </el-form-item>
+
+
+                <el-form-item
+                  prop="view_limit"
+                  :rules="[
+                      { required: true, message: 'هذا الحقل مطلوب' },
+                      { type: 'number', message: 'يجب ان يكون رقم صحيح' },
+                  ]"
+                >
+                  <label for="view_limit" class="text-end d-block font-h6">
+                    عدد مرات المشاهدة
+                  </label>
+                  <el-input
+                      v-model.number="video.view_limit"
+                      placeholder="عدد مرات المشاهدة"
+                      id="view_limit"
+                  ></el-input>
+                </el-form-item>
+
+
                  <div class="col-md-6 col-lg-2">
                 <div>
                   <h6 class="font-h6"> متاح او لا </h6>
@@ -162,7 +182,6 @@ export default {
               description: this.video.description || null,
               type: "VIDEO",
               lesson_id: this.lessonId,
-              view_limit: 999999999,
             });
             this.$emit("added", false);
             this.$emit("close", false);

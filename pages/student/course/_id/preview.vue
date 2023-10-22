@@ -35,6 +35,7 @@
               :course="course"
               @selectContent="selectContent"
               @showPreview="showPreview"
+              :selectedContent="selectedContent"
             />
           </div>
         </div>
@@ -92,6 +93,7 @@ export default {
         description: "فيديو تعريفي للكورس",
         type: "VIDEO",
         link: this.course.promo,
+        openVideo: true
       };
       await this.$nextTick();
       this.refreshSelectedContent = true;
@@ -106,6 +108,7 @@ export default {
         description: "فيديو تعريفي للكورس",
         type: "VIDEO",
         link: this.course?.promo,
+        openVideo: true
       },
       loading: true,
       refreshSelectedContent: true,

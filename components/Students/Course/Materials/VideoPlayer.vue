@@ -32,7 +32,7 @@
     </div>
 
     <template v-if="!invalidVideoUrl">
-      <div v-if="selectedContentStarted && selectedContent.link">
+      <div v-if="selectedContentStarted && selectedContent.link && selectedContent.openVideo">
         <iframe
           style="width: 100%; height: 50.5rem"
           :src="customizedVideoUrl(selectedContent.link)"
@@ -40,7 +40,7 @@
         ></iframe>
       </div>
 
-      <div v-if="selectedContentStarted && selectedContent.content">
+      <div v-if="selectedContentStarted && selectedContent.content && selectedContent.openVideo">
         <iframe
           style="width: 100%; height: 50.5rem"
           :src="customizedVideoUrl(selectedContent.content?.url)"
@@ -92,7 +92,11 @@ export default {
       return "";
     },
     openVideo() {
-      this.selectedContentStarted = true;
+      if(this.selectedContent.openVideo) {
+        this.selectedContentStarted = true;
+      }else {
+        this.$awn.alert("إنتهي عدد مرات مشاهدة الفيديو");
+      }
     },
   },
 };
