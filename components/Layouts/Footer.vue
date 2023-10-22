@@ -86,14 +86,11 @@ export default {
     open(type) {
       if (process.client) {
         if (type === "facebook") {
-          window.open("https://www.facebook.com/mr.madkour.salama", "_blank");
+          window.open(process.env.FACEBOOK_LINK, "_blank");
         } else if (type === "youtube") {
-          window.open(
-            "https://youtube.com/@madkour_salama?si=8hivc-kgRYMkpyVk",
-            "_blank"
-          );
+          window.open(process.env.YOUTUBE_LINK, "_blank");
         } else if (type == "whatsapp") {
-          window.open("https://wa.link/1ojqy7", "_blank");
+          window.open(process.env.WHATSAPP_LINK, "_blank");
         }
       }
     },

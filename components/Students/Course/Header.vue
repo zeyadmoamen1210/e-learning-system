@@ -7,7 +7,7 @@
             <h4 class="course-header__name font-h4 mb-4">
               <span> {{ course.name }} </span>
               <span class="course-header__offer-perc" v-if="+course.discount > 0">
-                خصم {{ +course.discount }} جنية
+                خصم {{ +course.discount }}%
               </span>
             </h4>
             <div class="d-flex gap-2 align-items-center flex-wrap">
@@ -30,7 +30,7 @@
                 <h6 class="mb-0 font-h6">سعر الكورس :</h6>
               </div>
               <h6 class="mb-0 font-h6 d-flex gap-4 flex-wrap align-items-end">
-                <span class="font--orange" v-if="course.price - +course.discount > 0">{{ course.price - +course.discount }} جنية</span>
+                <span class="font--orange" v-if="course.price - (course.price * (+course.discount/100) ) > 0">{{ course.price - (course.price * (+course.discount/100) ) }} جنية</span>
                 <span class="font--orange" v-else> مجاناً </span>
                 <span
                   v-if="+course.discount > 0"
@@ -61,7 +61,7 @@
               <div>
                 <a
                   class="button button--icon button--whatsapp"
-                  :href="generateWhatsAppLink('+201092225757')"
+                  :href="generateWhatsAppLink()"
                   target="_blank"
                 >
                   <img src="@/assets/imgs/course-imgs/whatsapp.png" alt="" />
@@ -172,7 +172,8 @@ export default {
         return `${window?.location?.origin}/student/course/${this.course.id}/preview`;
       }
     },
-    generateWhatsAppLink(phoneNumber) {
+    generateWhatsAppLink() {
+      let phoneNumber = process.env.WHATSAPP_NUMBER;
       let message = `السلام عليكم و رحمة اللٌه و بركاته
       \n ** أريد الإشتراك في هذا الكورس \n ** المادة/  الفيزياء \n ** اسم الكورس/ ${
         this.course.name
