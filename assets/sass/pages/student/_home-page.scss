@@ -51,6 +51,7 @@ body {
 
 .home-page {
     background-image: url(@/assets/imgs/landing-page/header.png);
+    // background-color: #e9f3fb;
     padding: 3rem;
     background-position: bottom;
     background-repeat: no-repeat;
@@ -87,7 +88,7 @@ body {
         margin: auto;
         max-width: 100%;
         transition: all 0.5s linear;
-        animation: HeaderImageMoves 1.5s ease-in infinite;
+        // animation: HeaderImageMoves 1.5s ease-in infinite;
         animation-direction: alternate-reverse;
       }
     }

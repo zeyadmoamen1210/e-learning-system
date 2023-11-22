@@ -1,15 +1,5 @@
 <template>
   <div class="row">
-     <div class="col-md-6">
-      <div class="home-page__img">
-       <img
-        style="max-width: 38rem"
-        class="w-100"
-        src="@/assets/imgs/landing-page/user.png"
-        alt=""
-      />
-      </div>
-    </div>
     <div class="col-md-6">
       <div>
         <div class="home-page__title">
@@ -37,7 +27,11 @@
         </p>
       </div>
     </div>
-   
+    <div class="col-md-6">
+      <div class="home-page__img">
+        <img draggable="false" src="@/assets/imgs/landing-page/illustration.png" alt="" />
+      </div>
+    </div>
   </div>
 </template>
 <script setup>

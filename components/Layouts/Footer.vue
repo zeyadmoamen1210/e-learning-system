@@ -75,7 +75,9 @@
     </div>
 
     <div class="app-footer__copy">
-      <h6 class="text-center">&copy; جميع الحقوق محفوظة - مدكور سلامة 2023</h6>
+      <h6 class="text-center">  
+        <div class="-copyrights">جميع الحقوق محفوظة © <a target="_blank" style="text-decoration: none;"  href="https://wa.me/+201553997394" >منصه دروسي اون لاين</a> 2023</div>
+      </h6>
     </div>
   </div>
 </template>
