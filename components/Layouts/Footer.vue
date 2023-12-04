@@ -75,7 +75,7 @@
     </div>
 
     <div class="app-footer__copy">
-      <h6 class="text-center">  
+      <h6 class="text-center">
         <div class="-copyrights">جميع الحقوق محفوظة © <a target="_blank" style="text-decoration: none;"  href="https://wa.me/+201553997394" >منصه دروسي اون لاين</a> 2023</div>
       </h6>
     </div>
@@ -88,11 +88,11 @@ export default {
     open(type) {
       if (process.client) {
         if (type === "facebook") {
-          window.open(process.env.FACEBOOK_LINK, "_blank");
+          window.open("https://www.facebook.com/mr.madkour.salama", "_blank");
         } else if (type === "youtube") {
-          window.open(process.env.YOUTUBE_LINK, "_blank");
+          window.open("https://youtube.com/@madkour_salama?si=8hivc-kgRYMkpyVk", "_blank");
         } else if (type == "whatsapp") {
-          window.open(process.env.WHATSAPP_LINK, "_blank");
+          window.open("https://wa.link/1ojqy7", "_blank");
         }
       }
     },

@@ -8,7 +8,7 @@
       <div class="our-whatsapp-tooltip" v-if="visible">
         <div class="d-flex justify-content-between gap-2 flex-wrap">
           <h6>تحدث مع فريقنا</h6>
-          <font-awesome-icon @click="visible = false" class="text-danger" role="button" :icon="['fas', 'xmark']" />
+          <font-awesome-icon @click="closeCliced = true, visible = false" class="text-danger" role="button" :icon="['fas', 'xmark']" />
         </div>
         <p>
           إذا لديك إستفسار، تواصل معنا واكتشف كيف يمكننا مساعدتك 🤓.
@@ -23,13 +23,25 @@ export default {
   methods: {
     openWhatsapp() {
       if (process.client) {
-          window.open(process.env.WHATSAPP_LINK, "_blank");
+        window.open("https://wa.link/1ojqy7", "_blank");
       }
     },
   },
+  mounted() {
+    window.addEventListener('scroll', (e) => {
+      if(window.scrollY > 0) {
+        this.visible = false;
+      }else {
+        if(!this.closeCliced) {
+          this.visible = true;
+        }
+      }
+    })
+  },
   data() {
     return {
-      visible: true
+      visible: true,
+      closeCliced: false,
     }
   }
 }

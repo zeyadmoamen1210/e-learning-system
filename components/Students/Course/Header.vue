@@ -173,7 +173,7 @@ export default {
       }
     },
     generateWhatsAppLink() {
-      let phoneNumber = process.env.WHATSAPP_NUMBER;
+      let phoneNumber = "+201092225757";
       let message = `السلام عليكم و رحمة اللٌه و بركاته
       \n ** أريد الإشتراك في هذا الكورس \n ** المادة/  الفيزياء \n ** اسم الكورس/ ${
         this.course.name

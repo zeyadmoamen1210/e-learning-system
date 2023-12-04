@@ -69,3 +69,11 @@ export default {
   },
 };
 </script>
+
+<style>
+.home-section {
+  @media screen and (max-width: 780px) {
+    padding-bottom: 20rem;
+  }
+}
+</style>

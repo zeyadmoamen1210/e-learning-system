@@ -28,16 +28,22 @@
           كل ما يلزم مادة الفيزياء أصبح سهلا
         </span>
 
-        <p class="mt-5 font--light home-page__desc">
+        <p class="mt-5 font--light home-page__desc d-none d-md-block">
           معلم خبير الفيزياء
           <br>
           خبرة 25 عامًا من الخبرة
           <br>
         معد كتاب الصفوة فى الفيزياء
         </p>
+
+        <p class="mt-5 font--light home-page__desc  d-md-none">
+          معلم خبير الفيزياء -
+          خبرة 25 عامًا من الخبرة -
+          معد كتاب الصفوة فى الفيزياء
+        </p>
       </div>
     </div>
-   
+
   </div>
 </template>
 <script setup>
